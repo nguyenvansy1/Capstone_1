@@ -1,0 +1,241 @@
+<div class="main-content" id="main-container">
+  <div class="row small-spacing">
+    <div class="col-xs-12">
+      <div style="position: relative" class="box-content">
+        <h1 class="box-title">List event</h1>
+        <button (click)="onOpenModal(null, 'add')"  mat-raised-button color="primary">Add Customer</button>
+        <div class="row" style="margin-bottom: 15px">
+          <div class="col-md-3">
+            <form class="form-inline my-2 my-lg-0" >
+            </form>
+          </div>
+          <div class="col-md-3">
+
+          </div>
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-3">
+          </div>
+        </div>
+
+        <table id="example" class="table table-striped table-bordered display" style="width:100%; margin-bottom: 0">
+          <thead>
+          <tr>
+            <th>STT</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Customer</th>
+            <th class="text-center align-middle">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let event of eventList; let i = index">
+            <td style="width: 59px">{{i+1+(thePageNumber-1)*thePageSize}}</td>
+            <td style="width: 140px">{{event.name}}</td>
+            <td  style="width: 200px">{{event.location}}</td>
+            <td style="width: 80px">{{event.date | date: 'dd/MM/yyyy'}}</td>
+            <td style="width: 80px">{{event.startTime}}</td>
+            <td style="width: 80px">{{event.endTime}}</td>
+            <td style="width: 80px">{{event.customer.name}}</td>
+            <td style="width: 60px" class="text-center align-middle">
+              <div class="btn-group" style="cursor: pointer;">
+                <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                  class="fa-solid fa-ellipsis h4"></i></div>
+                <ul class="dropdown-menu" style="left: -100px; min-width: 120px;">
+                  <li class="padding-top-10 text-left is-hover" data-toggle="modal"
+                      data-target="#editModal" style="cursor: pointer; padding: 8px 30px;"  (click)="onOpenModalEvent(event, 'edit')">
+                    <i class="fa-solid fa-pen"></i>
+                    Edit
+                  </li>
+                  <li class="padding-top-10 text-left is-hover" data-toggle="modal"
+                      data-target="#removeModal" style="cursor: pointer; padding: 8px 30px;" (click)="onOpenModalEvent(null, 'add')" >
+                    <i class=" fa-solid fa-trash"></i>
+                    Create
+                  </li>
+                  <li class="padding-top-10 text-left is-hover" data-toggle="modal"
+                      data-target="#removeModal" style="cursor: pointer; padding: 8px 30px;" >
+                    <i class=" fa-solid fa-trash"></i>
+                    Delete
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="eventList?.length == 0" class="alert alert-warning text-center" role="alert" style="background-color: #F2F2F2; color: black">
+          <b>Event not found</b>
+        </div>
+        <div class="row" style="margin-left: -25px;">
+          <div class="col-md-4" style="padding: 25px" >
+            <span>Show </span>
+            <select style="height: 25px;width: 50px;-webkit-box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 1px 1px rgb(0 0 0 / 5%);border-radius: 3px" class="form-control-md" (change) = "updatePageSize($event.target.value)" >
+              <option selected >5</option>
+              <option >10</option>
+              <option >20</option>
+              <option >50</option>
+            </select>
+            <span> entries</span>
+          </div>
+          <div class="col-md-1" style="padding: 25px" >
+          </div>
+          <div class="col-md-3 text-right" style="padding: 25px" >
+            <p> Showing {{ (thePageNumber - 1) * thePageSize + 1 }} - {{ itemPerPage }} of {{ theTotalElements }} entries</p>
+          </div>
+          <div class="col-md-4 text-right">
+            <ngb-pagination [(page)] = "thePageNumber"
+                            [pageSize] = "thePageSize"
+                            [collectionSize] = "theTotalElements"
+                            (pageChange) = "getListEvent2()"
+                            [boundaryLinks]="true"
+                            [maxSize]="3"
+                            [rotate]="true"
+            >
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Add Customer Modal-->
+<div style="width: 500px;margin-left: 508px;margin-top: -20px" class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="height: 50px">
+        <h2 class="modal-title" id="addCustomerModalLabel">Add Customer</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" (click)="resetForm()">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formAddCustomer" (ngSubmit)="addCustomer(formAddCustomer)">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control" formControlName="name" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" class="form-control"  formControlName="email" placeholder="Email">
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="edit-customer-form"  class="btn" style="background-color: #5A6268;color: white" data-dismiss="modal" (click)="resetForm()">Close</button>
+            <button [disabled]="formAddCustomer.invalid" type="submit" class="btn btn-primary" >Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--Add Event Modal-->
+<div style="width: 500px;height:780px;margin-left: 508px;margin-top: -20px" class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="height: 50px">
+        <h2 class="modal-title" id="addEventModalLabel">Add Event</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formCreate" (ngSubmit)="onAddEvent(formCreate)">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name11"  name="name" class="form-control" placeholder="Name" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location1"  name="location" class="form-control"  placeholder="Location"  formControlName="location">
+          </div>
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date1"  name="date" class="form-control"  formControlName="date">
+          </div>
+          <div class="form-group">
+            <label for="startTime">Start Time</label>
+            <input type="time" id="startTime1"  name="startTime" class="form-control"  placeholder="Start Time"  formControlName="startTime">
+          </div>
+          <div class="form-group">
+            <label for="endTime">End Time</label>
+            <input type="time" id="endTime1"  name="endTime" class="form-control"  placeholder="End Time"  formControlName="endTime">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Customer</label>
+            <select [compareWith]="compareCustomer" class="form-control" id="exampleFormControlSelect2" formControlName="customer">
+              <option [ngValue]="null" disabled >-- Select --</option>
+              <option *ngFor="let customer of customerList" [ngValue] = "customer" >{{customer?.name}}</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button"  class="btn" style="background-color: #5A6268;color: white" data-dismiss="modal">Close</button>
+            <button [disabled]="formCreate.invalid" type="submit" class="btn btn-primary" >Save change</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Edit Event Modal-->
+<div style="width: 500px;height:780px;margin-left: 508px;margin-top: -20px" class="modal fade" id="editEventModal" tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="height: 50px">
+        <h2 class="modal-title" id="editEventModalLabel">Edit Event</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEdit" (ngSubmit)="onEditEvent(formEdit)">
+          <div class="form-group">
+            <input type="number" hidden name="id" class="form-control" required formControlName="id">
+          </div>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name1"  name="name" class="form-control" placeholder="Name" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location"  name="location" class="form-control"  placeholder="Location"  formControlName="location">
+          </div>
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date"  name="date" class="form-control"  formControlName="date">
+          </div>
+          <div class="form-group">
+            <label for="startTime">Start Time</label>
+            <input type="time" id="startTime"  name="startTime" class="form-control"  placeholder="Start Time"  formControlName="startTime">
+          </div>
+          <div class="form-group">
+            <label for="endTime">End Time</label>
+            <input type="time" id="endTime"  name="endTime" class="form-control"  placeholder="End Time"  formControlName="endTime">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Customer</label>
+            <select [compareWith]="compareCustomer" class="form-control" id="exampleFormControlSelect1" formControlName="customer">
+              <option [ngValue]="null" disabled >-- Select --</option>
+              <option *ngFor="let customer of customerList" [ngValue] = "customer" >{{customer?.name}}</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button"  class="btn" style="background-color: #5A6268;color: white" data-dismiss="modal">Close</button>
+            <button [disabled]="formEdit.invalid" type="submit" class="btn btn-primary" >Save change</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<notifier-container></notifier-container>
+
+

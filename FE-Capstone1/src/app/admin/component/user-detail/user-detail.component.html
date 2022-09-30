@@ -1,0 +1,86 @@
+<div id="notification-popup" class="notice-popup js__toggle" data-space="50">
+  <h2 class="popup-title">Your Notifications</h2>
+  <div class="content">
+
+    <a href="#" class="notice-read-more">See more messages <i class="fa fa-angle-down"></i></a>
+  </div>
+</div>
+
+<div id="message-popup" class="notice-popup js__toggle" data-space="50">
+  <h2 class="popup-title">Recent Messages<a href="#" class="pull-right text-danger">New message</a></h2>
+  <div class="content">
+
+    <a href="#" class="notice-read-more">See more messages <i class="fa fa-angle-down"></i></a>
+  </div>
+
+</div>
+
+
+
+<div id="wrapper">
+  <div class="main-content">
+    <button routerLink="/admin/user/list"  mat-raised-button color="primary">Back To List</button>
+    <div class="row bg-white shadow p-3 mb-5 bg-white rounded" style="margin-left: 1px;margin-right: 1px;margin-top: 10px">
+      <div class="col-md-4" style="border-right: 2px solid  rgb(235 220 220)">
+        <div class="card ">
+          <div class="card-body">
+            <div class="avatar text-center">
+              <img src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2021/07/avatar-doi-ban-than-2021-82.jpg"
+                   alt="avt" class="img-fluid rounded-circle" style="height: 130px; width: 130px;">
+            </div>
+            <h2 class="name text-center">{{user.name}}</h2>
+            <p class="mssv text-center">{{user.code}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <h2>User profile</h2>
+        <div class="row" style="border-bottom: 2px solid  rgb(235 220 220);;">
+          <div class="col-md-4 pb-2 pl-2">
+            <p class="gender">Gender: <b>Female</b></p>
+          </div>
+          <div class="col-md-4 pb-2 pl-2">
+            <p class="dateofbirth">Date of birth: <b>{{user?.birthDay | date: 'dd/MM/yyyy'}}</b></p>
+          </div>
+          <div class="col-md-4 pb-2 pl-2">
+            <p class="phonenumber">Phone number: <b>{{user?.phone}}</b></p>
+          </div>
+
+        </div>
+        <div class="row" style="border-bottom: 2px solid  rgb(235 220 220);margin-top: 10px">
+          <div class="col-md-4 pb-2 pl-2">
+            <p class="mssv ">Identity Card: <b>{{user?.identityCard}}</b></p>
+          </div>
+          <div class="col-md-4 pb-2 pl-2">
+            <p class="course ">Course: <b>{{user?.course.name}}</b></p>
+          </div>
+          <div class="col-md-4 pb-2 pl-2">
+            <p class="course ">Majors: <b>{{user?.majors.name}}</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <h3 class="title">List Checkin</h3>
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th class="text-center align-middle">ID</th>
+          <th class="text-center align-middle">Event</th>
+          <th class="text-center align-middle">Start Checkin</th>
+          <th class="text-center align-middle">Start Checkout</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th class="text-center align-middle">1</th>
+          <td class="text-center align-middle">Hội chợ việc làm</td>
+          <td class="text-center align-middle">15/10/2022 - 2:40 CH</td>
+          <td class="text-center align-middle">15/10/2022 - 3:40 CH</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
