@@ -7,16 +7,8 @@
           <div class="col-md-3">
             <form class="form-inline my-2 my-lg-0" >
               <mat-form-field>
-                <mat-label>Code</mat-label>
-                <input matInput #inputCode  name="search" [(ngModel)]="keywordCode" (keyup)=(searchByCode(inputCode.value))>
-              </mat-form-field>
-            </form>
-          </div>
-          <div class="col-md-3">
-            <form class="form-inline my-2 my-lg-0" >
-              <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput #inputName  name="search2" [(ngModel)]="keywordName" (keyup)=(searchByName(inputName.value))>
+                <mat-label>Search</mat-label>
+                <input matInput #inputName  name="search" [(ngModel)]="keywordName" (keyup)=(searchByCodeOrName(inputName.value))>
               </mat-form-field>
             </form>
           </div>

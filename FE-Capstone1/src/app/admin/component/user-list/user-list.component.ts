@@ -26,8 +26,6 @@ export class UserListComponent implements OnInit {
   deleteUser: User;
   keywordName: undefined;
   // tslint:disable-next-line:max-line-length
-  keywordCode: undefined;
-  // tslint:disable-next-line:max-line-length
   constructor(private userService: UserService, private courseService: CourseService, private majorsService: MajorsService, private fb: FormBuilder, private notifier: NotifierService) { }
 
   ngOnInit(): void {
@@ -54,26 +52,20 @@ export class UserListComponent implements OnInit {
   }
 
   getListUser() {
-    if (this.keywordCode === undefined && this.keywordName === undefined) {
-      this.userService.getAllUser(this.thePageNumber - 1, this.thePageSize).subscribe(this.processResult());
+    if (this.keywordName !== undefined) {
+      this.searchByCodeOrName(this.keywordName);
     } else {
-       if (this.keywordName !== undefined && this.keywordCode !== undefined) {
-          this.searchByCodeAndName(this.keywordCode , this.keywordName);
-       } else {
-         if (this.keywordName === undefined && this.keywordCode !== undefined) {
-           this.searchByCode(this.keywordCode);
-         } else {
-           if (this.keywordName !== undefined && this.keywordCode === undefined) {
-             this.searchByName(this.keywordName);
-           }
-         }
-       }
+      this.getListUser2();
     }
   }
   getListUser2() {
     this.userService.getAllUser(this.thePageNumber - 1, this.thePageSize).subscribe(this.processResult());
   }
 
+  searchByCodeOrName(value: string) {
+     console.log(value);
+     this.userService.getUserByCodeOrName(this.thePageNumber - 1, this.thePageSize, value).subscribe(this.processResult());
+  }
   processResult() {
     return (data) => {
       this.userList = data.content; //
@@ -154,41 +146,5 @@ export class UserListComponent implements OnInit {
 
   compareMajors(c1: Majors, c2: Majors): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
-  }
-
-  searchByName(value: string) {
-    value = value.trim();
-    if (this.keywordCode !== undefined) {
-      this.searchByCodeAndName(this.keywordCode, this.keywordName);
-    } else {
-      this.userService.getUserByName(this.thePageNumber - 1, this.thePageSize, value).subscribe(this.processResult());
-    }
-  }
-  searchByCode(value: string) {
-    if (this.keywordName !== undefined) {
-      this.searchByCodeAndName(this.keywordCode, this.keywordName);
-    } else {
-      this.userService.getUserByCode(this.thePageNumber - 1, this.thePageSize, value ).subscribe(this.processResult());
-    }
-  }
-
-  searchByCodeAndName(code: string, name: string) {
-    if (code === '' && name === '') {
-      this.keywordName = undefined;
-      this.keywordCode = undefined;
-      this.getListUser();
-    } else {
-      if (code !== '' && name === '') {
-        this.keywordName = undefined;
-        this.getListUser();
-      } else {
-        if (code === '' && name !== '') {
-          this.keywordCode = undefined;
-          this.getListUser();
-        } else {
-          this.userService.getUserByCodeAndName(this.thePageNumber - 1, this.thePageSize, code , name ).subscribe(this.processResult());
-        }
-      }
-    }
   }
 }

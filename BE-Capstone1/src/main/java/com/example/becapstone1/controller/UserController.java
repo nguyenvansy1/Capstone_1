@@ -123,11 +123,34 @@ public class UserController {
         return new ResponseEntity<>(majorsList,HttpStatus.OK);
     }
 
-    /** Find user by name and code. */
+    /** Find user by name or code. */
     @GetMapping("/filter")
-    public ResponseEntity<Page<User>> getAllUserByCodeAndName(@RequestParam("page") Integer page,
-                                                       @RequestParam("size") Integer size , @RequestParam("code") String code, @RequestParam("name") String name) {
-        Page<User> users = userService.getByCodeAndName(code,name,page,size);
+    public ResponseEntity<Page<User>> getAllUserByCodeOrName(@RequestParam("page") Integer page,
+                                                       @RequestParam("size") Integer size , @RequestParam("name") String name) {
+        Page<User> users = userService.getByCodeOrName(name,page,size);
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    /** Get data user. */
+    @GetMapping("/dataUser")
+    public ResponseEntity<?> getData()
+    {
+        Integer[][] data = userService.getDataUser();
+        Integer[] arr = new Integer[12];
+        for (int i = 1 ; i<=12; i++){
+            for(int row = 0; row < data.length; row++) {
+                for(int column = 0; column < data[row].length-1; column++) {
+                    if (i == data[row][column]) {
+                        arr[i-1] = data[row][column+1];
+                    }
+                }
+            }
+        }
+        for (int i = 0 ; i<12; i++) {
+            if (arr[i] == null){
+                arr[i] = 0;
+            }
+        }
+        return new ResponseEntity<>(arr, HttpStatus.OK);
     }
 }

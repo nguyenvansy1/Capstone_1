@@ -16,5 +16,7 @@ public interface IUserService {
 
     Page<User> getByCode(String code, Integer page, Integer size);
 
-    Page<User> getByCodeAndName(String code,String name, Integer page, Integer size);
+    Page<User> getByCodeOrName(String name, Integer page, Integer size);
+
+    Integer[][] getDataUser();
 }

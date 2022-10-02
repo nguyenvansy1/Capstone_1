@@ -3,4 +3,13 @@
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/*body { margin: 0;*/
+/*  font-family: MONTSERAT, segoe ui, serif; }*/
+
+@font-face {
+  font-family: 'Segoe UI Variable';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Segoe UI Variable'), url('https://fonts.cdnfonts.com/s/63254/SegoeUIVF.woff') format('woff');
+}
+

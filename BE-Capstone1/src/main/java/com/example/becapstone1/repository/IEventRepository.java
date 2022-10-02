@@ -17,5 +17,5 @@ public interface IEventRepository extends JpaRepository<Event,Long> {
             "where year(date) = year(curdate())\n" +
             "group by month(date)\n" +
             "order by month(date)", nativeQuery = true)
-    Integer[][] getData();
+    Integer[][] getDataEvent();
 }

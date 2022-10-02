@@ -30,4 +30,9 @@ public class EventService implements IEventService {
     public void addEvent(Event event) {
         iEventRepository.save(event);
     }
+
+    @Override
+    public Integer[][] getDataEvent() {
+        return iEventRepository.getDataEvent();
+    }
 }

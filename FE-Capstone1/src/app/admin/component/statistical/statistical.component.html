@@ -1,0 +1,41 @@
+<div class="main-content" id="main-container">
+  <div class="row small-spacing">
+    <div class="col-xs-12">
+      <div style="position: relative" class="box-content">
+        <div class="row">
+          <div class="col-lg-6">
+            <div >
+              <canvas
+                baseChart
+                [datasets]="barChartDataEvent"
+                [labels]="barChartLabels"
+                [options]="barChartOptionEvent"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [chartType]="barChartTypeEvent"
+                [colors]="chartColorsEvent"
+              >
+              </canvas>
+            </div>
+          </div>
+<!--          <div class="col-lg-6">-->
+<!--            <div>-->
+<!--              <canvas-->
+<!--                baseChart-->
+<!--                [datasets]="barChartDataUser"-->
+<!--                [labels]="barChartLabels"-->
+<!--                [options]="barChartOptionUser"-->
+<!--                [plugins]="barChartPlugins"-->
+<!--                [legend]="barChartLegend"-->
+<!--                [chartType]="barChartTypeUser"-->
+<!--                [colors]="chartColorsUser"-->
+<!--              >-->
+<!--              </canvas>-->
+<!--            </div>-->
+<!--          </div>-->
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

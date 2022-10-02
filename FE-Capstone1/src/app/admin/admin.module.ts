@@ -17,7 +17,8 @@ import {UserListComponent} from './component/user-list/user-list.component';
 import {CssComponent} from './component/css/css.component';
 import {CommonModule} from '@angular/common';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import { StatisticalComponent } from './component/statistical/statistical.component';
+import {ChartsModule} from 'ng2-charts';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     UserDetailComponent,
     UserListComponent,
     CssComponent,
+    StatisticalComponent,
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    ChartsModule,
   ]
 })
 export class AdminModule { }

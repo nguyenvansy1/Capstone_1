@@ -56,9 +56,14 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Page<User> getByCodeAndName(String code, String name, Integer page, Integer size) {
+    public Page<User> getByCodeOrName( String name, Integer page, Integer size) {
         Pageable paging = PageRequest.of(page, size);
-        return userRepository.findByCodeContainingAndNameContaining("%"+code+"%","%"+name+"%",paging);
+        return userRepository.findByCodeContainingOrNameContaining("%"+name+"%",paging);
+    }
+
+    @Override
+    public Integer[][] getDataUser() {
+        return userRepository.getDataUser();
     }
 
 

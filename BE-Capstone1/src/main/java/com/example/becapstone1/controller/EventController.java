@@ -31,8 +31,6 @@ import java.util.List;
 @RequestMapping("/api/event")
 @CrossOrigin("*")
 public class EventController {
-    @Autowired
-    private IEventRepository iEventRepository;
 
     @Autowired
     private EventService eventService;
@@ -60,10 +58,10 @@ public class EventController {
     }
 
     /** Get data event. */
-    @GetMapping("/data")
+    @GetMapping("/dataEvent")
     public ResponseEntity<?> getData()
     {
-        Integer[][] data = iEventRepository.getData();
+        Integer[][] data = eventService.getDataEvent();
         Integer[] arr = new Integer[12];
         for (int i = 1 ; i<=12; i++){
             for(int row = 0; row < data.length; row++) {

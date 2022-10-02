@@ -19,9 +19,17 @@ public interface IUserRepository extends JpaRepository<User,Long> {
     @Query(value = "Select * from user where student_code like :code", nativeQuery = true)
     Page<User> findByCodeContaining(@Param("code") String code, Pageable pageable);
 
-    @Query(value = "Select * from user where student_code like :code and name like BINARY :name", nativeQuery = true)
-    Page<User> findByCodeContainingAndNameContaining(@Param("code") String code,@Param("name") String name, Pageable pageable);
+    @Query(value = "Select * from user where student_code like :name or name like BINARY :name", nativeQuery = true)
+    Page<User> findByCodeContainingOrNameContaining(@Param("name") String name, Pageable pageable);
 
+
+
+    @Query(value = "select month(date) as Month , count(month(date)) as Times from event_user\n" +
+            "left join event on event_user.event_id = event.id\n" +
+            "where year(date) = year(curdate())\n" +
+            "group by month(date)\n" +
+            "order by month(date)", nativeQuery = true)
+    Integer[][] getDataUser();
 }
 
 

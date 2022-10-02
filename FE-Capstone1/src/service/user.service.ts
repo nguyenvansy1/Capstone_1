@@ -33,13 +33,17 @@ export class UserService {
     return this.httpClient.get<GetResponseUser>(url);
   }
 
-  getUserByCodeAndName(thePage: number, thePageSize: number, code: string, name: string): Observable<GetResponseUser> {
-    const url = `${this.URL_API}/filter?` + `code=${code}&name=${name}&page=${thePage}&size=${thePageSize}`;
+  getUserByCodeOrName(thePage: number, thePageSize: number, name: string): Observable<GetResponseUser> {
+    const url = `${this.URL_API}/filter?` + `page=${thePage}&size=${thePageSize}&name=${name}`;
     return this.httpClient.get<GetResponseUser>(url);
   }
 
   findUserByCode(code: number): Observable<User> {
     return this.httpClient.get<User>(`${this.URL_API}/find/${code}`);
+  }
+
+  getDataUser(): Observable<number[]> {
+    return this.httpClient.get<number[]>(`${this.URL_API}/dataUser`);
   }
 }
 

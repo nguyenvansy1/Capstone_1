@@ -9,4 +9,6 @@ public interface IEventService {
     void editEvent(Event event);
 
     void addEvent(Event event);
+
+    Integer[][] getDataEvent();
 }

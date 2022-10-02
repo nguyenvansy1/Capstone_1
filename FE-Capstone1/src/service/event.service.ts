@@ -23,6 +23,12 @@ export class EventService {
   addEvent1(event: Event): Observable<Event> {
     return this.httpClient.post<Event>(`${this.URL_API}/add`, event);
   }
+
+  getDataEvent(): Observable<number[]> {
+    return this.httpClient.get<number[]>(`${this.URL_API}/dataEvent`);
+  }
+
+
 }
 
 interface GetResponseEvent {
