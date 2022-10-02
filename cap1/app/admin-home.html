@@ -13,7 +13,7 @@
     <!-- Main Styles -->
     <link rel="stylesheet" href="/assets/styles/style.min.css">
 
-    Material Design Icon
+    <!-- Material Design Icon -->
     <link rel="stylesheet" href="/assets/fonts/material-design/css/materialdesignicons.css">
 
     <!-- mCustomScrollbar -->
@@ -30,6 +30,15 @@
 
     <!-- Chartist Chart -->
     <link rel="stylesheet" href="/assets/plugin/chart/chartist/chartist.min.css">
+
+    <!-- FullCalendar -->
+    <link rel="stylesheet" href="/assets/plugin/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="/assets/plugin/fullcalendar/fullcalendar.print.css" media='print'>
+
+    <!-- Color Picker -->
+    <link rel="stylesheet" href="/assets/color-switcher/color-switcher.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
 </head>
 
 <body>
@@ -41,42 +50,60 @@
         <!-- /.header -->
         <div class="content">
 
-            <div class="avatar text-center pb-2">
-                <img class="rounded-circle"
-                    src="https://vnn-imgs-a1.vgcloud.vn/image1.ictnews.vn/_Files/2020/03/17/trend-avatar-1.jpg"
-                    alt="" />
-                <p>WellCome</p>
-                <h5>Admin DTU</h5>
-            </div>
             <div class="navigation">
                 <ul class="menu js__accordion">
                     <li class="current">
-                        <a class="waves-effect" href="index.html"><i
+                        <a class="waves-effect" href="#"><i
                                 class="menu-icon mdi mdi-view-dashboard"></i><span>Dashboard</span></a>
                     </li>
-                    <ul class="nav-menu">
-                        <li>
-                            <a class="waves-effect" href="index.html">
-                                <i class="menu-icon mdi mdi-view-dashboard"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="index.html">
-                                <i class="menu-icon mdi mdi-view-dashboard"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="index.html">
-                                <i class="menu-icon mdi mdi-view-dashboard"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-
-                    </ul>
+                    <li>
+                        <a class="waves-effect parent-item js__control" href="#"><i
+                                class="menu-icon mdi mdi-chart-bar"></i><span>Statistical</span><span
+                                class="menu-arrow fa fa-angle-down"></span></a>
+                        <ul class="sub-menu js__content">
+                            <!-- <li><a href="chart-3d.html">3D Charts</a></li>
+                            <li><a href="chart-chartist.html">Chartist Charts</a></li>
+                            <li><a href="chart-chartjs.html">Chartjs Chart</a></li>
+                            <li><a href="chart-dynamic.html">Dynamic Chart</a></li>
+                            <li><a href="chart-flot.html">Flot Chart</a></li>
+                            <li><a href="chart-knob.html">Knob Chart</a></li>
+                            <li><a href="chart-morris.html">Morris Chart</a></li>
+                            <li><a href="chart-sparkline.html">Sparkline Chart</a></li>
+                            <li><a href="chart-other.html">Other Chart</a></li> -->
+                        </ul>
+                        <!-- /.sub-menu js__content -->
+                    </li>
+                    <li>
+                        <a class="waves-effect parent-item js__control" href="#"><i
+                                class="menu-icon mdi mdi-cube-outline"></i><span>Admin</span><span
+                                class="menu-arrow fa fa-angle-down"></span></a>
+                        <ul class="sub-menu js__content">
+                            <!-- <li><a href="ui-notification.html">Notification</a></li>
+                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="ui-range-slider.html">Range Slider</a></li>
+                            <li><a href="ui-sweetalert.html">Sweet Alert</a></li>
+                            <li><a href="ui-treeview.html">Tree view</a></li>
+                            <li><a href="widgets.html">Widget</a></li> -->
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="waves-effect parent-item js__control" href="#"><i
+                                class="menu-icon mdi mdi-account-multiple"></i><span>Users</span><span
+                                class="menu-arrow fa fa-angle-down"></span></a>
+                        <ul class="sub-menu js__content">
+                            <!-- <li><a href="chart-3d.html">3D Charts</a></li>
+                            <li><a href="chart-chartist.html">Chartist Charts</a></li>
+                            <li><a href="chart-chartjs.html">Chartjs Chart</a></li>
+                            <li><a href="chart-dynamic.html">Dynamic Chart</a></li>
+                            <li><a href="chart-flot.html">Flot Chart</a></li>
+                            <li><a href="chart-knob.html">Knob Chart</a></li>
+                            <li><a href="chart-morris.html">Morris Chart</a></li>
+                            <li><a href="chart-sparkline.html">Sparkline Chart</a></li>
+                            <li><a href="chart-other.html">Other Chart</a></li> -->
+                        </ul>
+                        <!-- /.sub-menu js__content -->
+                    </li>
                 </ul>
-
             </div>
         </div>
     </div>
@@ -86,7 +113,7 @@
         <div class="pull-left">
             <button type="button"
                 class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile"></button>
-            <h1 class="page-title">Home</h1>
+            <h1 class="page-title">Dashboard</h1>
         </div>
         <!-- /.pull-left -->
         <div class="pull-right">
@@ -245,7 +272,153 @@
 
 
     <div id="wrapper">
+        <div class="main-content">
+            <div class="row">
+                <div class="col-sm-6 col-lg-3 col-xs-12">
+                    <div class="box-content bg-inverse active-chart rounded-sm">
+                        <h2 class="counter text-white">12</h2>
+                        <h4 class="box-title text-white">Thống kê sinh viên</h4>
+                        <div class="dropdown js__drop_down">
+                            <div class="icon-tun">
+                                <i class="fa fa-user text-white" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="content widget-stat">
+                            <!-- <div class="left-content">
+                                <h2 class="counter text-white">12</h2>
+                                <p class="text text-white">Some text here</p>
+                            </div> -->
+                            <div id="bar" class="progress">
+                                <div class="progress-bar active progress-bar-success progress-bar-striped bar"
+                                    style="width: 45%; background-color: #4b3333;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 col-xs-12">
+                    <div class="box-content bg-inverse rounded-sm">
+                        <h2 class="counter text-white">12</h2>
+                        <h4 class="box-title text-white">Thống kê sinh viên</h4>
+                        <div class="dropdown js__drop_down">
+                            <div class="icon-tun">
+                                <i class="fa fa-university" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="content widget-stat">
+                            <!-- <div class="left-content">
+                                <h2 class="counter text-white">12</h2>
+                                <p class="text text-white">Some text here</p>
+                            </div> -->
+                            <div id="bar" class="progress">
+                                <div class="progress-bar active progress-bar-success progress-bar-striped bar"
+                                    style="width: 45%; background-color: #4b3333;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="box-content"><iframe class="chartjs-hidden-iframe" tabindex="-1"
+                            style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
+                        <h4 class="box-title">Bar Chart</h4>
+                        <!-- /.box-title -->
+                        <div class="dropdown js__drop_down">
+                            <a href="#"
+                                class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else there</a></li>
+                                <li class="split"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                            <!-- /.sub-menu -->
+                        </div>
+                        <!-- /.dropdown js__dropdown -->
+                        <canvas id="bar-chartjs-chart" class="chartjs-chart" width="697" height="465"
+                            style="display: block; width: 558px; height: 372px;"></canvas>
+                        <!-- /#bar-chartjs-chart.chartjs-chart -->
+                    </div>
+                    <!-- /.box-content -->
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="box-content"><iframe class="chartjs-hidden-iframe" tabindex="-1"
+                            style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
+                        <h4 class="box-title">Line Chart</h4>
+                        <!-- /.box-title -->
+                        <div class="dropdown js__drop_down">
+                            <a href="#"
+                                class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else there</a></li>
+                                <li class="split"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                            <!-- /.sub-menu -->
+                        </div>
+                        <!-- /.dropdown js__dropdown -->
+                        <canvas id="line-chartjs-chart" class="chartjs-chart" width="697" height="465"
+                            style="display: block; width: 558px; height: 372px;"></canvas>
+                        <!-- /#line-chartjs-chart.chartjs-chart -->
+                    </div>
+                    <!-- /.box-content -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="bg-white rounded-sm">
+                    <h2 class="title-detail">Detail</h2>
+                    <table class="table table-hover ">
+                        <thead>
+                            <tr>
+                                <th class="text-center align-middle text-muted1">ID</th>
+                                <th class="text-center align-middle text-muted1">Event Name</th>
+                                <th class="text-center align-middle text-muted1">Location</th>
+                                <th class="text-center align-middle text-muted1">Date</th>
+                                <th class="text-center align-middle text-muted1">Start Time</th>
+                                <th class="text-center align-middle text-muted1">End Time</th>
+                                <th class="text-center align-middle text-muted1">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="text-center">1</th>
+                                <td class="text-center align-middle text-inverse font-weight-bold">
+                                    Hội chợ việc làm
+                                </td>
+                                <td class="text-center align-middle text-inverse font-weight-bold">03 Quang Trung</td>
+                                <td class="text-center align-middle text-inverse font-weight-bold">15/10/2022</td>
+                                <td class="text-center align-middle text-inverse font-weight-bold">04:00 CH</td>
+                                <td class="text-center align-middle text-inverse font-weight-bold">06:00 CH</td>
+                                <td class="text-center align-middle text-inverse font-weight-bold">
+                                    <div class="btn-group" style="cursor: pointer;">
+                                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                                class="fa-solid fa-ellipsis h4"></i></div>
+                                        <ul class="dropdown-menu" style="left: -100px; min-width: 120px;">
+                                            <li class="padding-top-10 text-left is-hover" data-toggle="modal"
+                                                data-target="#editModal" style="cursor: pointer; padding: 8px 30px;">
+                                                <i class="fa-solid fa-pen"></i>
+                                                Edit
+                                            </li>
+                                            <li class="padding-top-10 text-left is-hover" data-toggle="modal"
+                                                data-target="#removeModal" style="cursor: pointer; padding: 8px 30px;">
+                                                <i class=" fa-solid fa-trash"></i>
+                                                Delete
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -266,12 +439,17 @@
     <script src="/assets/plugin/chart/chartjs/Chart.bundle.min.js"></script>
     <script src="/assets/scripts/chart.chartjs.init.min.js"></script>
 
+    <!-- FullCalendar -->
+    <script src="/assets/plugin/moment/moment.js"></script>
+    <script src="/assets/plugin/fullcalendar/fullcalendar.min.js"></script>
+    <script src="/assets/scripts/fullcalendar.init.js"></script>
 
     <!-- Sparkline Chart -->
     <script src="/assets/plugin/chart/sparkline/jquery.sparkline.min.js"></script>
     <script src="/assets/scripts/chart.sparkline.init.min.js"></script>
 
     <script src="/assets/scripts/main.min.js"></script>
+    <script src="/assets/color-switcher/color-switcher.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.sub-menu li a').click(function () {

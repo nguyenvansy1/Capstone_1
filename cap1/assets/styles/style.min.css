@@ -8,7 +8,7 @@ html {
     font-family: 'Roboto', sans-serif;
     position: relative;
     height: 100%;
-    background: #f4f7f9;
+    background: #f8f8f8;
     color: #505458
 }
 
@@ -23,7 +23,7 @@ html {
     -moz-transform: translate(0, 0);
     -o-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
-    background: #f5f7fa;
+    background: #f8f8f8;
     overflow: hidden;
     transition: transform 0.4s ease;
     -webkit-transition: -webkit-transform 0.4s ease;
@@ -57,7 +57,7 @@ input {
 a {
     text-decoration: none !important;
     outline: none;
-    color: rgb(163, 7, 19)
+    color: #444549
 }
 
 a:active,
@@ -169,8 +169,7 @@ label {
 }
 
 .fa-hover:hover {
-    background: rgb(163, 7, 19);
-    background: linear-gradient(90deg, rgba(163, 7, 19, 1) 0%, rgba(129, 10, 20, 1) 0%, rgba(133, 9, 13, 1) 100%);
+    background: #444549;
     color: #ffffff
 }
 
@@ -375,10 +374,6 @@ h4 strong {
     padding: 10px 15px 10px 15px
 }
 
-.padding-top-10 {
-    padding-top: 10px !important
-}
-
 .padding-10 {
     padding: 10px !important
 }
@@ -452,8 +447,6 @@ h4 strong {
 .btn.btn-bordered:hover {
     background: #e4e7ea
 }
-
-
 
 .btn.btn-rounded {
     border-radius: 23px;
@@ -642,7 +635,7 @@ h4 strong {
 }
 
 .btn-primary {
-    background: rgb(163, 7, 19)
+    background: #444549
 }
 
 .btn-primary:active,
@@ -652,8 +645,8 @@ h4 strong {
 }
 
 .btn-primary.btn-bordered {
-    border-color: rgb(163, 7, 19);
-    color: rgb(163, 7, 19)
+    border-color: #444549;
+    color: #444549
 }
 
 .btn-primary.btn-bordered:active,
@@ -849,7 +842,7 @@ h4 strong {
 }
 
 .bg-primary {
-    background-color: rgb(163, 7, 19) !important
+    background-color: #444549 !important
 }
 
 .bg-success {
@@ -910,11 +903,6 @@ h4 strong {
 
 .text-danger {
     color: #ff1744 !important
-}
-
-
-.text-muted1 {
-    color: #83878c !important
 }
 
 .text-muted {
@@ -999,7 +987,7 @@ h4 strong {
 .table>thead>tr.primary>th,
 .table>thead>tr>td.primary,
 .table>thead>tr>th.primary {
-    background: rgb(163, 7, 19)
+    background: #444549
 }
 
 .table>tbody>tr.danger>td,
@@ -1041,9 +1029,9 @@ h4 strong {
     height: 100%;
     padding-top: 50px;
     background: #ffffff;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 1px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 1px rgba(0, 0, 0, 0.05);
-    -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    -moz-box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    -webkit-box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
@@ -1053,11 +1041,7 @@ h4 strong {
 
 .main-menu .content {
     height: 100%;
-    overflow: auto;
-    padding-top: 20px;
-    border-top: 1px solid #83878c35;
-    padding-left: 20px;
-    padding-right: 20px;
+    overflow: auto
 }
 
 .main-menu .button-close {
@@ -1089,7 +1073,7 @@ h4 strong {
     z-index: 10;
     margin-left: 280px;
     margin-right: 20px;
-    padding: 70px 30px 0 30px;
+    padding-top: 70px
 }
 
 .fixed-navbar {
@@ -1099,11 +1083,12 @@ h4 strong {
     z-index: 20;
     right: 0px;
     padding: 0px 20px 0px 70px;
-    background: linear-gradient(90deg, rgba(163, 7, 19, 1) 0%, rgba(129, 10, 20, 1) 0%, rgba(133, 9, 13, 1) 100%);
-    color: #fff;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14);
-    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14);
-    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14)
+    background: #ffffff;
+    color: #434343;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
 }
 
 .fixed-navbar .searchform {
@@ -1170,8 +1155,7 @@ h4 strong {
 
     .main-menu .header {
         text-align: left;
-        padding-left: 20px;
-        border-bottom: 1px solid #00bf4f
+        padding-left: 20px
     }
 
     .main-menu .button-close {
@@ -1246,8 +1230,8 @@ h4 strong {
     height: 50px;
     white-space: nowrap;
     overflow: hidden;
-    color: #434343;
-    background: #ffffff;
+    color: #fff;
+    background: #000;
     font-weight: 500
 }
 
@@ -1368,7 +1352,7 @@ h4 strong {
 }
 
 .user .control-list a:hover {
-    color: rgb(163, 7, 19)
+    color: #444549
 }
 
 .user .name {
@@ -1388,7 +1372,7 @@ h4 strong {
 
 @media (min-width:1025px) {
     .user .name a:hover {
-        color: rgb(163, 7, 19)
+        color: #444549
     }
 }
 
@@ -1444,26 +1428,26 @@ h4 strong {
 
 .navigation .menu a {
     display: block;
-    color: #434a54
+    color: #fff
 }
 
 @media (min-width:1025px) {
     .navigation .menu a:hover {
-        color: rgb(163, 7, 19)
+        color: #444549
     }
 
     .navigation .menu a:hover i {
-        color: rgb(163, 7, 19)
+        color: #444549
     }
 }
 
 .navigation .menu a.active,
 .navigation .menu a.current {
-    color: rgb(163, 7, 19)
+    color: #444549
 }
 
 .navigation .menu a i {
-    color: #212121;
+    color: #fff;
     transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
@@ -1487,7 +1471,8 @@ h4 strong {
 
 .navigation .menu>li>a span {
     vertical-align: middle;
-    font-size: 14px
+    font-size: 14px;
+    color: #fff;
 }
 
 .navigation .menu>li>a .menu-arrow {
@@ -1508,7 +1493,7 @@ h4 strong {
 }
 
 .navigation .menu>li.active>a {
-    background: #e6e9ed
+    background: #232222;
 }
 
 .navigation .menu>li.active>a .menu-arrow {
@@ -1520,8 +1505,7 @@ h4 strong {
 }
 
 .navigation .menu>li.current>a {
-    background: rgb(163, 7, 19);
-    background: linear-gradient(90deg, rgba(163, 7, 19, 1) 0%, rgba(129, 10, 20, 1) 0%, rgba(133, 9, 13, 1) 100%);
+    background: #444549;
     color: #ffffff
 }
 
@@ -1530,7 +1514,7 @@ h4 strong {
 }
 
 .navigation .menu>li.current .current>a {
-    color: rgb(163, 7, 19)
+    color: #444549
 }
 
 .navigation .menu>li.current .sub-menu {
@@ -1624,7 +1608,7 @@ h4 strong {
         top: 0;
         width: 75px;
         height: 50px;
-        background: #ffffff;
+        background: #000;
         z-index: -2
     }
 
@@ -1699,8 +1683,7 @@ h4 strong {
 
     .menu-active .navigation .menu>li:hover>a {
         width: 260px;
-        background: rgb(163, 7, 19);
-        background: linear-gradient(90deg, rgba(163, 7, 19, 1) 0%, rgba(129, 10, 20, 1) 0%, rgba(133, 9, 13, 1) 100%);
+        background: #444549;
         color: #ffffff;
         padding-left: 90px
     }
@@ -1740,7 +1723,7 @@ h4 strong {
     }
 
     .menu-active .navigation .menu .sub-menu a {
-        background: #e6e9ed;
+        background: #000;
         padding: 10px 15px
     }
 
@@ -1756,7 +1739,7 @@ h4 strong {
 }
 
 .fixed-navbar {
-    height: 60px
+    height: 50px
 }
 
 .fixed-navbar .ico-item {
@@ -1766,12 +1749,12 @@ h4 strong {
     cursor: pointer;
     font-size: 16px;
     line-height: 50px;
-    color: #fff
+    color: #434343
 }
 
 @media (min-width:1025px) {
     .fixed-navbar .ico-item:hover {
-        color: rgb(163, 7, 19)
+        color: #444549
     }
 }
 
@@ -1917,7 +1900,7 @@ h4 strong {
 }
 
 .fixed-navbar .ico-item.toggle-hover .toggle-content .read-more:hover {
-    color: rgb(163, 7, 19)
+    color: #444549
 }
 
 .fixed-navbar .ico-item.toggle-hover.active .toggle-content {
@@ -1993,7 +1976,7 @@ h4 strong {
 }
 
 .fixed-navbar .sub-ico-item a:hover {
-    color: rgb(163, 7, 19)
+    color: #444549
 }
 
 @media (max-width:479px) {
@@ -2018,7 +2001,7 @@ h4 strong {
 
 @media (min-width:1025px) {
     .footer a:hover {
-        color: rgb(163, 7, 19)
+        color: #444549
     }
 }
 
@@ -2150,7 +2133,7 @@ h4 strong {
 
 @media (min-width:1025px) {
     .box-content .dropdown.js__drop_down .sub-menu a:hover {
-        color: rgb(163, 7, 19)
+        color: #444549
     }
 }
 
@@ -2450,8 +2433,7 @@ h4 strong {
 
 .fc .fc-event,
 .fc .fc-event-dot {
-    background: rgb(163, 7, 19);
-    background: linear-gradient(90deg, rgba(163, 7, 19, 1) 0%, rgba(129, 10, 20, 1) 0%, rgba(133, 9, 13, 1) 100%);
+    background: #444549;
     transition: none;
     -moz-transition: none;
     -webkit-transition: none
@@ -2629,7 +2611,7 @@ h4 strong {
 }
 
 .dataTables_wrapper .dataTable .group {
-    background-color: rgb(163, 7, 19);
+    background-color: #444549;
     color: #ffffff
 }
 
@@ -2653,8 +2635,7 @@ h4 strong {
 
 table.focus-on>tbody>tr.focused.unfocused>td,
 table.focus-on>tbody>tr.focused.unfocused>th {
-    background: rgb(163, 7, 19);
-    background: linear-gradient(90deg, rgba(163, 7, 19, 1) 0%, rgba(129, 10, 20, 1) 0%, rgba(133, 9, 13, 1) 100%);
+    background: #444549;
     color: #ffffff
 }
 
@@ -2774,7 +2755,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .inbox-list .name {
-    color: rgb(163, 7, 19);
+    color: #444549;
     margin: 0px;
     transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
@@ -2843,8 +2824,8 @@ table.focus-on>tbody>tr.focused.unfocused>th {
     outline: none;
     font-size: 16px;
     line-height: 50px;
-    color: #fff;
-    background: linear-gradient(90deg, rgba(163, 7, 19, 1) 0%, rgba(129, 10, 20, 1) 0%, rgba(133, 9, 13, 1) 100%);
+    color: #434343;
+    background: #fff
 }
 
 .morris-chart-detail-list {
@@ -2886,7 +2867,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 
 .notice-blue {
     color: #ffffff;
-    background: rgb(163, 7, 19)
+    background: #444549
 }
 
 .notice-purple {
@@ -2973,7 +2954,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 
 @media (min-width:1025px) {
     .notice-list .name:hover {
-        color: rgb(163, 7, 19)
+        color: #444549
     }
 }
 
@@ -3105,7 +3086,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .notice-popup .notice-read-more:hover {
-    color: rgb(163, 7, 19)
+    color: #444549
 }
 
 #message-popup {
@@ -3236,7 +3217,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .radio.primary label:after {
-    background: rgb(163, 7, 19)
+    background: #444549
 }
 
 .radio.success label:after {
@@ -3268,7 +3249,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .radio.primary input[type=radio]:checked+label:before {
-    border-color: rgb(163, 7, 19)
+    border-color: #444549
 }
 
 .radio.success input[type=radio]:checked+label:before {
@@ -3349,7 +3330,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 
 @media (min-width:1025px) {
     .searchform .button-search:hover {
-        color: rgb(163, 7, 19)
+        color: #444549
     }
 }
 
@@ -3459,9 +3440,8 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .switch.primary input[type=checkbox]:checked+label:before {
-    background: rgb(163, 7, 19);
-    background: linear-gradient(90deg, rgba(163, 7, 19, 1) 0%, rgba(129, 10, 20, 1) 0%, rgba(133, 9, 13, 1) 100%);
-    border-color: rgb(163, 7, 19)
+    background: #444549;
+    border-color: #444549
 }
 
 .switch.success input[type=checkbox]:checked+label:before {
@@ -3538,7 +3518,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
     margin: 0px;
     font-size: 18px;
     line-height: 50px;
-    font-weight: 500
+    font-weight: 700
 }
 
 .user-info .avatar {
@@ -3591,10 +3571,6 @@ table.focus-on>tbody>tr.focused.unfocused>th {
     font-size: 13px
 }
 
-.pb-2 {
-    padding: 10px 0;
-}
-
 .widget-stat {
     padding-bottom: 10px;
     text-align: right
@@ -3626,7 +3602,8 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .widget-stat .left-content {
-    float: left
+    /* float: left */
+    text-align: start;
 }
 
 .widget-stat .right-content {
@@ -3775,12 +3752,12 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .box.box-solid.box-primary {
-    border: 1px solid rgb(163, 7, 19)
+    border: 1px solid #444549
 }
 
 .box.box-solid.box-primary>.box-header {
     color: #ffffff;
-    background-color: rgb(163, 7, 19)
+    background-color: #444549
 }
 
 .box.box-solid.box-primary>.box-header .btn,
@@ -4019,7 +3996,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 
 .box-body .nav li.active a {
     background: #ffffff;
-    color: rgb(163, 7, 19)
+    color: #444549
 }
 
 .box-body .nav a {
@@ -4032,7 +4009,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 
 .box-body .nav a:hover {
     background: #ffffff;
-    color: rgb(163, 7, 19)
+    color: #444549
 }
 
 .box-body .nav .fa {
@@ -4118,7 +4095,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .mailbox-messages .unread>td:first-of-type {
-    border-left: 5px solid rgb(163, 7, 19)
+    border-left: 5px solid #444549
 }
 
 .mailbox-messages .unread .mailbox-subject span {
@@ -4367,7 +4344,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .frm-single .frm-input .frm-inp:focus {
-    border-color: rgb(163, 7, 19);
+    border-color: #444549;
     padding-left: 10px
 }
 
@@ -4412,8 +4389,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
     width: 100%;
     height: 36px;
     border: none;
-    background: rgb(163, 7, 19);
-    background: linear-gradient(90deg, rgba(163, 7, 19, 1) 0%, rgba(129, 10, 20, 1) 0%, rgba(133, 9, 13, 1) 100%);
+    background: #444549;
     color: #ffffff;
     margin-bottom: 15px
 }
@@ -4839,7 +4815,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .profile-avatar .btn-inbox {
-    background: rgb(163, 7, 19)
+    background: #444549
 }
 
 .profile-friends-list li {
@@ -5030,7 +5006,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 .pricing-table .col-first .thead {
     border: 1px solid #e9eaeb;
     background: none;
-    color: rgb(163, 7, 19);
+    color: #444549;
     text-transform: uppercase;
     font-size: 18px;
     font-weight: 700;
@@ -5044,8 +5020,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 .pricing-table .thead {
     height: 110px;
     padding: 13px;
-    background: rgb(163, 7, 19);
-    background: linear-gradient(90deg, rgba(163, 7, 19, 1) 0%, rgba(129, 10, 20, 1) 0%, rgba(133, 9, 13, 1) 100%);
+    background: #444549;
     color: #fff;
     vertical-align: middle
 }
@@ -5059,7 +5034,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .pricing-table .thead.bg-main-2 {
-    background-color: rgb(163, 7, 19)
+    background-color: #444549
 }
 
 .pricing-table .thead.bg-blue-1 {
@@ -5071,7 +5046,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .pricing-table .thead.bg-blue-3 {
-    background-color: rgb(163, 7, 19)
+    background-color: #444549
 }
 
 .pricing-table .price {
@@ -5140,7 +5115,7 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .pricing-table .td .fa-check {
-    color: rgb(163, 7, 19);
+    color: #444549;
     font-size: 24px;
     line-height: 48px
 }
@@ -5181,12 +5156,12 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 }
 
 .pricing-table .col-featured .td .btn-order {
-    background: rgb(163, 7, 19)
+    background: #444549
 }
 
 @media (min-width:1025px) {
     .pricing-table .td .btn-order:hover {
-        background: rgb(163, 7, 19)
+        background: #444549
     }
 
     .pricing-table .col:hover:before {
@@ -5435,12 +5410,12 @@ table.focus-on>tbody>tr.focused.unfocused>th {
 
 @media (min-width:1025px) {
     .isotope-filter .filter-controls a:hover {
-        color: rgb(163, 7, 19)
+        color: #444549
     }
 }
 
 .isotope-filter .filter-controls .js__active {
-    color: rgb(163, 7, 19)
+    color: #444549
 }
 
 .modal-content {
@@ -5750,7 +5725,46 @@ textarea.form-control {
     background: #ea4335
 }
 
+/* ============================================================================= */
 
+.navigation {
+    background-color: black;
+    height: 100vh;
+}
+
+.navigation i {
+    color: #fff;
+}
+
+.mCSB_1_container {
+    background-color: #00aeff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======================================== */
 
 /* ===================Boostrap================= */
 .p-3 {
@@ -5782,6 +5796,9 @@ textarea.form-control {
     border-radius: 0.25rem !important;
 }
 
+.rounded-sm {
+    border-radius: 2rem !important;
+}
 
 .rounded-circle {
     border-radius: 50% !important;
@@ -5870,7 +5887,7 @@ textarea.form-control {
     background-color: #cccc;
 }
 
-.navigation .nav-menu {
+/* .navigation .nav-menu {
     padding: 0 10px;
 }
 
@@ -5888,7 +5905,7 @@ textarea.form-control {
 
 .navigation .nav-menu li:hover i {
     color: #fff;
-}
+} */
 
 .content .avatar img {
     width: 100px;
@@ -5939,4 +5956,34 @@ li {
     top: 5px;
     font-size: 18px;
     color: #828a8e;
+}
+
+
+.icon-tun {
+    padding: 13px 15px;
+    background-color: #574949;
+    border-radius: 10px;
+    color: #fff;
+
+}
+
+.icon-tun i {
+    font-size: 24px;
+}
+
+.box-content {
+    cursor: pointer;
+}
+
+.active-chart {
+    background-color: #fff !important;
+}
+
+.active-chart h2,
+.active-chart h4 {
+    color: #000 !important;
+}
+
+.title-detail {
+    padding: 10px 15px;
 }
