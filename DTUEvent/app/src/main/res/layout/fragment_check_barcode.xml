@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.CheckBarcodeFragment">
+    <FrameLayout
+        android:id="@+id/layout_scan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+        <androidx.camera.view.PreviewView
+            android:id="@+id/cameraPreviewView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/frame_top"
+                android:layout_width="match_parent"
+                android:layout_height="161dp"
+                android:layout_above="@id/frame_mid"
+                android:background="#80000000" />
+
+            <TextView
+                android:id="@+id/frame_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/frame_mid"
+                android:background="#80000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/frame_bottom"
+                android:layout_below="@id/frame_top"
+                android:layout_toLeftOf="@id/frame_mid"
+                android:background="#80000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/frame_mid"
+                android:layout_above="@id/frame_bottom"
+                android:layout_below="@id/frame_top"
+                android:background="#80000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/img_csan_frame"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="35dp"
+                android:text="Di chuyển mã vạch vào khu vực"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/frame_mid"
+                android:layout_width="279dp"
+                android:layout_height="279dp"
+                android:background="@null"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:id="@+id/img_csan_frame"
+                android:layout_width="284dp"
+                android:layout_height="284dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_baseline_document_scanner_24" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:weightSum="2"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btn_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_scan"
+                    android:gravity="center"
+                    android:minWidth="150dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Thư viện"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/btn_fash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_scan"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:minWidth="150dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textStyle="bold"
+                    android:text="Tắt đèn Flash"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!--            <com.google.android.gms.ads.AdView-->
+            <!--                xmlns:ads="http://schemas.android.com/apk/res-auto"-->
+            <!--                android:id="@+id/ads_scan"-->
+            <!--                android:layout_gravity="center_horizontal"-->
+            <!--                android:layout_marginBottom="10dp"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:background="@color/main"-->
+            <!--                android:layout_centerInParent="true"-->
+            <!--                ads:adSize="BANNER"-->
+            <!--                ads:adUnitId="@string/banner_ad_unit_id" />-->
+            <Button
+                android:id="@+id/btn_check"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#981212"
+                android:gravity="center"
+                android:minWidth="150dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Quét"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_permisson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_permisson"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="120dp"
+            android:paddingLeft="60dp"
+            android:src="@drawable/img_permission" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_permisson"
+            android:layout_width="320dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="120dp"
+            android:background="@drawable/btn_permission"
+            android:letterSpacing="0.1"
+            android:stateListAnimator="@null"
+            android:text="@string/allow_permission"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</RelativeLayout>

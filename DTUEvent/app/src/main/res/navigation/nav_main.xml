@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:defaultNavHost="true"
+    app:startDestination="@id/home">
+    <fragment
+        android:id="@+id/splash"
+        android:name="com.example.dtuevent.ui.activity.SplashActivity"
+        android:label="Splash"
+        tools:layout="@layout/activity_splash"/>
+    <fragment
+        android:id="@+id/scan"
+        android:name="com.example.dtuevent.ui.fragment.CheckBarcodeFragment"
+        android:label="Scan"
+        tools:layout="@layout/fragment_check_barcode"/>
+    <fragment
+        android:id="@+id/home"
+        android:name="com.example.dtuevent.ui.fragment.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_to_users"
+            app:destination="@id/users" />
+        <action
+            android:id="@+id/action_home_to_notification"
+            app:destination="@id/notification" />
+        <action
+            android:id="@+id/action_home_to_creatqr"
+            app:destination="@id/creatqr" />
+        <action
+            android:id="@+id/action_home_to_history"
+            app:destination="@id/history" />
+        <action
+            android:id="@+id/action_home_to_setting"
+            app:destination="@id/setting" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/users"
+        android:name="com.example.dtuevent.ui.fragment.UsersFragment"
+        android:label="Users"
+        tools:layout="@layout/fragment_users" />
+    <fragment
+        android:id="@+id/notification"
+        android:name="com.example.dtuevent.ui.fragment.NotificationFragment"
+        android:label="Notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/creatqr"
+        android:name="com.example.dtuevent.ui.fragment.CreateQRFragment"
+        android:label="CreatQR"
+        tools:layout="@layout/fragment_create_qr" />
+    <fragment
+        android:id="@+id/history"
+        android:name="com.example.dtuevent.ui.fragment.HistoryFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/setting"
+        android:name="com.example.dtuevent.ui.fragment.SettingFragment"
+        android:label="Setting"
+        tools:layout="@layout/fragment_setting"/>
+</navigation>
