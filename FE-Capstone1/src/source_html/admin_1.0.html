@@ -1,0 +1,152 @@
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="utf-8">-->
+<!--  <title>FECapstone1</title>-->
+<!--  <base href="/">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--  <link rel="icon" type="image/x-icon" href="favicon.ico">-->
+
+<!--  &lt;!&ndash; Main Styles &ndash;&gt;-->
+<!--  <link rel="stylesheet" type="text/css" href="/assets/styles/style.min.css">-->
+
+<!--  &lt;!&ndash; Material Design Icon &ndash;&gt;-->
+<!--  <link rel="stylesheet" type="text/css" href="/assets/fonts/material-design/css/materialdesignicons.css">-->
+
+<!--  &lt;!&ndash; mCustomScrollbar &ndash;&gt;-->
+<!--  <link rel="stylesheet" type="text/css" href="/assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css">-->
+
+<!--  &lt;!&ndash; Waves Effect &ndash;&gt;-->
+<!--  <link rel="stylesheet" type="text/css" href="/assets/plugin/waves/waves.min.css">-->
+
+<!--  &lt;!&ndash; Sweet Alert &ndash;&gt;-->
+<!--  <link rel="stylesheet" type="text/css" href="/assets/plugin/sweet-alert/sweetalert.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="main-menu">-->
+<!--  <header class="header">-->
+<!--    <a routerLink="/home" class="logo">Zeiss</a>-->
+<!--    <button type="button" class="button-close fa fa-times js__menu_close"></button>-->
+<!--  </header>-->
+<!--  &lt;!&ndash; /.header &ndash;&gt;-->
+<!--  <div class="content">-->
+
+<!--    <div class="navigation">-->
+<!--      <ul class="menu js__accordion">-->
+<!--        <li class="current" style="background-color: green">-->
+<!--          <a class="waves-effect" href="index.html"><i-->
+<!--            class="menu-icon mdi mdi-view-dashboard"></i><span>Dashboard</span></a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a class="waves-effect parent-item js__control" href="#"><i-->
+<!--            class="menu-icon mdi mdi-flower"></i><span>Managers</span><span-->
+<!--            class="menu-arrow fa fa-angle-down"></span></a>-->
+<!--          <ul class="sub-menu js__content">-->
+<!--            <li><a routerLink="/admin1/user">User</a></li>-->
+<!--            <li><a href="icons-fontello.html">Customer</a></li>-->
+<!--          </ul>-->
+<!--          &lt;!&ndash; /.sub-menu js__content &ndash;&gt;-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--      &lt;!&ndash; /.menu js__accordion &ndash;&gt;-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; /.navigation &ndash;&gt;-->
+<!--  </div>-->
+<!--  &lt;!&ndash; /.content &ndash;&gt;-->
+<!--</div>-->
+<!--&lt;!&ndash; /.main-menu &ndash;&gt;-->
+
+<!--<div class="fixed-navbar">-->
+<!--  <div class="pull-left">-->
+<!--    <button type="button"-->
+<!--            class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile"></button>-->
+<!--    <h1 class="page-title"></h1>-->
+<!--    &lt;!&ndash; /.page-title &ndash;&gt;-->
+<!--  </div>-->
+<!--  &lt;!&ndash; /.pull-left &ndash;&gt;-->
+<!--  <div class="pull-right">-->
+<!--    <div class="ico-item">-->
+<!--      <a href="#" class="ico-item fa fa-search js__toggle_open" data-target="#searchform-header"></a>-->
+<!--      <form action="#" id="searchform-header" class="searchform js__toggle"><input type="search"-->
+<!--                                                                                   placeholder="Search..." class="input-search"><button class="fa fa-search button-search"-->
+<!--                                                                                                                                        type="submit"></button></form>-->
+<!--      &lt;!&ndash; /.searchform &ndash;&gt;-->
+<!--    </div>-->
+<!--    &lt;!&ndash; /.ico-item &ndash;&gt;-->
+<!--    <div class="ico-item fa fa-arrows-alt js__full_screen"></div>-->
+<!--    &lt;!&ndash; /.ico-item fa fa-fa-arrows-alt &ndash;&gt;-->
+<!--    <div class="ico-item toggle-hover js__drop_down ">-->
+<!--      <span class="fa fa-th js__drop_down_button"></span>-->
+<!--      <div class="toggle-content">-->
+<!--        &lt;!&ndash;        <ul>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <li><a href="#"><i class="fa fa-github"></i><span class="txt">Github</span></a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <li><a href="#"><i class="fa fa-bitbucket"></i><span class="txt">Bitbucket</span></a>&ndash;&gt;-->
+<!--        &lt;!&ndash;          </li>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <li><a href="#"><i class="fa fa-slack"></i><span class="txt">Slack</span></a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <li><a href="#"><i class="fa fa-dribbble"></i><span class="txt">Dribbble</span></a>&ndash;&gt;-->
+<!--        &lt;!&ndash;          </li>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <li><a href="#"><i class="fa fa-amazon"></i><span class="txt">Amazon</span></a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <li><a href="#"><i class="fa fa-dropbox"></i><span class="txt">Dropbox</span></a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </ul>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <a href="#" class="read-more">More</a>&ndash;&gt;-->
+<!--      </div>-->
+<!--      &lt;!&ndash; /.toggle-content &ndash;&gt;-->
+<!--    </div>-->
+<!--    &lt;!&ndash; /.ico-item &ndash;&gt;-->
+<!--    <a href="#" class="ico-item fa fa-envelope notice-alarm js__toggle_open"-->
+<!--       data-target="#message-popup"></a>-->
+<!--    <a href="#" class="ico-item pulse"><span class="ico-item fa fa-bell notice-alarm js__toggle_open"-->
+<!--                                             data-target="#notification-popup"></span></a>-->
+<!--    <div class="ico-item">-->
+<!--      <ul class="sub-ico-item">-->
+<!--        <li><a href="#">Settings</a></li>-->
+<!--        <li><a href="#">Blog</a></li>-->
+<!--        <li><a class="js__logout" href="#">Log Out</a></li>-->
+<!--      </ul>-->
+<!--      &lt;!&ndash; /.sub-ico-item &ndash;&gt;-->
+<!--    </div>-->
+<!--    &lt;!&ndash; /.ico-item &ndash;&gt;-->
+<!--  </div>-->
+<!--  &lt;!&ndash; /.pull-right &ndash;&gt;-->
+<!--</div>-->
+<!--&lt;!&ndash; /.fixed-navbar &ndash;&gt;-->
+
+<!--<div id="notification-popup" class="notice-popup js__toggle" data-space="50">-->
+<!--  <h2 class="popup-title">Your Notifications</h2>-->
+<!--  &lt;!&ndash; /.popup-title &ndash;&gt;-->
+<!--  <div class="content">-->
+
+<!--    <a href="#" class="notice-read-more">See more messages <i class="fa fa-angle-down"></i></a>-->
+<!--  </div>-->
+<!--  &lt;!&ndash; /.content &ndash;&gt;-->
+<!--</div>-->
+<!--&lt;!&ndash; /#notification-popup &ndash;&gt;-->
+
+<!--<div id="message-popup" class="notice-popup js__toggle" data-space="50">-->
+<!--  <h2 class="popup-title">Recent Messages<a href="#" class="pull-right text-danger">New message</a></h2>-->
+<!--  &lt;!&ndash; /.popup-title &ndash;&gt;-->
+<!--  <div class="content">-->
+
+<!--    <a href="#" class="notice-read-more">See more messages <i class="fa fa-angle-down"></i></a>-->
+<!--  </div>-->
+
+<!--</div>-->
+
+
+<!--<div id="wrapper">-->
+<!--  <div class="main-content">-->
+<!--    <div class="row small-spacing">-->
+<!--      <div class="col-xs-12">-->
+<!--        <div style="position: relative" class="box-content">-->
+<!--          <h4 class="box-title">Default</h4>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+

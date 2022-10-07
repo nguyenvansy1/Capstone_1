@@ -1,0 +1,179 @@
+<div class="main-content" id="main-container">
+  <div class="row small-spacing">
+    <div class="col-xs-12">
+      <div style="position: relative" class="box-content">
+        <h1 class="box-title">List user</h1>
+        <div class="row" style="margin-bottom: 15px">
+          <div class="col-md-3">
+            <form class="form-inline my-2 my-lg-0" >
+              <mat-form-field>
+                <mat-label>Search</mat-label>
+                <input matInput #inputName  name="search" [(ngModel)]="keywordName" (keyup)=(searchByCodeOrName(inputName.value))>
+              </mat-form-field>
+            </form>
+          </div>
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-3">
+          </div>
+        </div>
+
+        <table id="example" class="table table-striped table-bordered display" style="width:100%; margin-bottom: 0">
+          <thead>
+          <tr>
+            <th style="width: 59px">STT</th>
+            <th style="width: 140px">Code</th>
+            <th style="width: 200px">Name</th>
+            <th style="width: 140px">Identity Card</th>
+            <th style="width: 140px">Phone</th>
+            <th style="width: 140px">Birth Day</th>
+            <th style="width: 140px">Course</th>
+            <th style="width: 140px">Majors</th>
+            <th class="text-center align-middle">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let user of userList; let i = index">
+            <td style="width: 59px">{{i+1+(thePageNumber-1)*thePageSize}}</td>
+            <td style="width: 140px">{{user?.code}}</td>
+            <td  style="width: 200px"><a [routerLink]="['/admin/user/detail', user.code]">{{user?.name}}</a></td>
+            <td style="width: 140px">{{user?.identityCard}}</td>
+            <td style="width: 140px">{{user?.phone}}</td>
+            <td style="width: 140px">{{user?.birthDay | date: 'dd/MM/yyyy'}}</td>
+            <td style="width: 140px">{{user?.course.name}}</td>
+            <td style="width: 140px">{{user?.majors.name}}</td>
+            <td class="text-center align-middle">
+              <div class="btn-group" style="cursor: pointer;">
+                <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                  class="fa-solid fa-ellipsis h4"></i></div>
+                <ul class="dropdown-menu" style="left: -100px; min-width: 120px;">
+                  <li class="padding-top-10 text-left is-hover" data-toggle="modal"
+                      data-target="#editModal" style="cursor: pointer; padding: 8px 30px;" (click)="onOpenModal(user, 'edit')">
+                    <i class="fa-solid fa-pen"></i>
+                    Edit
+                  </li>
+                  <li class="padding-top-10 text-left is-hover" data-toggle="modal"
+                      data-target="#removeModal" style="cursor: pointer; padding: 8px 30px;" (click)="onOpenModal(user, 'delete')">
+                    <i class=" fa-solid fa-trash"></i>
+                    Delete
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="userList?.length == 0" class="alert alert-warning text-center" role="alert" style="background-color: #F2F2F2; color: black">
+          <b>User not found</b>
+        </div>
+        <div class="row" style="margin-left: -25px;">
+          <div class="col-md-4" style="padding: 25px" >
+            <span>Show </span>
+            <select style="height: 25px;width: 50px;-webkit-box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 1px 1px rgb(0 0 0 / 5%);border-radius: 3px" class="form-control-md" (change) = "updatePageSize($event.target.value)" >
+              <option selected >5</option>
+              <option >10</option>
+              <option >20</option>
+              <option >50</option>
+            </select>
+            <span> entries</span>
+          </div>
+          <div class="col-md-1" style="padding: 25px" >
+          </div>
+          <div class="col-md-3 text-right" style="padding: 25px" >
+            <p> Showing {{ (thePageNumber - 1) * thePageSize + 1 }} - {{ itemPerPage }} of {{ theTotalElements }} entries</p>
+          </div>
+          <div class="col-md-4 text-right">
+            <ngb-pagination [(page)] = "thePageNumber"
+                            [pageSize] = "thePageSize"
+                            [collectionSize] = "theTotalElements"
+                            (pageChange) = "getListUser()"
+                            [boundaryLinks]="true"
+                            [maxSize]="3"
+                            [rotate]="true"
+            >
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Edit User Modal-->
+<div style="width: 500px;height:780px;margin-left: 508px;margin-top: -20px" class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="height: 50px">
+        <h2 class="modal-title" id="editUserModalLabel">Edit User</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEdit" (ngSubmit)="onUpdateUser(formEdit)">
+          <div class="form-group">
+            <input type="number" hidden name="code" class="form-control" required formControlName="code">
+          </div>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name"  name="name" class="form-control" placeholder="Name" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label for="identityCard">Identity Card</label>
+            <input type="number" id="identityCard"  name="identityCard" class="form-control"  placeholder="Identity Card"  formControlName="identityCard">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone"  name="phone" class="form-control"  placeholder="Phone"  formControlName="phone">
+          </div>
+          <div class="form-group">
+            <label for="birthDay">BirthDay</label>
+            <input type="date" id="birthDay"  name="birthDay" class="form-control"  placeholder="BirthDay"  formControlName="birthDay">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Course</label>
+            <select [compareWith]="compareCourse" class="form-control" id="exampleFormControlSelect1" formControlName="course">
+              <option [ngValue]="null" disabled >-- Select --</option>
+              <option *ngFor="let course of courseList" [ngValue] = "course" >{{course?.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect2">Majors</label>
+            <select [compareWith]="compareMajors" class="form-control" id="exampleFormControlSelect2" formControlName="majors">
+              <option [ngValue]="null" disabled >-- Select --</option>
+              <option *ngFor="let majors of majorsList" [ngValue] = "majors" >{{majors?.name}}</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="edit-customer-form"  class="btn" style="background-color: #5A6268;color: white" data-dismiss="modal">Close</button>
+            <button [disabled]="formEdit.invalid" type="submit" class="btn btn-primary" >Save change</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" >Delete User</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to delete user {{deleteUser?.name}} with code {{deleteUser?.code}} ?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn" style="background-color: #5A6268;color: white"  data-dismiss="modal">No</button>
+          <button (click)="onDeleteUser(deleteUser?.code)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<notifier-container></notifier-container>
+
+
