@@ -2039,10 +2039,12 @@ h4 strong {
     -webkit-transition: all 0.4s ease
 }
 
+.box-content .ico,
 .box-content .box-title .ico {
     margin-right: 8px;
-    line-height: 16px
+    line-height: 16px;
 }
+
 
 .box-content .box-title.with-control .controls {
     position: absolute;

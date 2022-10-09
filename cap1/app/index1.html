@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .wrapper {
+        width: 200px;
+        padding: 10px;
+    }
+
+    .wrapper input {
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 0;
+    }
+
+    .address-box {
+        background-color: #fff;
+        color: #333;
+    }
+
+    .active {
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <input placeholder="Nhập địa chỉ" />
+        <div class="address-box active">
+            <p>h1</p>
+            <p>h1</p>
+            <p>h1</p>
+            <p>h1</p>
+            <p>h1</p>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    var inpputElement = document.querySelector("input");
+    var addressBoxElement = document.querySelector(".address-box");
+    var check = false;
+    inpputElement.onfocus = () => {
+        addressBoxElement.classList.remove("active")
+    }
+
+
+</script>
+
+</html>
