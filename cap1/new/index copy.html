@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Morvin - Responsive Bootstrap 5 Admin Dashboard | Docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesdesign" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+
+<style>
+    button {
+        outline: none;
+        border: none;
+        background-color: transparent;
+    }
+
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+
+    .col-md-2-4 {
+        flex: 0 0 15%;
+        max-width: 15%;
+    }
+
+    .price {
+        font-weight: 700;
+    }
+
+    .customer_info_name {
+        position: relative;
+        margin-right: 10px;
+    }
+
+    .customer_info_name::after {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 25px;
+        background-color: rgb(228, 220, 220);
+        top: 0;
+        right: -5px;
+
+    }
+
+    .total_prices {
+        position: relative;
+        padding: 20px 0;
+    }
+
+    .total_prices::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: rgba(247, 242, 242, 0.532);
+        top: 0;
+    }
+</style>
+
+<body data-sidebar="dark">
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="index.html" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="assets/images/logo-sm-light.png" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="assets/images/logo-light.png" alt="" height="20">
+                            </span>
+                        </a>
+                    </div>
+
+                    <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+                        id="vertical-menu-btn">
+                        <i class="mdi mdi-backburger"></i>
+                    </button>
+
+                </div>
+                <div class="d-flex" style="align-items: center">
+                    <div class="d-inline-block" style="position: relative">
+                        <input type="text" class="input-header">
+                        <i class="fa-solid fa-magnifying-glass icon-find"></i>
+                    </div>
+                </div>
+                <div class="d-flex" style="align-items: center">
+                    <div class="d-inline-block" style="margin-right: 15px">
+                        <h5><i class="fa-regular fa-bell icon"></i></h5>
+                    </div>
+                    <div class="d-inline-block img-avatar">
+                        <img src="https://variety.com/wp-content/uploads/2021/04/Avatar.jpg" alt="sdsd">
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+
+            <div data-simplebar class="h-100">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li>
+                            <a href="index.html" class="waves-effect">
+                                <i class="mdi mdi-file-document-box-outline"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="setup.html" class=" waves-effect">
+                                <i class="mdi mdi-settings-outline"></i>
+                                <span>Donate Blood</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="plugins.html" class=" waves-effect">
+                                <i class="mdi mdi-apps"></i>
+                                <span>History</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="vertical.html" class=" waves-effect">
+                                <i class="mdi mdi-flip-horizontal"></i>
+                                <span>Buy Blood</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="horizontal.html" class=" waves-effect">
+                                <i class="mdi mdi-flip-vertical"></i>
+                                <span>Prifole</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <div class="main-content bg-light">
+
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <!-- products -->
+                            <div class="row rounded bg-white align-items-center">
+                                <div class="col-md-2-4 d-flex " style="flex: 0 0 40%; max-width: 40%;">
+                                    <div class="form-group" style="margin: auto 0; padding: 8px 10px;">
+                                        <input type="checkbox">
+                                        <label for="">Tất cả (3 sản phẩm)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2-4">Đơn giá</div>
+                                <div class="col-md-2-4">Số lượng</div>
+                                <div class="col-md-2-4">Thành tiền</div>
+                                <div class="col-md-2-4 text-right"><button><i
+                                            class="fa-solid fa-trash-can"></i></button></div>
+                            </div>
+                            <!-- list shopp -->
+                            <div class="wrapper rounded mt-2 bg-white ">
+                                <div class="row bg-white" style="padding: 8px 10px;">
+                                    <div class="col-md-2-4" style="flex: 0 0 40%; max-width: 40%;">
+                                        <div class="form-group">
+                                            <input type="checkbox">
+                                            <label for=""><i class="fa-solid fa-store"></i>Mega Store</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- shop1 -->
+                                <div class="row bg-white" style="padding: 8px 10px;">
+                                    <div class="col-md-2-4 d-flex align-items-center "
+                                        style="flex: 0 0 40%; max-width: 40%;">
+                                        <input type="checkbox">
+                                        <div class="product d-flex align-items-center">
+                                            <img class="img-fuild mx-1 "
+                                                src="
+                                            https://salt.tikicdn.com/cache/w78/ts/product/a3/6c/0c/636b4243f96d4d52e2ca1f524c0edda8.jpg.webp"
+                                                alt="" style="width: 80px; height: 80px;">
+                                            <div class="product__content px-2">
+                                                <a href="">Tai nghe chụp tai Gaming H3T - Tai Nghe Game Thủ</a>
+                                                <span class="text-warning d-block">Hết Hàng</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2-4 price">178.000 đ</div>
+                                    <div class="col-md-2-4"></div>
+                                    <div class="col-md-2-4"> </div>
+                                    <div class="col-md-2-4 text-right"><button><i
+                                                class="fa-solid fa-trash-can"></i></button></div>
+                                </div>
+                                <!-- shop2 -->
+                                <div class="row bg-white" style="padding: 8px 10px;">
+                                    <div class="col-md-2-4 d-flex align-items-center "
+                                        style="flex: 0 0 40%; max-width: 40%;">
+                                        <input type="checkbox">
+                                        <div class="product d-flex align-items-center">
+                                            <img class="img-fuild mx-1 "
+                                                src="
+                                            https://salt.tikicdn.com/cache/w78/ts/product/a3/6c/0c/636b4243f96d4d52e2ca1f524c0edda8.jpg.webp"
+                                                alt="" style="width: 80px; height: 80px;">
+                                            <div class="product__content px-2">
+                                                <a href="">Tai nghe chụp tai Gaming H3T - Tai Nghe Game Thủ</a>
+                                                <span class="text-warning d-block">Hết Hàng</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2-4 price">178.000 đ</div>
+                                    <div class="col-md-2-4"></div>
+                                    <div class="col-md-2-4"> </div>
+                                    <div class="col-md-2-4 text-right"><button><i
+                                                class="fa-solid fa-trash-can"></i></button></div>
+                                </div>
+                                <!-- footer -->
+                                <div class="row bg-white"
+                                    style="padding: 8px 10px; border-top: 1px solid rgb(201, 196, 196);">
+                                    <div class="col-md-12 wrapper d-flex p-2 ">
+                                        <div class="mr-3">Shop Khuyến Mãi</div>
+                                        <span>Vui lòng chọn sản phẩm trước</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="container bg-white py-2 rounded">
+                                <div class="header d-flex align-items-center justify-content-between">
+                                    <h3>Giao tới</h3>
+                                    <a href=" #" class="text-primary">Thay đổi</a>
+                                </div>
+                                <div class="customer_info d-flex align-items-center">
+                                    <p class="font-weight-bold customer_info_name">Nguyễn Sỹ</p>
+                                    <p class="font-weight-bold customer_info_phone">123456789</p>
+                                </div>
+                                <div class=" address">
+                                    <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium,
+                                        nihil.</span>
+                                </div>
+                            </div>
+                            <div class="container bg-white mt-3 py-2 rounded">
+                                <div class="header d-flex align-items-center justify-content-between pt-2">
+                                    <h6>Tiki Khuyễn Mãi</h6>
+                                    <p>Có thể chọn 2<i class="fa-solid fa-info rounded-circle border border-dark ml-3"
+                                            style="width: 20px; height: 20px;padding-left: 6px;"></i></p>
+                                </div>
+                                <div class="discount py-3">
+                                    <a href="#" class="text-primary"><i class="fa-solid fa-window-maximize"></i>
+                                        Chọn
+                                        hoặc nhập Khuyến mãi
+                                        khác</a>
+                                </div>
+                            </div>
+                            <div class="container bg-white mt-3 py-2 rounded">
+                                <ul class="prices_items" style="padding: initial;">
+                                    <li class="prices_item d-flex align-items-center justify-content-between">
+                                        <div class=" text">Tạm tính
+                                        </div>
+                                        <div class="value font-weight-bold">0đ</div>
+                                    </li>
+                                    <li class="prices_item d-flex align-items-center justify-content-between">
+                                        <div class=" text">Giảm giá
+                                        </div>
+                                        <div class="value font-weight-bold">0đ</div>
+                                    </li>
+                                </ul>
+                                <div class="total_prices d-flex justify-content-between">
+                                    <div class="total">Tổng tiền</div>
+                                    <div>
+                                        <div class="total_value text-danger">Vui lòng chọn sản phẩm</div>
+                                        <div class="total_notes">(Đã bao gồm VAT nếu có)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="btn btn-danger mt-3" style="width: 100%">Mua hàng(0)</div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+    </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+
+    <script src="assets/js/app.js"></script>
+
+</body>
+
+</html>
