@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Morvin - Responsive Bootstrap 5 Admin Dashboard | Docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesdesign" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+
+<style>
+    button {
+        outline: none;
+        border: none;
+        background-color: transparent;
+    }
+
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+
+    .col-md-2-4 {
+        flex: 0 0 15%;
+        max-width: 15%;
+    }
+
+
+    .invoice {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .header {
+        border-bottom: 5px solid #333;
+        padding-bottom: 15px;
+    }
+
+    .sub_invoice {
+        padding-right: 50px;
+    }
+
+    .sub_invoice p {
+        line-height: 1;
+    }
+
+    .header_name {
+        font-size: 16px;
+        padding: 25px 0;
+    }
+
+    .infomation {
+        border-bottom: 2px dotted #333;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    .table {
+        border-bottom: 2px solid #333;
+    }
+
+    .list_items {
+        padding-bottom: 5px;
+        font-weight: bold;
+    }
+</style>
+
+<body data-sidebar="dark">
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="index.html" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="assets/images/logo-sm-light.png" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="assets/images/logo-light.png" alt="" height="20">
+                            </span>
+                        </a>
+                    </div>
+
+                    <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+                        id="vertical-menu-btn">
+                        <i class="mdi mdi-backburger"></i>
+                    </button>
+
+                </div>
+                <div class="d-flex" style="align-items: center">
+                    <div class="d-inline-block" style="position: relative">
+                        <input type="text" class="input-header">
+                        <i class="fa-solid fa-magnifying-glass icon-find"></i>
+                    </div>
+                </div>
+                <div class="d-flex" style="align-items: center">
+                    <div class="d-inline-block" style="margin-right: 15px">
+                        <h5><i class="fa-regular fa-bell icon"></i></h5>
+                    </div>
+                    <div class="d-inline-block img-avatar">
+                        <img src="https://variety.com/wp-content/uploads/2021/04/Avatar.jpg" alt="sdsd">
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+
+            <div data-simplebar class="h-100">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li>
+                            <a href="index.html" class="waves-effect">
+                                <i class="mdi mdi-file-document-box-outline"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="setup.html" class=" waves-effect">
+                                <i class="mdi mdi-settings-outline"></i>
+                                <span>Donate Blood</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="plugins.html" class=" waves-effect">
+                                <i class="mdi mdi-apps"></i>
+                                <span>History</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="vertical.html" class=" waves-effect">
+                                <i class="mdi mdi-flip-horizontal"></i>
+                                <span>Buy Blood</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="horizontal.html" class=" waves-effect">
+                                <i class="mdi mdi-flip-vertical"></i>
+                                <span>Prifole</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <div class="main-content bg-light">
+
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div class="invoice">
+                        <div class="header d-flex justify-content-between">
+                            <div>
+                                <h1>Invoice</h1>
+                            </div>
+                            <div class="sub_invoice">
+                                <p><b>Invoice No: </b>Rk369879</p>
+                                <p><b>Invoice Date: </b>7/4/2014</p>
+                            </div>
+                        </div>
+                        <div class="infomation">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="infomation__billding">
+                                        <h2 class="header_name">Bdillding Infomation</h2>
+                                        <div class="info mb-4">
+                                            <div class="company_title font-weight-bold">Company</div>
+                                            <div class="company_value">Coding Error</div>
+                                            <div class="name_title font-weight-bold">Name</div>
+                                            <div class="name_value">Allyn Pullterges</div>
+                                        </div>
+                                        <div class="address">
+                                            <div class="address_title font-weight-bold">Adress</div>
+                                            <div class="address_Value">Lorem ipsum dolor sit amet consectetur,
+                                                adipisicing
+                                                elit. Commodi, fugit.</div>
+                                            <div class="email_title font-weight-bold">Email</div>
+                                            <div class="email_value">pullterges@gmail.com</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="infomation__shipping">
+                                        <h2 class="header_name">Shipping Infomation</h2>
+                                        <div class="info">
+                                            <div class="name_title font-weight-bold">Name</div>
+                                            <div class="name_value">Allyn Pullterges</div>
+                                            <div class="address_title font-weight-bold">Adress</div>
+                                            <div class="address_Value">Lorem ipsum dolor sit amet consectetur,
+                                                adipisicing
+                                                elit. Commodi, fugit.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="products">
+                            <h6>Products</h6>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Apple</td>
+                                        <td>2</td>
+                                        <td>318.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mango</td>
+                                        <td>5</td>
+                                        <td>820.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>bânnaa</td>
+                                        <td>3</td>
+                                        <td>180.0</td>
+                                    </tr>
+
+                                    <!-- total -->
+                                    <tr>
+                                        <td></td>
+                                        <td>Total</td>
+                                        <td>123456.0</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div class="tearm-condition">
+                            <h3>Tearms And Conditions</h3>
+                            <div class="list_items">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+                                corporis cum quod
+                                vitae a delectus inventore fuga architecto temporibus natus.</div>
+                            <div class="list_items">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+                                corporis cum quod
+                                vitae a delectus inventore fuga architecto temporibus natus.</div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+    </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+
+    <script src="assets/js/app.js"></script>
+
+</body>
+
+</html>
