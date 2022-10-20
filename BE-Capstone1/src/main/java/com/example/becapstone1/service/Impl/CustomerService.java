@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,8 @@ public class CustomerService implements ICustomerService {
     private DataMailService dataMailService;
 
     @Override
-    public void addCustomer(Customer customer) {
+    public void addCustomer(Customer customer) throws IOException {
+        customer.setAccount_id(4);
         iCustomerRepository.save(customer);
         try {
             DataMail dataMail = new DataMail();

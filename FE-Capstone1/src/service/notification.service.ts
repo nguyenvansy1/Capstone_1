@@ -17,10 +17,6 @@ export class NotificationService {
     this.notifier.notify(Type.SUCCESS, message);
   }
 
-  // onInfo(message: string): void {
-  //   this.notifier.notify(Type.INFO, message);
-  // }
-
   onWarning(message: string): void {
     this.notifier.notify(Type.WARNING, message);
   }

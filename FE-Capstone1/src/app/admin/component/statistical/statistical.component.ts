@@ -11,7 +11,9 @@ import {UserService} from '../../../../service/user.service';
   styleUrls: ['./statistical.component.css']
 })
 export class StatisticalComponent implements OnInit {
-
+  amountUser: number;
+  amountEventFinished: number;
+  amountEventUpcoming: number;
   constructor(private eventService: EventService , private userService: UserService) { }
 
   title = 'test';
@@ -186,6 +188,17 @@ export class StatisticalComponent implements OnInit {
 
     this.userService.getDataUser().subscribe(data => {
       this.barChartDataEvent[1].data = data;
+    });
+    this.userService.getAmountUser().subscribe(data => {
+      this.amountUser = data;
+    });
+
+    this.eventService.getAmountEventFinished().subscribe(data => {
+      this.amountEventFinished = data;
+    });
+
+    this.eventService.getAmountEventUpcoming().subscribe(data => {
+      this.amountEventUpcoming = data;
     });
   }
 }

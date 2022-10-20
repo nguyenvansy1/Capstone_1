@@ -18,7 +18,7 @@
           </div>
         </div>
 
-        <table id="example" class="table table-striped table-bordered display" style="width:100%; margin-bottom: 0">
+        <table id="example" class="table table-striped table-borderless table-hover" style="width:100%; margin-bottom: 0">
           <thead>
           <tr>
             <th>STT</th>
@@ -34,7 +34,7 @@
           <tbody>
           <tr *ngFor="let event of eventList; let i = index">
             <td style="width: 59px">{{i+1+(thePageNumber-1)*thePageSize}}</td>
-            <td style="width: 140px">{{event.name}}</td>
+            <td style="width: 140px"><a [routerLink]="['/admin/event/detail', event.id]">{{event.name}}</a></td>
             <td  style="width: 200px">{{event.location}}</td>
             <td style="width: 80px">{{event.date | date: 'dd/MM/yyyy'}}</td>
             <td style="width: 80px">{{event.startTime}}</td>
@@ -52,7 +52,7 @@
                   </li>
                   <li class="padding-top-10 text-left is-hover" data-toggle="modal"
                       data-target="#removeModal" style="cursor: pointer; padding: 8px 30px;" (click)="onOpenModalEvent(null, 'add')" >
-                    <i class=" fa-solid fa-trash"></i>
+                    <i class="fa-solid fa-plus"></i>
                     Create
                   </li>
                   <li class="padding-top-10 text-left is-hover" data-toggle="modal"
@@ -175,7 +175,7 @@
           </div>
           <div class="modal-footer">
             <button type="button"  class="btn" style="background-color: #5A6268;color: white" data-dismiss="modal">Close</button>
-            <button [disabled]="formCreate.invalid" type="submit" class="btn btn-primary" >Save change</button>
+            <button [disabled]="formCreate.invalid" type="submit" class="btn btn-primary" >Add</button>
           </div>
         </form>
       </div>
@@ -198,6 +198,7 @@
         <form [formGroup]="formEdit" (ngSubmit)="onEditEvent(formEdit)">
           <div class="form-group">
             <input type="number" hidden name="id" class="form-control" required formControlName="id">
+            <input type="text" hidden name="flag" class="form-control" required formControlName="flag">
           </div>
           <div class="form-group">
             <label for="name">Name</label>

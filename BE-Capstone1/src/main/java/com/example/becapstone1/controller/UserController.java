@@ -1,6 +1,7 @@
 package com.example.becapstone1.controller;
 
 import com.example.becapstone1.model.Course;
+import com.example.becapstone1.model.Event;
 import com.example.becapstone1.model.Majors;
 import com.example.becapstone1.model.User;
 import com.example.becapstone1.service.Impl.CourseService;
@@ -45,17 +46,19 @@ public class UserController {
     /** Get list user. */
     @GetMapping("/list")
     public ResponseEntity<Page<User>> getAllUser(@RequestParam("page") Integer page,
-                                                 @RequestParam("size") Integer size)
-    {
-        Page<User> userList = userService.getAllUser(page, size);
-        return new ResponseEntity<>(userList,HttpStatus.OK);
+                                                 @RequestParam("size") Integer size) {
+        try {
+            Page<User> userList = userService.getAllUser(page, size);
+            return new ResponseEntity<>(userList,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
 
     /** Update user. */
     @PatchMapping("/update")
-    public ResponseEntity<?> updateUser(@RequestBody User user)
-    {
+    public ResponseEntity<?> updateUser(@RequestBody User user) {
         try{
             userService.updateUser(user);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -66,11 +69,11 @@ public class UserController {
     }
 
 
-    /** Delete user. */
-    @DeleteMapping("/delete/{code}")
-    public ResponseEntity<?> deleteUser(@PathVariable("code") Long code) {
+    /** Block user by account id. */
+    @DeleteMapping("/block/{id}")
+    public ResponseEntity<?> blockUser(@PathVariable("id") Integer accountId) {
         try {
-            userService.deleteUser(code);
+            userService.blockUser(accountId);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e)
         {
@@ -78,6 +81,17 @@ public class UserController {
         }
     }
 
+    /** Un Block user by account id. */
+    @DeleteMapping("/unblock/{id}")
+    public ResponseEntity<?> unBlockUser(@PathVariable("id") Integer accountId) {
+        try {
+            userService.unBlockUser(accountId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
     /** Find user by id. */
     @GetMapping("/find/{code}")
@@ -89,24 +103,6 @@ public class UserController {
         {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
-
-
-    /** Find user by name. */
-    @GetMapping("/searchName")
-    public ResponseEntity<Page<User>> getAllUserByName(@RequestParam("page") Integer page,
-                                                               @RequestParam("size") Integer size , @RequestParam("name") String name) {
-        System.out.println(name);
-        Page<User> users = userService.getByName(name , page, size);
-        return new ResponseEntity<>(users, HttpStatus.OK);
-    }
-
-    /** Find user by name. */
-    @GetMapping("/searchCode")
-    public ResponseEntity<Page<User>> getAllUserByCode(@RequestParam("page") Integer page,
-                                                           @RequestParam("size") Integer size , @RequestParam("code") String code) {
-        Page<User> users = userService.getByCode(code , page, size);
-        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     /** Get list course **/
@@ -131,26 +127,17 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    /** Get data user. */
+    /** Get data user join event by month. */
     @GetMapping("/dataUser")
-    public ResponseEntity<?> getData()
-    {
-        Integer[][] data = userService.getDataUser();
-        Integer[] arr = new Integer[12];
-        for (int i = 1 ; i<=12; i++){
-            for(int row = 0; row < data.length; row++) {
-                for(int column = 0; column < data[row].length-1; column++) {
-                    if (i == data[row][column]) {
-                        arr[i-1] = data[row][column+1];
-                    }
-                }
-            }
-        }
-        for (int i = 0 ; i<12; i++) {
-            if (arr[i] == null){
-                arr[i] = 0;
-            }
-        }
-        return new ResponseEntity<>(arr, HttpStatus.OK);
+    public ResponseEntity<?> getData() {
+        Integer[] data = userService.getDataUser();
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+
+    /** Get data amount user. */
+    @GetMapping("/amountUser")
+    public ResponseEntity<?> getAmountUser() {
+        Integer amountUser = userService.getAmountUser();
+        return new ResponseEntity<>(amountUser, HttpStatus.OK);
     }
 }

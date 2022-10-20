@@ -1,37 +1,38 @@
 <div class="main-menu">
   <header class="header">
-    <a routerLink="/admin" class="logo">Event QR Code</a>
+    <a routerLink="/admin/home" class="logo">Event QR Code</a>
     <button type="button" class="button-close fa fa-times js__menu_close"></button>
   </header>
-  <!-- /.header -->
+
   <div class="content">
+
     <div class="navigation">
       <ul class="menu js__accordion">
         <li class="current">
-          <a class="waves-effect" routerLink="/admin"><i
+          <a class="waves-effect" routerLink="/admin/home"><i
             class="menu-icon mdi mdi-view-dashboard"></i><span>Dashboard</span></a>
         </li>
+<!--        <li>-->
+<!--          <a class="waves-effect parent-item js__control" href="#"><i-->
+<!--            class="menu-icon mdi mdi-chart-bar"></i><span>Statistical</span><span-->
+<!--            class="menu-arrow fa fa-angle-down"></span></a>-->
+<!--          <ul class="sub-menu js__content">-->
+<!--          </ul>-->
+
+<!--        </li>-->
         <li>
-          <ul class="nav-menu">
-            <li>
-              <a class="waves-effect" routerLink="/admin/user/list">
-<!--                <i class="menu-icon mdi mdi-view-dashboard"></i>-->
-                <i class="fa-brands fa-etsy menu-icon mdi "></i>
-                <span>User</span>
-              </a>
-            </li>
-            <li>
-              <a class="waves-effect" routerLink="/admin/event/list">
-                <i class="fa-solid fa-user menu-icon mdi"></i>
-                <span>Event</span>
-              </a>
-            </li>
-            <li>
-              <a class="waves-effect" routerLink="/admin/statistical">
-                <i class="fa-solid fa-user menu-icon mdi"></i>
-                <span>Statistics</span>
-              </a>
-            </li>
+          <a class="waves-effect parent-item " routerLink="/admin/user/list"><i
+            class="menu-icon mdi mdi-account-multiple"></i><span>User</span><span
+            class="menu-arrow fa "></span></a>
+          <ul class="sub-menu js__content">
+          </ul>
+
+        </li>
+        <li>
+          <a class="waves-effect parent-item " routerLink="/admin/event/list"><i
+            class="menu-icon mdi mdi-cube-outline"></i><span>Event</span><span
+            class="menu-arrow fa "></span></a>
+          <ul class="sub-menu js__content">
           </ul>
         </li>
 

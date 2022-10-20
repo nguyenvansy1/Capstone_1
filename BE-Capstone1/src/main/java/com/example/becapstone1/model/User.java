@@ -7,37 +7,61 @@ import java.time.LocalDate;
 @Table(name = "user")
 public class User  {
     @Id
-    @Column(name = "studentCode")
+    @Column(name = "user_code")
     private Long code;
 
+    @Column(name = "user_name")
     private String name;
 
+    @Column(name = "user_identity_card")
     private Integer identityCard;
 
+    @Column(name = "user_phone")
     private String phone;
 
+    @Column(name = "user_birth_day")
     private LocalDate birthDay;
 
+    @Column(name = "user_gender")
+    private Boolean gender;
+
+    @Column(name = "user_since")
+    private LocalDate since;
+
+    @Column(name = "user_address")
+    private String address;
+
     @ManyToOne
-    @JoinColumn(name = "courseId")
+    @JoinColumn(name = "user_course")
     private Course course;
 
     @ManyToOne
-    @JoinColumn(name = "majorsId")
+    @JoinColumn(name = "user_majors")
     private Majors majors;
 
+    @ManyToOne
+    @JoinColumn(name = "user_class")
+    private Class classUser;
 
+    @ManyToOne
+    @JoinColumn(name = "user_account")
+    private Account account;
     public User() {
     }
 
-    public User(Long code, String name, Integer identityCard, String phone, LocalDate birthDay, Course course, Majors majors) {
+    public User(Long code, String name, Integer identityCard, String phone, LocalDate birthDay, Boolean gender, LocalDate since, String address, Course course, Majors majors, Class classUser, Account account) {
         this.code = code;
         this.name = name;
         this.identityCard = identityCard;
         this.phone = phone;
         this.birthDay = birthDay;
+        this.gender = gender;
+        this.since = since;
+        this.address = address;
         this.course = course;
         this.majors = majors;
+        this.classUser = classUser;
+        this.account = account;
     }
 
     public Long getCode() {
@@ -94,5 +118,45 @@ public class User  {
 
     public void setMajors(Majors majors) {
         this.majors = majors;
+    }
+
+    public Boolean getGender() {
+        return gender;
+    }
+
+    public void setGender(Boolean gender) {
+        this.gender = gender;
+    }
+
+    public LocalDate getSince() {
+        return since;
+    }
+
+    public void setSince(LocalDate since) {
+        this.since = since;
+    }
+
+    public Class getClassUser() {
+        return classUser;
+    }
+
+    public void setClassUser(Class classUser) {
+        this.classUser = classUser;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

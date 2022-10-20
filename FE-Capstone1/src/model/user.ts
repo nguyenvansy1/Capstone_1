@@ -1,5 +1,7 @@
 import {Course} from './course';
 import {Majors} from './majors';
+import {Account} from './account';
+import {Class} from './class';
 
 export interface User {
   code?: number;
@@ -7,6 +9,11 @@ export interface User {
   identityCard?: number;
   phone?: number;
   birthDay?: string;
+  gender?: boolean;
+  since?: string;
+  address?: string;
+  account?: Account;
   course?: Course;
   majors?: Majors;
+  classUser?: Class;
 }

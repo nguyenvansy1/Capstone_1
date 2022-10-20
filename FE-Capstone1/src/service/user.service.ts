@@ -19,23 +19,17 @@ export class UserService {
     return this.httpClient.patch<User>(`${this.URL_API}/update`, user);
   }
 
-  deleteCustomer(code: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.URL_API}/delete/${code}`);
+  blockUser(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.URL_API}/block/${id}`);
   }
 
-  getUserByName(thePage: number, thePageSize: number, name: string): Observable<GetResponseUser> {
-    const url = `${this.URL_API}/searchName?` + `name=${name}&page=${thePage}&size=${thePageSize}`;
-    return this.httpClient.get<GetResponseUser>(url);
+  unBlockUser(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.URL_API}/unblock/${id}`);
   }
 
-  getUserByCode(thePage: number, thePageSize: number, code: string): Observable<GetResponseUser> {
-    const url = `${this.URL_API}/searchCode?` + `code=${code}&page=${thePage}&size=${thePageSize}`;
-    return this.httpClient.get<GetResponseUser>(url);
-  }
-
-  getUserByCodeOrName(thePage: number, thePageSize: number, name: string): Observable<GetResponseUser> {
+  getUserByCodeOrName(thePage: number, thePageSize: number, name: string): Observable<void> {
     const url = `${this.URL_API}/filter?` + `page=${thePage}&size=${thePageSize}&name=${name}`;
-    return this.httpClient.get<GetResponseUser>(url);
+    return this.httpClient.get<void>(url);
   }
 
   findUserByCode(code: number): Observable<User> {
@@ -44,6 +38,10 @@ export class UserService {
 
   getDataUser(): Observable<number[]> {
     return this.httpClient.get<number[]>(`${this.URL_API}/dataUser`);
+  }
+
+  getAmountUser(): Observable<number> {
+    return this.httpClient.get<number>(`${this.URL_API}/amountUser`);
   }
 }
 

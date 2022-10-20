@@ -28,7 +28,6 @@ export class EventListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListEvent2();
-    this.notifier.notify('success', 'Get list event successfully');
     this.customerService.getAllCustomer().subscribe(data => {
       this.customerList = data;
     });
@@ -51,7 +50,8 @@ export class EventListComponent implements OnInit {
         date: [],
         startTime: [],
         endTime: [],
-        customer: []
+        customer: [],
+        flag: [],
       }
     );
     this.formAddCustomer = this.fb.group(
@@ -122,6 +122,7 @@ export class EventListComponent implements OnInit {
       this.formEdit.controls.startTime.setValue(event.startTime);
       this.formEdit.controls.endTime.setValue(event.endTime);
       this.formEdit.controls.customer.setValue(event.customer);
+      this.formEdit.controls.flag.setValue(event.flag);
       button.setAttribute('data-target', '#editEventModal');
     }
     if (mode === 'add') {

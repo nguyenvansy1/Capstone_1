@@ -30,7 +30,6 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListUser();
-    this.notifier.notify('success', 'Get list user successfully');
     this.formEdit = this.fb.group(
       {
         code: [],
@@ -85,12 +84,15 @@ export class UserListComponent implements OnInit {
   }
 
   public onOpenModal(user: User, mode: string): void {
+    console.log(user);
+    console.log(mode);
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'edit') {
+      console.log(1);
       this.formEdit.controls.code.setValue(user.code);
       this.formEdit.controls.name.setValue(user.name);
       this.formEdit.controls.identityCard.setValue(user.identityCard);
@@ -106,6 +108,7 @@ export class UserListComponent implements OnInit {
     }
     container.appendChild(button);
     button.click();
+    console.log(2);
   }
 
   public onUpdateUser(editForm: FormGroup): void {
@@ -120,22 +123,22 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  public onDeleteUser(userId: number): void {
-    this.userService.deleteCustomer(userId).subscribe(
-      (data: void) => {
-        this.getListUser2();
-        this.notifier.notify('success', 'Delete user successfully');
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  }
+  // public onDeleteUser(userId: number): void {
+  //   this.userService.deleteCustomer(userId).subscribe(
+  //     (data: void) => {
+  //       this.getListUser2();
+  //       this.notifier.notify('success', 'Delete user successfully');
+  //     },
+  //     (error: HttpErrorResponse) => {
+  //       alert(error.message);
+  //     }
+  //   );
+  // }
 
 
 
   updatePageSize(pageSize) {
-    this.thePageSize = pageSize;
+    this.thePageSize = pageSize.value;
     this.thePageNumber = 1;
     this.getListUser();
   }
@@ -146,5 +149,29 @@ export class UserListComponent implements OnInit {
 
   compareMajors(c1: Majors, c2: Majors): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
+  blockUser(id: number) {
+    this.userService.blockUser(id).subscribe(
+      (data: void) => {
+        this.getListUser2();
+        this.notifier.notify('error', 'Block user successfully');
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  unBlockUser(id: number) {
+    this.userService.unBlockUser(id).subscribe(
+      (data: void) => {
+        this.getListUser2();
+        this.notifier.notify('success', 'Unblock user successfully');
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 }

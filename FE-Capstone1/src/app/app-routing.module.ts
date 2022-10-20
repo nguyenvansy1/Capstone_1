@@ -5,7 +5,7 @@ import {AdminRoutingModule} from './admin/admin-routing.module';
 
 const routes: Routes = [
 
-  {path: '' , redirectTo: '/admin' , pathMatch: 'full'},
+  {path: '' , redirectTo: '/admin/home' , pathMatch: 'full'},
 ];
 
 @NgModule({

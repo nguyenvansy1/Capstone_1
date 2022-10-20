@@ -8,24 +8,29 @@ import java.time.LocalDate;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "event_id")
     private Long id;
 
-    @Column(name = "eventName")
+    @Column(name = "event_name")
     private String name;
 
+    @Column(name = "event_location")
     private String location;
 
-    private LocalDate date;
-
-    private String title;
-
+    @Column(name = "event_content")
     private String content;
 
-    @Column(columnDefinition = "Time")
+    @Column(name = "event_date")
+    private LocalDate date;
+
+    @Column(name = "event_start_time",columnDefinition = "Time")
     private String startTime;
 
-    @Column(columnDefinition = "Time")
+    @Column(name = "event_end_time",columnDefinition = "Time")
     private String endTime;
+
+    @Column(name = "event_flag")
+    private Boolean flag;
 
     @ManyToOne
     @JoinColumn(name = "customerId")
@@ -34,15 +39,15 @@ public class Event {
     public Event() {
     }
 
-    public Event(Long id, String name, String location, LocalDate date, String title, String content, String startTime, String endTime, Customer customer) {
+    public Event(Long id, String name, String location, LocalDate date,  String startTime, String endTime, Boolean flag, Customer customer,String content) {
         this.id = id;
         this.name = name;
         this.location = location;
-        this.date = date;
-        this.title = title;
         this.content = content;
+        this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.flag = flag;
         this.customer = customer;
     }
 
@@ -78,22 +83,6 @@ public class Event {
         this.date = date;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public String getStartTime() {
         return startTime;
     }
@@ -116,5 +105,21 @@ public class Event {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

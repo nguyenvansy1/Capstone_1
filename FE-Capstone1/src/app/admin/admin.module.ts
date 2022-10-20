@@ -19,6 +19,7 @@ import {CommonModule} from '@angular/common';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { StatisticalComponent } from './component/statistical/statistical.component';
 import {ChartsModule} from 'ng2-charts';
+import { EventDetailComponent } from './component/event-detail/event-detail.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import {ChartsModule} from 'ng2-charts';
     UserListComponent,
     CssComponent,
     StatisticalComponent,
+    EventDetailComponent,
   ],
   imports: [
     CommonModule,

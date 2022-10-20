@@ -1,25 +1,21 @@
 package com.example.becapstone1.model;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-public class Majors {
+public class Class {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "majors_id")
+    @Column(name = "class_id")
     private Integer id;
 
-    @Column(name = "majors_name")
+    @Column(name = "class_name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "majors")
-    private Set<User> users;
-
-    public Majors() {
+    public Class() {
     }
 
-    public Majors(Integer id, String name) {
+    public Class(Integer id, String name) {
         this.id = id;
         this.name = name;
     }

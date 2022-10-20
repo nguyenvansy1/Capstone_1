@@ -7,9 +7,10 @@ import java.util.Set;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "course_id")
     private Integer id;
 
-    @Column(name = "courseName")
+    @Column(name = "course_name")
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")

@@ -13,9 +13,20 @@ import java.util.List;
 public interface IEventRepository extends JpaRepository<Event,Long> {
     Page<Event> findAll(Pageable pageable);
 
-    @Query(value = "select month(date) as Month , count(month(date)) as Times from event\n" +
-            "where year(date) = year(curdate())\n" +
-            "group by month(date)\n" +
-            "order by month(date)", nativeQuery = true)
+    @Query(value = "select month(event_date) as Month , count(month(event_date)) as Times from event\n" +
+            "where year(event_date) = year(curdate())\n" +
+            "group by month(event_date)\n" +
+            "order by month(event_date);", nativeQuery = true)
     Integer[][] getDataEvent();
+
+    @Query(value = "select * from event \n" +
+            "where IF(event_date = date(now()) , event_end_time < curtime() , event_date < date(now()));", nativeQuery = true)
+    List<Event> getListEventFinished();
+
+    @Query(value = "select * from event \n" +
+            "where IF(event_date = date(now()) , event_end_time > curtime() , event_date > date(now()));", nativeQuery = true)
+    List<Event> getListEventUpcoming();
+
+
+
 }

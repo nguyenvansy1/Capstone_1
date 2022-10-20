@@ -13,13 +13,16 @@ public class Customer {
 
     private String email;
 
+    @Column(name = "account_id")
+    private Integer account_id;
     public Customer() {
     }
 
-    public Customer(Long id, String name, String email) {
+    public Customer(Long id, String name, String email, Integer account_id) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.account_id = account_id;
     }
 
     public Long getId() {
@@ -44,5 +47,13 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getAccount_id() {
+        return account_id;
+    }
+
+    public void setAccount_id(Integer account_id) {
+        this.account_id = account_id;
     }
 }
