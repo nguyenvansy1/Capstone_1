@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<style>
+    .gradient-custom-2 {
+        background: #fccb90;
+        background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+        background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    }
+
+    @media (min-width: 768px) {
+        .gradient-form {
+            height: 100vh !important;
+        }
+    }
+
+    @media (min-width: 769px) {
+        .gradient-custom-2 {
+            border-top-right-radius: .3rem;
+            border-bottom-right-radius: .3rem;
+        }
+    }
+</style>
+
+<body>
+    <section class="w-100 p-4 p-xl-5" style="background-color: #eee; border-radius: .5rem .5rem 0 0;">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="card-body bg-white p-md-5 mx-md-4">
+                    <div class="text-center">
+                        <img src="https://cdn.duytan.edu.vn/images/icon/logo_dtu_while.png"
+                            style="width: 185px; background: #95080E;" alt="logo">
+                        <h4 class="mt-1 mb-5 pb-1">We are The BarCode & QRCode</h4>
+                    </div>
+                    <form>
+                        <p>Please login to your account</p>
+
+                        <div class="form-outline mb-4">
+                            <input type="email" id="form2Example11" class="form-control"
+                                placeholder="Phone number or email address">
+                            <label class="form-label" for="form2Example11" style="margin-left: 0px;">Username</label>
+                            <div class="form-notch">
+                                <div class="form-notch-leading" style="width: 9px;"></div>
+                                <div class="form-notch-middle" style="width: 67.2px;"></div>
+                                <div class="form-notch-trailing"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="password" id="form2Example22" class="form-control">
+                            <label class="form-label" for="form2Example22" style="margin-left: 0px;">Password</label>
+                            <div class="form-notch">
+                                <div class="form-notch-leading" style="width: 9px;"></div>
+                                <div class="form-notch-middle" style="width: 64px;"></div>
+                                <div class="form-notch-trailing"></div>
+                            </div>
+                        </div>
+
+                        <div class="text-center pt-1 mb-5 pb-1">
+                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Log
+                                in</button>
+                            <a class="text-muted" href="#!">Forgot password?</a>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-center pb-4">
+                            <p class="mb-0 me-2">Don't have an account?</p>
+                            <button type="button" class="btn btn-outline-danger">Create new</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
