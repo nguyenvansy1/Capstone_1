@@ -37,7 +37,7 @@ public class ThymeleafTemplateConfig {
         mailSender.setPort(587);
 
         mailSender.setUsername("nguyenvansy091201@gmail.com");
-        mailSender.setPassword("poqopnoqyvgbvvyd");
+        mailSender.setPassword("ycanqsvqhofgiqvh");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");

@@ -1,0 +1,203 @@
+<div class="main-content user-table" id="main-container">
+  <div class="row small-spacing">
+    <div class="col-md-12 col-xs-12">
+      <div style="position: relative" class="box-content">
+        <h1 class="box-title">List user</h1>
+        <div class="row" style="margin-bottom: 15px">
+          <div class="col-md-3">
+            <form class="form-inline my-2 my-lg-0" >
+<!--              <mat-form-field>-->
+<!--                <mat-label>Search</mat-label>-->
+<!--                <input matInput #inputName  name="search" [(ngModel)]="keywordName" (keyup)=(searchByCodeOrName(inputName.value))>-->
+<!--              </mat-form-field>-->
+            </form>
+          </div>
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-3">
+          </div>
+        </div>
+
+        <table id="example" class="table table-user  table-hover " style="width:100%; margin-bottom: 0">
+          <thead>
+          <tr>
+            <th class="text-center align-middle" style="width: 59px">STT</th>
+            <th class="text-center align-middle" style="width: 140px">Code</th>
+            <th class=" align-middle" style="width: 200px">Name</th>
+            <th class="text-center align-middle" style="width: 140px">Identity Card</th>
+            <th class="text-center align-middle" style="width: 140px">Phone</th>
+            <th class="text-center align-middle" style="width: 140px">Birth Day</th>
+            <th class="text-center align-middle" style="width: 140px">Course</th>
+            <th class="text-center align-middle" style="width: 140px">Majors</th>
+            <th class="text-center align-middle" style="width: 180px">Status</th>
+            <th class="text-center align-middle">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let user of userList; let i = index">
+            <td class="align-middle text-center" style="width: 59px">{{i+1+(thePageNumber-1)*thePageSize}}</td>
+            <td class="align-middle text-center" style="width: 200px">{{user?.code}}</td>
+            <td class="align-middle text-center" style="width: 270px">
+              <a [routerLink]="['/admin/user/detail', user.code]" class="d-flex  py-1 align-items-center">
+                  <h6 class="mb-0 text-sm">{{user?.name}}</h6>
+              </a>
+            </td>
+            <td class="align-middle text-center" style="width: 140px">{{user?.identityCard}}</td>
+            <td class="align-middle text-center" style="width: 140px">{{user?.phone}}</td>
+            <td class="align-middle text-center" style="width: 140px">{{user?.birthDay | date: 'dd/MM/yyyy'}}</td>
+            <td class="align-middle text-center" style="width: 140px">{{user?.course.name}}</td>
+            <td class="align-middle text-center" style="width: 140px">{{user?.majors.name}}</td>
+            <td class="align-middle text-center" style="width: 180px">
+              <span style="padding: 0.45rem 0.7rem; border-radius: 10px;" class="notice notice-purple badge badge-sm bg-gradient-success" *ngIf="user.account.flag == true; else elseBlock" >Active</span>
+              <ng-template #elseBlock>
+                <span class="notice notice-danger">Block</span>
+              </ng-template>
+            </td>
+            <td class="text-center align-middle">
+              <div class="btn-group" style="cursor: pointer">
+                <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i
+                  class="fa-solid fa-ellipsis h4"></i></div>
+                <ul class="dropdown-menu" style="left: -100px; min-width: 130px;">
+                  <li class="padding-top-10 text-left is-hover" data-toggle="modal"
+                      data-target="#editModal" style="cursor: pointer; padding: 8px 30px;" (click)="onOpenModal(user, 'edit')">
+                    <i class="fa-solid fa-pen"></i>
+                      <b> Edit</b>
+                  </li>
+                  <li *ngIf="user.account.flag == true; else elseBlock1" class="padding-top-10 text-left is-hover" data-toggle="modal"
+                      data-target="#removeModal" style="cursor: pointer; padding: 8px 30px;" (click)="blockUser(user.account.accountId)">
+                    <i class=" fa-solid fa-trash"></i>
+                      <b>  Block</b>
+                  </li>
+                  <ng-template #elseBlock1>
+                    <li class="padding-top-10 text-left is-hover" data-toggle="modal"
+                        data-target="#removeModal" style="cursor: pointer; padding: 8px 30px;" (click)="unBlockUser(user.account.accountId)">
+                      <i class="fa-solid fa-unlock-keyhole"></i>  <b>  Unblock</b>
+                    </li>
+                  </ng-template>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="userList?.length == 0" class="alert alert-warning text-center" role="alert" style="background-color: #F2F2F2; color: black">
+          <b>User not found</b>
+        </div>
+        <div class="row" style="margin-left: -25px;">
+          <div class="col-md-4" style="padding: 25px" >
+            <span>Show </span>
+            <select style="height: 25px;width: 50px;-webkit-box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 1px 1px rgb(0 0 0 / 5%);border-radius: 3px" class="form-control-md" (change) = "updatePageSize($event.target)" >
+              <option selected >5</option>
+              <option >10</option>
+              <option >20</option>
+              <option >50</option>
+            </select>
+            <span> entries</span>
+          </div>
+          <div class="col-md-1" style="padding: 25px" >
+          </div>
+          <div class="col-md-3 text-right" style="padding: 25px" >
+            <p> Showing {{ (thePageNumber - 1) * thePageSize + 1 }} - {{ itemPerPage }} of {{ theTotalElements }} entries</p>
+          </div>
+          <div class="col-md-4 text-right">
+            <ngb-pagination [(page)] = "thePageNumber"
+                            [pageSize] = "thePageSize"
+                            [collectionSize] = "theTotalElements"
+                            (pageChange) = "getListUser()"
+                            [boundaryLinks]="true"
+                            [maxSize]="3"
+                            [rotate]="true"
+            >
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Edit User Modal-->
+<div style="width: 500px;height:777px;margin-left: 513px;margin-top: -20px" class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="height: 50px">
+        <h2 class="modal-title" id="editUserModalLabel">Edit User</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEdit" (ngSubmit)="onUpdateUser(formEdit)">
+          <div class="form-group">
+            <input type="number" hidden name="code" class="form-control" required formControlName="code">
+            <input type="number" hidden name="gender" class="form-control" required formControlName="gender">
+            <input type="number" hidden name="since" class="form-control" required formControlName="since">
+            <input type="number" hidden name="classUser" class="form-control" required formControlName="classUser">
+            <input type="number" hidden name="account" class="form-control" required formControlName="account">
+            <input type="number" hidden name="address" class="form-control" required formControlName="address">
+          </div>
+          <div class="form-group">
+            <div class="d-flex align-items-center">
+            <label style="width: 40%;" for="name">Name</label>
+            <input style="border-radius: 8px" type="text" id="name"  name="name" class="form-control" placeholder="Name" formControlName="name" [ngClass]="{'is-invalid1': ((formEdit.controls.name.dirty || formEdit.controls.name.touched) && formEdit.controls.name.errors?.required) || ((formEdit.controls.name.dirty || formEdit.controls.name.touched) && (formEdit.controls.name.errors?.minlength || formEdit.controls.name.errors?.maxlength)) || ((formEdit.controls.name.dirty || formEdit.controls.name.touched) && (formEdit.controls.name.errors?.pattern))}">
+            </div>
+            <small *ngIf="(formEdit.controls.name.dirty || formEdit.controls.name.touched) && formEdit.controls.name.errors?.required" style="color: red">First and last name cannot be left blank</small>
+            <small *ngIf="(formEdit.controls.name.dirty || formEdit.controls.name.touched) && (formEdit.controls.name.errors?.minlength || formEdit.controls.name.errors?.maxlength)" style="color: red">Character length from 5-50</small>
+            <small *ngIf="(formEdit.controls.name.dirty || formEdit.controls.name.touched) && (formEdit.controls.name.errors?.pattern)" style="color: red">The name is not in the correct format</small>
+          </div>
+          <div class="form-group">
+            <div class="d-flex align-items-center">
+            <label style="width: 40%;" for="identityCard">Identity Card</label>
+            <input style="border-radius: 8px" type="number" id="identityCard"  name="identityCard" class="form-control"  placeholder="Identity Card"  formControlName="identityCard" [ngClass]="{'is-invalid1': ((formEdit.controls.identityCard.dirty || formEdit.controls.identityCard.touched) && formEdit.controls.identityCard.errors?.required) || ((formEdit.controls.identityCard.dirty || formEdit.controls.identityCard.touched) && (formEdit.controls.identityCard.errors?.pattern))}">
+            </div>
+            <small *ngIf="(formEdit.controls.identityCard.dirty || formEdit.controls.identityCard.touched) && formEdit.controls.identityCard.errors?.required" style="color: red">Identity Card cannot be left blank</small>
+            <small *ngIf="(formEdit.controls.identityCard.dirty || formEdit.controls.identityCard.touched) && (formEdit.controls.identityCard.errors?.pattern)" style="color: red">Identity card consists of 9 numbers</small>
+          </div>
+          <div class="form-group">
+            <div class="d-flex align-items-center">
+              <label  style="width: 40%;" for="phone">Phone</label>
+              <input style="border-radius: 8px" type="text" id="phone"  name="phone" class="form-control"  placeholder="Phone"  formControlName="phone" [ngClass]="{'is-invalid1': ((formEdit.controls.phone.dirty || formEdit.controls.phone.touched) && formEdit.controls.phone.errors?.required) || ((formEdit.controls.phone.dirty || formEdit.controls.phone.touched) && (formEdit.controls.phone.errors?.pattern))}">
+            </div>
+              <small *ngIf="(formEdit.controls.phone.dirty || formEdit.controls.phone.touched) && formEdit.controls.phone.errors?.required" style="color: red">Phone cannot be left blank</small>
+              <small *ngIf="(formEdit.controls.phone.dirty || formEdit.controls.phone.touched) && (formEdit.controls.phone.errors?.pattern)" style="color: red">The phone is not in the correct format</small>
+          </div>
+          <div class="form-group">
+              <div class="d-flex align-items-center">
+                <label style="width: 40%;"  for="birthDay">BirthDay</label>
+                <input style="border-radius: 8px" type="date" id="birthDay"  name="birthDay" class="form-control"  placeholder="BirthDay"  formControlName="birthDay" [ngClass]="{'is-invalid1': (formEdit.controls.birthDay.dirty || formEdit.controls.birthDay.touched) && (formEdit.controls.birthDay.errors?.invalidAge)}">
+              </div>
+              <small *ngIf="(formEdit.controls.birthDay.dirty || formEdit.controls.birthDay.touched) && (formEdit.controls.birthDay.errors?.invalidAge)" style="color: red">Age must be more than 18</small>
+          </div>
+          <div class="form-group">
+              <div class="d-flex align-items-center">
+                <label style="width: 40%;"  for="exampleFormControlSelect1">Class</label>
+                <select style="border-radius: 8px" [compareWith]="compareClass" class="form-control" id="exampleFormControlSelect1" formControlName="classUser">
+                  <option [ngValue]="null" disabled >-- Select --</option>
+                  <option *ngFor="let class of classList" [ngValue] = "class" >{{class?.name}}</option>
+                </select>
+              </div>
+          </div>
+          <div class="form-group">
+              <div class="d-flex align-items-center">
+                <label style="width: 40%;"  for="exampleFormControlSelect2">Majors</label>
+                <select style="border-radius: 8px" [compareWith]="compareMajors" class="form-control" id="exampleFormControlSelect2" formControlName="majors">
+                  <option [ngValue]="null" disabled >-- Select --</option>
+                  <option *ngFor="let majors of majorsList" [ngValue] = "majors" >{{majors?.name}}</option>
+                </select>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="edit-customer-form"  class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button [disabled]="formEdit.invalid" type="submit" class="btn btn-secondary"  >Save change</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

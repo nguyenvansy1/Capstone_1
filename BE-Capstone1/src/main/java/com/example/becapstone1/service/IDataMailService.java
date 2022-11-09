@@ -1,6 +1,6 @@
 package com.example.becapstone1.service;
 
-import com.example.becapstone1.model.DataMail;
+import com.example.becapstone1.model.event.DataMail;
 
 import javax.mail.MessagingException;
 

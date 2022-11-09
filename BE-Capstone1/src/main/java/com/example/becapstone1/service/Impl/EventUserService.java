@@ -1,7 +1,6 @@
 package com.example.becapstone1.service.Impl;
 
-import com.example.becapstone1.model.Event;
-import com.example.becapstone1.model.EventUser;
+import com.example.becapstone1.model.event.EventUser;
 import com.example.becapstone1.repository.IEventUserRepository;
 import com.example.becapstone1.service.IEventUserService;
 import org.springframework.beans.factory.annotation.Autowired;

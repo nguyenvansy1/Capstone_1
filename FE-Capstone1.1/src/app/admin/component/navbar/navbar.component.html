@@ -1,0 +1,93 @@
+<!--<div class="fixed-navbar">-->
+<!--  <div class="pull-left">-->
+<!--    <button type="button"-->
+<!--            class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile"></button>-->
+<!--    <h1 class="page-title" style="margin: 0;position: relative; top: 50%;transform: translateY(30%);">Dashboard</h1>-->
+<!--  </div>-->
+<!--  <div class="pull-right">-->
+<!--    <span>{{userName}}</span>-->
+<!--    <div class="ico-item toggle-hover js__drop_down active">-->
+<!--      <div class="js__drop_down_button avatar" style="width: 50px; ">-->
+<!--        <img (click)="updateCheck()" src="https://as1.ftcdn.net/v2/jpg/02/03/26/54/1000_F_203265470_uNAa2zAcCYXOcc4XxwF7r4uQsio6xxii.jpg"-->
+<!--             alt="avatar-->
+<!--                        position: relative;" style="border-radius: 50%; width: 40px;" />-->
+<!--      </div>-->
+<!--      <div class="toggle-content" *ngIf="check == true">-->
+<!--        <ul class="content__list">-->
+<!--          <li>-->
+<!--            <a routerLink="/admin/update/password">-->
+<!--              <i class="fa fa-gear" aria-hidden="true"></i>-->
+<!--              Change password-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li (click)="logout()">-->
+<!--            <a href="#">-->
+<!--              <i class="ico mdi mdi-logout"></i>-->
+<!--              Logout-->
+<!--            </a>-->
+<!--          </li>-->
+
+<!--        </ul>-->
+<!--        <a href="#" class="read-more"><small>Quyền riêng tư · Điều khoản © 2022</small></a>-->
+<!--      </div>-->
+<!--      &lt;!&ndash; /.toggle-content &ndash;&gt;-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->
+
+<div class="fixed-navbar">
+  <div class="pull-left">
+    <button type="button" class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile">
+      <i class="fa-solid fa-bars" style="font-size: 24px"></i>
+    </button>
+    <div>
+      <div class="breadcrumbb">
+        <div class="breadcrumb-item">
+          <a class="" href="#">Pages</a>
+        </div>
+        <div class="breadcrumb-item" aria-current="page">
+          Dashboard
+        </div>
+      </div>
+      <h6 class="name-page">Dashboard</h6>
+    </div>
+  </div>
+  <div class="pull-right">
+    <div class="d-flex align-items-center">
+      <div class="" style="width: 100%;">
+        <ul class="navbar justify-content-end position-relative d-flex">
+          <li class="d-flex align-items-center position-relative">
+            <div class="main avatar">
+              <img src="https://demos.creative-tim.com/soft-ui-dashboard/assets/img/team-3.jpg" class="img-fluid" />
+            </div>
+          </li>
+          <ul class="sub-avatar hidden-setting">
+            <li class="nav-item">
+              <a routerLink="/admin/update/password" class="nav-link  d-flex align-items-center justify-content-start">
+                <div class="icon">
+                  <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
+                </div>
+                <h6  class="d-sm-inline d-none font-weight-bold pl-3">Change password</h6>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link   d-flex align-items-center">
+                <div>
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+                <h6 (click)="logout()" class="d-sm-inline d-none font-weight-bold pl-3">Logout</h6>
+              </a>
+            </li>
+          </ul>
+          <li class="d-flex align-items-center ">
+            <a href="#" class="nav-link  font-weight-bold px-0">
+              <span class="">{{userName}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>

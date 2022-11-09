@@ -1,9 +1,10 @@
 package com.example.becapstone1.controller;
 
-import com.example.becapstone1.model.Course;
-import com.example.becapstone1.model.Event;
-import com.example.becapstone1.model.Majors;
-import com.example.becapstone1.model.User;
+import com.example.becapstone1.model.user.Class;
+import com.example.becapstone1.model.user.Course;
+import com.example.becapstone1.model.user.Majors;
+import com.example.becapstone1.model.user.User;
+import com.example.becapstone1.service.Impl.ClassService;
 import com.example.becapstone1.service.Impl.CourseService;
 import com.example.becapstone1.service.Impl.MajorsService;
 import com.example.becapstone1.service.Impl.UserService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -31,7 +33,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin("*")
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
@@ -42,8 +44,12 @@ public class UserController {
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private ClassService classService;
+
 
     /** Get list user. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/list")
     public ResponseEntity<Page<User>> getAllUser(@RequestParam("page") Integer page,
                                                  @RequestParam("size") Integer size) {
@@ -57,6 +63,7 @@ public class UserController {
 
 
     /** Update user. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping("/update")
     public ResponseEntity<?> updateUser(@RequestBody User user) {
         try{
@@ -70,6 +77,7 @@ public class UserController {
 
 
     /** Block user by account id. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/block/{id}")
     public ResponseEntity<?> blockUser(@PathVariable("id") Integer accountId) {
         try {
@@ -82,6 +90,7 @@ public class UserController {
     }
 
     /** Un Block user by account id. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/unblock/{id}")
     public ResponseEntity<?> unBlockUser(@PathVariable("id") Integer accountId) {
         try {
@@ -94,6 +103,7 @@ public class UserController {
     }
 
     /** Find user by id. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/find/{code}")
     public ResponseEntity<?> findUserById(@PathVariable("code") Long code) {
         try {
@@ -106,6 +116,7 @@ public class UserController {
     }
 
     /** Get list course **/
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/course")
     public ResponseEntity<List<Course>> getAllCourse() {
         List<Course> courseList = courseService.findAllCourse();
@@ -113,13 +124,23 @@ public class UserController {
     }
 
     /** Get list majors **/
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/majors")
     public ResponseEntity<List<Majors>> getAllMajors() {
         List<Majors> majorsList = majorsService.findAllMajors();
         return new ResponseEntity<>(majorsList,HttpStatus.OK);
     }
 
+    /** Get list class **/
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/class")
+    public ResponseEntity<List<Class>> getAllClass() {
+        List<Class> classList = classService.findAllClass();
+        return new ResponseEntity<>(classList,HttpStatus.OK);
+    }
+
     /** Find user by name or code. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/filter")
     public ResponseEntity<Page<User>> getAllUserByCodeOrName(@RequestParam("page") Integer page,
                                                        @RequestParam("size") Integer size , @RequestParam("name") String name) {
@@ -128,6 +149,7 @@ public class UserController {
     }
 
     /** Get data user join event by month. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/dataUser")
     public ResponseEntity<?> getData() {
         Integer[] data = userService.getDataUser();
@@ -135,6 +157,7 @@ public class UserController {
     }
 
     /** Get data amount user. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/amountUser")
     public ResponseEntity<?> getAmountUser() {
         Integer amountUser = userService.getAmountUser();

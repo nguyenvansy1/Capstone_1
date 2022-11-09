@@ -1,9 +1,10 @@
 package com.example.becapstone1.service.Impl;
 
 
-import com.example.becapstone1.model.DataMail;
+import com.example.becapstone1.model.event.DataMail;
 import com.example.becapstone1.service.IDataMailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,16 @@ public class DataMailService implements IDataMailService {
         helper.setSubject(dataMail.getSubject());
         helper.setText(html, true);
         mailSender.send(message);
+    }
+
+    public void sendMail(String toMail, String subject, String body){
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("nguyenvansy091201@gmail.com");
+        message.setTo(toMail);
+        message.setText(body);
+        message.setSubject(subject);
+        mailSender.send(message);
+
+        System.out.println("Send success!!");
     }
 }

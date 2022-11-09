@@ -1,7 +1,6 @@
 package com.example.becapstone1.service;
 
-import com.example.becapstone1.model.Event;
-import com.example.becapstone1.model.EventUser;
+import com.example.becapstone1.model.event.EventUser;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

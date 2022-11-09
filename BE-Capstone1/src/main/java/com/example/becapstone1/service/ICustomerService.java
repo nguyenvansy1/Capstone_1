@@ -1,13 +1,13 @@
 package com.example.becapstone1.service;
 
-import com.example.becapstone1.model.Customer;
+import com.example.becapstone1.dto.CustomerDTO;
+import com.example.becapstone1.model.event.Customer;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
 public interface ICustomerService {
-    void addCustomer(Customer customer) throws IOException;
+    void addCustomer(CustomerDTO customer) throws IOException;
 
     List<Customer> findAll();
 }

@@ -1,8 +1,7 @@
 package com.example.becapstone1.service.Impl;
 
 import com.example.becapstone1.exception.UserNotFoundException;
-import com.example.becapstone1.model.Event;
-import com.example.becapstone1.model.User;
+import com.example.becapstone1.model.user.User;
 import com.example.becapstone1.repository.IUserRepository;
 import com.example.becapstone1.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service

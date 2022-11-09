@@ -1,6 +1,6 @@
 package com.example.becapstone1.service.Impl;
 
-import com.example.becapstone1.model.EventUser;
+import com.example.becapstone1.model.event.EventUser;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;

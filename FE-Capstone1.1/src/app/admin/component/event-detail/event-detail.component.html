@@ -1,0 +1,197 @@
+<!--<div id="wrapper">-->
+<!--  <div class="main-content">-->
+<!--    <div class="row small-spacing">-->
+<!--      <div class="col-md-3 col-xs-12">-->
+<!--        <div class="box-content bordered primary margin-bottom-20">-->
+<!--          <div class="profile-avatar">-->
+<!--            <h2><i class="fa-solid fa-user-group ico"></i><strong>{{event.name}}</strong>-->
+<!--              - -->
+<!--              <strong>({{event.customer.name}})</strong>-->
+<!--            </h2>-->
+<!--            <h4><i class="fa-solid fa-location-dot ico"></i> {{event.location}}</h4>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; .profile-avatar &ndash;&gt;-->
+<!--          <table class="table table-hover no-margin">-->
+<!--            <tbody>-->
+<!--            <tr>-->
+<!--              <td><i class="fa-solid fa-clock ico"></i> Bắt đầu lúc:</td>-->
+<!--              <td>{{event.date | date: 'MMM d, y'}} - {{event.startTime}}</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <td><i class="fa-solid fa-clock ico"></i> Kết thúc lúc</td>-->
+<!--              <td>{{event.date | date: 'MMM d, y'}} - {{event.endTime}}</td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--          </table>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--      &lt;!&ndash; /.col-md-3 col-xs-12 &ndash;&gt;-->
+<!--      <div class="col-md-9 col-xs-12">-->
+<!--        <div class="row">-->
+<!--          <div class="col-xs-12">-->
+<!--            <div class="box-content card">-->
+<!--              <h4 class="box-title"><i class="fa fa-comments ico"></i>Content</h4>-->
+<!--              <div class="dropdown js__drop_down">-->
+<!--                &lt;!&ndash; gì đấy &ndash;&gt;-->
+<!--              </div>-->
+<!--              &lt;!&ndash; /.dropdown js__dropdown &ndash;&gt;-->
+<!--              <div class="card-content">-->
+<!--                <div class="row">-->
+<!--                  <div class="col-md-12">-->
+<!--                    <textarea disabled name="" id="" cols="20" rows="10" style="width: 100%">{{event.content}}</textarea>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; /.card-content &ndash;&gt;-->
+<!--            </div>-->
+<!--            &lt;!&ndash; /.box-content card &ndash;&gt;-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-12 col-xs-12">-->
+<!--            <div class="box-content card">-->
+<!--               <h4 class="box-title d-flex align-items-center justify-content-between">-->
+<!--                 <div>-->
+<!--                   <i class="fa fa-globe ico"></i>-->
+<!--                   Activity-->
+<!--                 </div>-->
+<!--                 <div class="btn-group" style="cursor: pointer;">-->
+<!--                 <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i-->
+<!--                   class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></i></div>-->
+<!--                 <ul class="dropdown-menu" style="left: -100px; min-width: 120px;">-->
+<!--                   <li class="padding-top-10 text-left is-hover" data-toggle="modal"-->
+<!--                       data-target="#removeModal" style="cursor: pointer; padding: 8px 30px;" (click)="export(id)" >-->
+<!--                     <i class="fa-solid fa-plus"></i>-->
+<!--                     Export-->
+<!--                   </li>-->
+<!--                 </ul>-->
+<!--               </div>-->
+<!--               </h4>-->
+<!--              &lt;!&ndash; /.dropdown js__dropdown &ndash;&gt;-->
+<!--              <div class="card-content">-->
+<!--                <ul class="notice-list">-->
+<!--                  <li  *ngFor="let event of eventList">-->
+<!--                    <a [routerLink]="['/admin/user/detail', event.user.code]">-->
+<!--                                               <span class="avatar bg-primary"><i-->
+<!--                                                 class="glyphicon glyphicon-user"></i></span>-->
+<!--                      <span class="name">{{event.user.name}}</span>-->
+<!--                      <span class="desc">Successfully checked in at {{event.event.name}}</span>-->
+<!--                      <span class="time">{{event.checkin | date: 'MMM d, y, hh:mm:ss a'}}</span>-->
+<!--                    </a>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--                &lt;!&ndash; /.notice-list &ndash;&gt;-->
+<!--                <div class="text-center margin-top-20"><a *ngIf="thePageSize<theTotalElements" (click)="seeAllActivities()" class="btn btn-default">See All-->
+<!--                  Activities <i class="fa fa-angle-double-right"></i></a></div>-->
+<!--                <div class="text-center margin-top-20"><a *ngIf="thePageSize==theTotalElements" (click)="hide()" class="btn btn-default">Hide  <i class="fa fa-angle-double-left"></i></a></div>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; /.card-content &ndash;&gt;-->
+<!--            </div>-->
+<!--            &lt;!&ndash; /.box-content card &ndash;&gt;-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /.row &ndash;&gt;-->
+<!--      </div>-->
+<!--      &lt;!&ndash; /.col-md-9 col-xs-12 &ndash;&gt;-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  &lt;!&ndash; /.main-content &ndash;&gt;-->
+<!--</div>-->
+
+
+
+
+
+
+
+<div id="wrapper">
+  <div class="main-content">
+    <div class="row" style="margin-top: 40px;">
+      <div class="col-md-3">
+        <div class="card cus-event">
+          <div class="card-header text-center image-cus">
+            <img class="img-fluid rounded-circle"
+                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/800px-FPT_logo_2010.svg.png"
+                 alt="" />
+          </div>
+          <div class="card-body">
+            <h6 class="name-event font-weight-bold">
+              {{event.name}} - <strong>({{event.customer.name}})</strong>
+            </h6>
+            <p>{{event.location}}</p>
+            <div class="time-event">
+              <div class="start">
+                <label class="" for="">Bắt đầu lúc: </label>
+                <span class="">{{event.date | date: 'MMM d, y'}} - {{event.startTime}}</span>
+              </div>
+              <div class="end">
+                <label class="" for="">Kết thức lúc: </label>
+                <span class="">{{event.date | date: 'MMM d, y'}} - {{event.endTime}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-12 col-xl-12 mb-5">
+            <div class="card overflow-auto activity" style="max-height: 545px">
+              <div class="card-header pb-0 p-3">
+                <div class="row">
+                  <div class="col-md-8 d-flex align-items-center">
+                    <h6 class="mb-0 font-weight-bold "><i
+                      class="fa-solid fa-comments mr-2"></i>Content
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-3">
+                <div class="row px-4 mb-3">
+                  <div class="form-group">
+                    <textarea  name="" placeholder="Enter heard..." class="form-control"  id="" cols="200" rows="5" style="border: none;">{{event.content}}</textarea>
+<!--                      <textarea  placeholder="Enter heard..." class="form-control" cols="200" rows="5" style="border: none;"></textarea>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-xl-12">
+            <div class="card overflow-auto activity" style="max-height: 545px">
+              <div class="card-header pb-0 p-3">
+                <div class="row">
+                  <div class="col-md-8 d-flex align-items-center">
+                    <h6 class="mb-0 font-weight-bold "><i
+                      class="fa-brands fa-usps pr-2"></i>List Checked
+                    </h6>
+                  </div>
+                  <div class=" col-md-4 text-right">
+                    <a href="#">
+                      <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-3">
+                <div class="row px-4 mb-3 hover" *ngFor="let event of eventList">
+                  <img class="img-fluid img-cus"
+                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/800px-FPT_logo_2010.svg.png"
+                       alt="" />
+                  <div class="infor-cus ml-3 mt-3">
+                    <h6 class="font-weight-bold">{{event.user.name}}</h6>
+                    <p style="font-size: 14px; line-height: 0.8;">Successfully checked in at {{event.event.name}}</p>
+                  </div>
+                  <div class="date-check">
+                    <span class="">{{event.checkin | date: 'MMM d, y, hh:mm:ss a'}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<!--<div class="container" >-->
+
+<!--    <form [formGroup]="loginForm" (ngSubmit)="login()" style="height: 420px">-->
+<!--&lt;!&ndash;        <i class="fas fa-paper-plane"></i>&ndash;&gt;-->
+<!--        <div class="login_text">-->
+<!--            <h2>Login</h2>-->
+<!--        </div>-->
+<!--        <div class="input-group">-->
+<!--            <label>Username <span style="color: red">(*)</span></label>-->
+<!--            <input type="text" class="input__text" placeholder="User name" formControlName="username" name="username" id="username" maxlength="40" >-->
+<!--        </div>-->
+<!--        <small class="fs-6 text__error"-->
+<!--           style="color: red"-->
+<!--           *ngIf="loginForm.get('username').errors?.required && (loginForm.get('username').dirty ||loginForm.get('username').touched) && checkUserName == false">-->
+<!--          Account cannot be empty.-->
+<!--        </small>-->
+<!--        <small class="fs-6 text__error"-->
+<!--               style="color: red"-->
+<!--               *ngIf="this.loginForm.value.username === '' && checkUserName == true">-->
+<!--          Account cannot be empty.-->
+<!--        </small>-->
+<!--        <div class="input-group">-->
+<!--            <label>Password <span style="color: red">(*)</span></label>-->
+<!--            <input type="password" class="input__text" placeholder="Password" formControlName="password" name="password" id="password" maxlength="40">-->
+<!--        </div>-->
+<!--        <small class="fs-6 text__error" style="color: red"-->
+<!--           *ngIf="loginForm.get('password').errors?.required && (loginForm.get('password').dirty ||loginForm.get('password').touched) && checkPassWord == false">-->
+<!--          Password can not be empty.-->
+<!--        </small>-->
+<!--        <small class="fs-6 text__error"-->
+<!--               style="color: red"-->
+<!--               *ngIf="this.loginForm.value.password === '' && checkPassWord == true">-->
+<!--          Password can not be empty.-->
+<!--        </small>-->
+<!--        <div class="checkbox__line">-->
+<!--            <input type="checkbox" class="my-checkbox" value="1" formControlName="remember_me"/>-->
+<!--          Remember me-->
+<!--            <a routerLink="/reset-password" style="margin-left: 80px">Forgot password ?</a>-->
+<!--        </div>-->
+<!--        <div style="height: 5px"></div>-->
+<!--        <small class="fs-6 text__error" style="color: red" *ngIf="errorMessage">The account or password is incorrect.</small>-->
+<!--        <div class="button__container">-->
+<!--            <button class="btn__login" type="submit" value="Login">Login</button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+
+
+
+
+<div class="container-fluid position-relative "
+     style="font-family: 'Open Sans';width: 100%;height: 100vh; background-image: url(https://scontent.fdad3-6.fna.fbcdn.net/v/t1.15752-9/262976534_437013004583765_8777138386675617656_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=ae9488&_nc_ohc=R848twoAzEUAX8riu_Y&_nc_ht=scontent.fdad3-6.fna&oh=03_AdQFNk59DW9IzF1w952WJCDJRDOjMqDT1fvAac2XPcqTJQ&oe=638E9E47); background-repeat: no-repeat; background-size: cover; background-position: top;">
+  <div class="container login">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center mb-5">
+        <h2 class="heading-section">DTU EVENT</h2>
+        <img style="width: 100px; margin-top: 10px;"
+             src="https://cdn.duytan.edu.vn/upload/images/logoDT-70.png" alt="">
+
+      </div>
+
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="login-wrap p-0">
+          <h3 class="mb-4 text-center">Have an account?</h3>
+          <form [formGroup]="loginForm" (ngSubmit)="login()" class="signin-form">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Username" formControlName="username" required>
+              <small class="fs-6 text__error"
+                     style="color: red"
+                     *ngIf="loginForm.get('username').errors?.required && (loginForm.get('username').dirty ||loginForm.get('username').touched) && checkUserName == false">Username cannot be empty.</small>
+              <small class="fs-6 text__error"
+                     style="color: red"
+                     *ngIf="this.loginForm.value.username === '' && checkUserName == true">Username cannot be empty.</small>
+            </div>
+            <div class="form-group position-relative">
+              <input id="password-field" type="password" class="form-control" formControlName="password" placeholder="Password"
+                     required>
+              <span toggle="#password-field"
+                    class="fa fa-fw fa-eye field-icon toggle-password"></span>
+              <small class="fs-6 text__error" style="color: red"
+                     *ngIf="loginForm.get('password').errors?.required && (loginForm.get('password').dirty ||loginForm.get('password').touched) && checkPassWord == false">Password cannot be empty.</small>
+              <small class="fs-6 text__error"
+                     style="color: red"
+                     *ngIf="this.loginForm.value.password === '' && checkPassWord == true">Password cannot be empty.</small>
+            </div>
+            <small class="fs-6 text__error" style="color: red" *ngIf="errorMessage">The username or password is incorrect.</small>
+            <div class="form-group">
+              <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+            </div>
+            <div class="form-group d-flex align-items-center">
+              <div class="w-50">
+                <label  class="checkbox-wrap checkbox-primary">Remember Me
+                  <input formControlName="remember_me" type="checkbox" >
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="w-50 text-right">
+                <a routerLink="/reset-password" style="color: #fff">Forgot Password</a>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="overlay"></div>
+
+

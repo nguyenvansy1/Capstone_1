@@ -1,0 +1,127 @@
+<div id="wrapper">
+  <div class="main-content">
+    <div class="row">
+      <div class="col-sm-6 col-lg-3 col-xs-12" >
+        <div class="event-item box-content bg-inverse active-chart rounded-sm" style="height: 160px; border-radius: 20px !important;">
+          <h2 class="counter ">{{amountUser}}</h2>
+          <h4 class="box-title ">Thống kê sinh viên</h4>
+          <div class="dropdown js__drop_down">
+            <div class="icon-tun">
+              <i class="fa fa-user " aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="content widget-stat">
+            <!-- <div class="left-content">
+                <h2 class="counter text-white">12</h2>
+                <p class="text text-white">Some text here</p>
+            </div> -->
+            <div id="bar1" class="progress" style="height: 13px">
+              <div class="progress-bar active progress-bar-success progress-bar-striped bar"
+                   style="width: 45%; background-color: #4b3333;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 col-xs-12">
+        <div class=" event-item box-content bg-inverse rounded-sm" style="height: 160px; border-radius: 20px !important;">
+          <h2 class="counter ">{{amountEventUpcoming}}</h2>
+          <h4 class="box-title ">Sự kiện sắp diễn ra</h4>
+          <div class="dropdown js__drop_down">
+            <div class="icon-tun" style="height: 45px;width: 45px">
+              <i class="fa fa-university" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="content widget-stat">
+            <!-- <div class="left-content">
+                <h2 class="counter text-white">12</h2>
+                <p class="text text-white">Some text here</p>
+            </div> -->
+            <div id="bar2" class="progress" style="height: 13px">
+              <div class="progress-bar active progress-bar-success progress-bar-striped bar"
+                   style="width: 45%; background-color: #4b3333;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 col-xs-12" >
+        <div class="event-item box-content bg-inverse active-chart rounded-sm" style="height: 160px;border-radius: 20px !important;">
+          <h2 class="counter ">{{amountEventFinished}}</h2>
+          <h4 class="box-title ">Sự kiên đã kết thúc</h4>
+          <div class="dropdown js__drop_down">
+            <div class="icon-tun">
+              <i class="fa fa-user " aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="content widget-stat">
+            <!-- <div class="left-content">
+                <h2 class="counter text-white">12</h2>
+                <p class="text text-white">Some text here</p>
+            </div> -->
+            <div id="bar12" class="progress" style="height: 13px">
+              <div class="progress-bar active progress-bar-success progress-bar-striped bar"
+                   style="width: 45%; background-color: #4b3333;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <div class="box-content"><iframe class="chartjs-hidden-iframe" tabindex="-1"
+                                         style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
+          <h4 class="box-title">Bar Chart</h4>
+          <!-- /.box-title -->
+          <div class="dropdown js__drop_down">
+            <a href="#"
+               class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
+            <!-- /.sub-menu -->
+          </div>
+                        <canvas
+                          baseChart
+                          [datasets]="barChartDataEvent"
+                          [labels]="barChartLabels"
+                          [options]="barChartOptionEvent"
+                          [plugins]="barChartPlugins"
+                          [legend]="barChartLegend"
+                          [chartType]="barChartTypeEvent"
+                          [colors]="chartColorsEvent"
+                        >
+                        </canvas>
+          <!-- /.dropdown js__dropdown -->
+
+        </div>
+        <!-- /.box-content -->
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <div class="box-content"><iframe class="chartjs-hidden-iframe" tabindex="-1"
+                                         style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
+          <h4 class="box-title">Line Chart</h4>
+          <!-- /.box-title -->
+          <div class="dropdown js__drop_down">
+            <a href="#"
+               class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
+            <!-- /.sub-menu -->
+          </div>
+          <!-- /.dropdown js__dropdown -->
+          <canvas id="line-chartjs-chart" class="chartjs-chart" width="697" height="465"
+                  style="display: block; width: 558px; height: 372px;"></canvas>
+          <!-- /#line-chartjs-chart.chartjs-chart -->
+        </div>
+        <!-- /.box-content -->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

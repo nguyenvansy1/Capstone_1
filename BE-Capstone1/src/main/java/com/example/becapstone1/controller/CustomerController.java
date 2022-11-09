@@ -1,17 +1,14 @@
 package com.example.becapstone1.controller;
 
-import com.example.becapstone1.model.Course;
-import com.example.becapstone1.model.Customer;
+import com.example.becapstone1.dto.CustomerDTO;
+import com.example.becapstone1.model.event.Customer;
 import com.example.becapstone1.service.Impl.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,13 +28,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer")
-@CrossOrigin("*")
+@CrossOrigin
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
 
     /** Get list customer. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/list")
     public ResponseEntity<List<Customer>> getAllCustomer() {
         List<Customer> customerList = customerService.findAll();
@@ -45,13 +43,15 @@ public class CustomerController {
     }
 
     /** Add Customer. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/add")
-    public ResponseEntity<?> updateCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<?> updateCustomer(@RequestBody CustomerDTO customer) {
         try{
             customerService.addCustomer(customer);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (Exception e)
         {
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

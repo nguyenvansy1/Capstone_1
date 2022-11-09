@@ -1,7 +1,7 @@
 package com.example.becapstone1.controller;
 
-import com.example.becapstone1.model.Event;
-import com.example.becapstone1.model.EventUser;
+import com.example.becapstone1.model.event.Event;
+import com.example.becapstone1.model.event.EventUser;
 import com.example.becapstone1.service.Impl.EventService;
 import com.example.becapstone1.service.Impl.EventUserService;
 import com.example.becapstone1.service.Impl.ExcelServiceImpl;
@@ -10,8 +10,8 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
@@ -35,7 +35,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/event")
-@CrossOrigin("*")
+@CrossOrigin
 public class EventController {
 
     @Autowired
@@ -48,6 +48,7 @@ public class EventController {
     private ExcelServiceImpl excelService;
 
     /** Get list event. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/list")
     public ResponseEntity<Page<Event>> getAllUser(@RequestParam("page") Integer page,
                                                  @RequestParam("size") Integer size) {
@@ -56,18 +57,22 @@ public class EventController {
     }
 
     /** Add event. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/add")
     public ResponseEntity<?> addEvent(@RequestBody Event event) {
         try{
+            event.setFlag(true);
             eventService.addEvent(event);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (Exception e)
         {
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     /** Update event. **/
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping("/update")
     public ResponseEntity<?> editEvent(@RequestBody Event event) {
         try{
@@ -80,6 +85,7 @@ public class EventController {
     }
 
     /** Get data event. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/dataEvent")
     public ResponseEntity<?> getData() {
         Integer[] data = eventService.getDataEvent();
@@ -87,6 +93,7 @@ public class EventController {
     }
 
     /** Get data event finished. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/dataEventFinished")
     public ResponseEntity<?> getDataEventFinished() {
         List<Event> data = eventService.getListEventFinished();
@@ -95,6 +102,7 @@ public class EventController {
     }
 
     /** Get data event finished. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/dataEventUpcoming")
     public ResponseEntity<?> getDataEventUpcoming() {
         List<Event> data = eventService.getListEventUpcoming();
@@ -103,14 +111,20 @@ public class EventController {
     }
 
     /** Get list event by user code. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/eventByUser")
     public ResponseEntity<Page<EventUser>> getEventByUser(@RequestParam("page") Integer page,
                                                      @RequestParam("size") Integer size,@RequestParam("code") Long code) {
-        Page<EventUser> events = eventUserService.getListEventByUser(code,page,size);
-        return new ResponseEntity<>(events, HttpStatus.OK);
+        try {
+            Page<EventUser> events = eventUserService.getListEventByUser(code,page,size);
+            return new ResponseEntity<>(events, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     /** Get list event by user code. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/userByEvent")
     public ResponseEntity<Page<EventUser>> getUserByEvent(@RequestParam("page") Integer page,
                                                          @RequestParam("size") Integer size,@RequestParam("id") Long id) {
@@ -119,6 +133,7 @@ public class EventController {
     }
 
     /** Find event by id. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/find/{id}")
     public ResponseEntity<?> findEventById(@PathVariable("id") Long id) {
         try {
@@ -132,6 +147,7 @@ public class EventController {
 
 
     /** Export file Excel list user for event - SyNV. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/excel")
     public ResponseEntity<InputStreamResource> generateExcel(@RequestBody Long id) throws IOException {
         System.out.println(id);
@@ -140,5 +156,18 @@ public class EventController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition","inline;filename=eventStatistical.xlsx");
         return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bais));
+    }
+
+    /** Delete event by flag. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteByFlag(@PathVariable("id") Long id) {
+        try {
+            eventService.deleteEventByFlag(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

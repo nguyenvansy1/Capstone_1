@@ -860,7 +860,7 @@
                                                                             style="padding-top: 15px;padding-bottom: 15px">
                                                                             <a target="_blank"
                                                                                style="font-size: 18px;font-weight: bold"
-                                                                            th:text="${'Thank you ' + username + ' for coming for us '}"><br>Password your is bellow</a>
+                                                                            th:text="${'Thank you ' + username + ' for coming for us '}"><br>User Name and Password your is bellow</a>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -926,8 +926,8 @@
                                                         <tr>
                                                             <td align="center"
                                                                 class="es-p10t es-p20b es-p20r es-p20l es-m-txt-c">
-                                                                <h1><strong><a target="_blank"
-                                                                               style="text-decoration: none; color: #980D2C;">FGH-123-VBN</a></strong>
+                                                                <h1 style="color: red" th:text="${username + '-'  + password }"><strong><a target="_blank"
+                                                                               style="text-decoration: none; color: #980D2C;"></a></strong>
                                                                 </h1>
                                                             </td>
                                                         </tr>

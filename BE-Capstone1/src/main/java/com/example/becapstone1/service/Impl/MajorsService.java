@@ -1,6 +1,6 @@
 package com.example.becapstone1.service.Impl;
 
-import com.example.becapstone1.model.Majors;
+import com.example.becapstone1.model.user.Majors;
 import com.example.becapstone1.repository.IMajorsRepository;
 import com.example.becapstone1.service.IMajorsService;
 import org.springframework.beans.factory.annotation.Autowired;

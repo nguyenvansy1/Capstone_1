@@ -1,6 +1,6 @@
 package com.example.becapstone1.repository;
 
-import com.example.becapstone1.model.User;
+import com.example.becapstone1.model.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -37,11 +37,11 @@ public interface IUserRepository extends JpaRepository<User,Long> {
     Integer[] getAmountUser();
 
     @Modifying
-    @Query(value = "update account set account_status = 0 where account_id = :id", nativeQuery = true)
+    @Query(value = "update account set account_flag = 0 where account_id = :id", nativeQuery = true)
     void blockUser(@Param("id") Integer id);
 
     @Modifying
-    @Query(value = "update account set account_status = 1 where account_id = :id", nativeQuery = true)
+    @Query(value = "update account set account_flag = 1 where account_id = :id", nativeQuery = true)
     void unBlockUser(@Param("id") Integer id);
 }
 

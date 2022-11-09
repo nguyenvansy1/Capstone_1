@@ -1,6 +1,6 @@
 package com.example.becapstone1.service.Impl;
 
-import com.example.becapstone1.model.Course;
+import com.example.becapstone1.model.user.Course;
 import com.example.becapstone1.repository.ICourseRepository;
 import com.example.becapstone1.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;

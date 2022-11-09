@@ -1,9 +1,9 @@
 package com.example.becapstone1.service.Impl;
 
 import com.example.becapstone1.exception.EventNotFoundException;
-import com.example.becapstone1.exception.UserNotFoundException;
-import com.example.becapstone1.model.Event;
-import com.example.becapstone1.model.User;
+import com.example.becapstone1.model.event.DataMail;
+import com.example.becapstone1.model.event.Event;
+import com.example.becapstone1.repository.IAccountRepository;
 import com.example.becapstone1.repository.IEventRepository;
 import com.example.becapstone1.service.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +11,28 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EventService implements IEventService {
     @Autowired
     private IEventRepository iEventRepository;
 
+    @Autowired
+    private DataMailService dataMailService;
+
+    @Autowired
+    private IAccountRepository iAccountRepository;
+
     @Override
     public Page<Event> getAllEvent(Integer page, Integer size) {
-        Pageable paging = PageRequest.of(page, size, Sort.by("id").descending());
+        Pageable paging = PageRequest.of(page, size, Sort.by("event_id").descending());
         return iEventRepository.findAll(paging);
     }
 
@@ -33,6 +43,21 @@ public class EventService implements IEventService {
 
     @Override
     public void addEvent(Event event) {
+        try {
+            DataMail dataMail = new DataMail();
+            dataMail.setTo(event.getCustomer().getAccount().getEmail());
+            dataMail.setSubject("Event DTU");
+            Map<String, Object> props = new HashMap<>();
+            props.put("username", event.getCustomer().getName());
+            props.put("password", "123456");
+            dataMail.setProps(props);
+            dataMailService.sendMail(dataMail,"Mail");
+            System.out.println("Send Mail pass");
+        } catch (MessagingException exp){
+            exp.printStackTrace();
+        }
+        String passwordEncode = new BCryptPasswordEncoder().encode("123456");
+        iAccountRepository.changePassword(event.getCustomer().getAccount().getAccountId(),passwordEncode);
         iEventRepository.save(event);
     }
 
@@ -70,5 +95,10 @@ public class EventService implements IEventService {
     @Override
     public Event findEventById(Long id) {
         return iEventRepository.findById(id).orElseThrow(() -> new EventNotFoundException("Event by id " + id + " was not found"));
+    }
+
+    @Override
+    public void deleteEventByFlag(Long id) {
+        iEventRepository.deleteEventByFlag(id);
     }
 }
