@@ -29,6 +29,18 @@ export class EventService {
     return this.httpClient.get<number[]>(`${this.URL_API}/dataEvent`);
   }
 
+  filterDay(): Observable<EventUser[]> {
+    return this.httpClient.get<EventUser[]>(`${this.URL_API}/filterDay`);
+  }
+
+  filterMonth(): Observable<EventUser[]> {
+    return this.httpClient.get<EventUser[]>(`${this.URL_API}/filterMonth`);
+  }
+
+  filterYear(): Observable<EventUser[]> {
+    return this.httpClient.get<EventUser[]>(`${this.URL_API}/filterYear`);
+  }
+
   getAmountEventFinished(): Observable<number> {
     return this.httpClient.get<number>(`${this.URL_API}/dataEventFinished`);
   }
@@ -60,6 +72,9 @@ export class EventService {
     return this.httpClient.delete<Event>(`${this.URL_API}/delete/${id}`);
   }
 
+  import(list: string, id: string): Observable<string> {
+    return this.httpClient.get<string>(`${this.URL_API}/import/${list}/${id}`);
+  }
 }
 
 interface GetResponseEvent {

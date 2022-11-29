@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserService implements IUserService {
@@ -78,5 +80,18 @@ public class UserService implements IUserService {
         return amountUser;
     }
 
+    @Override
+    public List<User> findUserCheckinByEventId(Long id) {
+        return userRepository.findUserCheckinByEventId(id);
+    }
 
+    @Override
+    public List<User> getListUserByEvent(Long id) {
+        return userRepository.getListUserByEvent(id);
+    }
+
+    @Override
+    public void updateAvatar(String avatar, Long code) {
+        userRepository.updateAvatar(avatar, code);
+    }
 }

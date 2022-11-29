@@ -33,7 +33,6 @@ public class JwtServiceImpl implements UserDetailsService {
     public JwtResponse createJwtToken(LoginRequest loginRequest) throws Exception {
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
-        System.out.println(username + password);
         authenticate(username , password);
 
         UserDetails userDetails = loadUserByUsername(username);

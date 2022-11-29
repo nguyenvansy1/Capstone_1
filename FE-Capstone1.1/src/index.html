@@ -1,117 +1,31 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>FECapstone1</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--  <link rel="icon" type="image/x-icon" href="favicon.ico">-->
-<!--  &lt;!&ndash; Main Styles &ndash;&gt;-->
-  <link rel="stylesheet" type="text/css" href="/assets/styles/style.min.css">
-<!--  &lt;!&ndash; Material Design Icon &ndash;&gt;-->
-  <link rel="stylesheet" type="text/css" href="/assets/fonts/material-design/css/materialdesignicons.css">
-  <!-- mCustomScrollbar -->
-  <link rel="stylesheet" type="text/css" href="/assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
-  <!-- Waves Effect -->
-  <link rel="stylesheet" type="text/css" href="/assets/plugin/waves/waves.min.css">
-  <!-- Sweet Alert -->
-  <link rel="stylesheet" type="text/css" href="/assets/plugin/sweet-alert/sweetalert.css">
+  <head>
+    <meta charset="utf-8">
+    <title>FECapstone1</title>
+    <base href="/">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <!-- Percent Circle -->
-  <link rel="stylesheet" href="/assets/plugin/percircle/css/percircle.css">
-
-  <!-- Chartist Chart -->
-  <link rel="stylesheet" href="/assets/plugin/chart/chartist/chartist.min.css">
-
-  <!-- FullCalendar -->
-  <link rel="stylesheet" href="/assets/plugin/fullcalendar/fullcalendar.min.css">
-  <link rel="stylesheet" href="/assets/plugin/fullcalendar/fullcalendar.print.css" media='print'>
-
-  <!-- Color Picker -->
-  <link rel="stylesheet" href="/assets/color-switcher/color-switcher.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-
-  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/assets/vendor/charts-c3/plugin.css" />
-  <link rel="stylesheet" href="/assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css">
-  <link rel="stylesheet" href="/assets/vendor/chartist/css/chartist.min.css">
-  <link rel="stylesheet" href="/assets/vendor/toastr/toastr.min.css ">
-
-
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <!-- Main Styles -->
+    <link rel="stylesheet" type="text/css" href="/assets/styles/style.min.css">
+    <!-- Font awesome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <!-- Boostrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
 </head>
-<body class="mat-typography bg-gray-100">
-  <app-root></app-root>
-  <script src="/assets/scripts/jquery.min.js"></script>
-  <script src="/assets/scripts/modernizr.min.js"></script>
-  <script src="/assets/plugin/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-  <script src="/assets/plugin/nprogress/nprogress.js"></script>
-  <script src="/assets/plugin/sweet-alert/sweetalert.min.js"></script>
-  <script src="/assets/plugin/waves/waves.min.js"></script>
-  <!-- Full Screen Plugin -->
-  <script src="/assets/plugin/fullscreen/jquery.fullscreen-min.js"></script>
-
-  <!-- Google Chart -->
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-  <!-- chart.js Chart -->
-  <script src="/assets/plugin/chart/chartjs/Chart.bundle.min.js"></script>
-  <script src="/assets/scripts/chart.chartjs.init.min.js"></script>
-
-  <!-- FullCalendar -->
-  <script src="/assets/plugin/moment/moment.js"></script>
-  <script src="/assets/plugin/fullcalendar/fullcalendar.min.js"></script>
-  <script src="/assets/scripts/fullcalendar.init.js"></script>
-
-  <!-- Sparkline Chart -->
-  <script src="/assets/plugin/chart/sparkline/jquery.sparkline.min.js"></script>
-  <script src="/assets/scripts/chart.sparkline.init.min.js"></script>
-
-  <script src="/assets/scripts/main.min.js"></script>
-  <script src="/assets/color-switcher/color-switcher.min.js"></script>
-
-
-  <script>
-    $(document).ready(function () {
-      $('.sub-menu li a').click(function () {
-        $('.sub-menu li a').removeClass("is-active");
-        $(this).addClass("is-active");
-      });
-    });
-
-    $(document).ready(function () {
-      let hidden = false;
-      $('.main.avatar').click(function () {
-        hidden = !hidden
-        if (hidden) {
-          $('.sub-avatar').removeClass("hidden-setting")
-        } else {
-          $('.sub-avatar').addClass("hidden-setting")
-        }
-      })
-    });
-
-    $(document).ready(function () {
-      let x = $('#password-field')
-      $('.toggle-password').click(function () {
-        if (x.attr('type') === "password") {
-          x.attr('type', 'text')
-        } else {
-          x.attr('type', 'password')
-        }
-      })
-    });
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<body>
+<!--<div id="wrapper" style="overflow-y: auto">-->
+    <app-root></app-root>
+<!--</div>-->
 </body>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" defer></script>
+  <script src="/assets/plugin/nprogress/nprogress.js" defer></script>
+  <script src="/assets/scripts/jquery.min.js" dir=""></script>
+  <script src="/assets/scripts/main.min.js" defer></script>
 </html>

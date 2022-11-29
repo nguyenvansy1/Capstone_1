@@ -3,7 +3,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from '../app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NotifierModule} from 'angular-notifier';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AdminHomeComponent} from './component/admin-home/admin-home.component';
@@ -18,6 +17,10 @@ import { StatisticalComponent } from './component/statistical/statistical.compon
 import {ChartsModule} from 'ng2-charts';
 import { EventDetailComponent } from './component/event-detail/event-detail.component';
 import { ChangePasswordComponent } from './component/change-password/change-password.component';
+import {AvatarModule} from 'ngx-avatar';
+import { CustomerComponent } from './component/customer-list/customer.component';
+
+
 
 
 @NgModule({
@@ -32,6 +35,7 @@ import { ChangePasswordComponent } from './component/change-password/change-pass
     StatisticalComponent,
     EventDetailComponent,
     ChangePasswordComponent,
+    CustomerComponent,
   ],
   imports: [
     CommonModule,
@@ -40,10 +44,10 @@ import { ChangePasswordComponent } from './component/change-password/change-pass
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NotifierModule,
     NgbModule,
     BrowserAnimationsModule,
     ChartsModule,
+    AvatarModule,
   ]
 })
 export class AdminModule { }

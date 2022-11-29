@@ -1,10 +1,11 @@
 package com.example.becapstone1.controller;
 
+import com.example.becapstone1.dto.RequestCheckin;
+import com.example.becapstone1.model.event.Customer;
 import com.example.becapstone1.model.event.Event;
 import com.example.becapstone1.model.event.EventUser;
-import com.example.becapstone1.service.Impl.EventService;
-import com.example.becapstone1.service.Impl.EventUserService;
-import com.example.becapstone1.service.Impl.ExcelServiceImpl;
+import com.example.becapstone1.model.user.User;
+import com.example.becapstone1.service.Impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,6 +49,13 @@ public class EventController {
 
     @Autowired
     private ExcelServiceImpl excelService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private CustomerService customerService;
+
 
     /** Get list event. */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -123,7 +133,7 @@ public class EventController {
         }
     }
 
-    /** Get list event by user code. */
+    /** Get list user by event id. */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/userByEvent")
     public ResponseEntity<Page<EventUser>> getUserByEvent(@RequestParam("page") Integer page,
@@ -164,6 +174,94 @@ public class EventController {
     public ResponseEntity<?> deleteByFlag(@PathVariable("id") Long id) {
         try {
             eventService.deleteEventByFlag(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /** Student attendance by event. */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')")
+    @PostMapping("/addEventUser")
+    public ResponseEntity<?> addEventUser(@RequestBody RequestCheckin checkin) {
+        try {
+            User user = userService.findUserByCode(Long.parseLong(checkin.getUserId()));
+            if (user != null) {
+                Customer customer = customerService.findByAccountId(Long.parseLong(checkin.getAccountId()));
+                Event event = eventService.getEventCheckin(customer.getId());
+                Date date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat(
+                        "yyyy-MM-dd HH:mm:ss");
+                EventUser eventUser = eventUserService.getEventUserByEventAndUser(event.getId(), Long.parseLong(checkin.getUserId()));
+                System.out.println(eventUser);
+                if (eventUser == null) {
+                    eventUserService.addEventUser(format.format(date),event.getId(), Long.parseLong(checkin.getUserId()));
+                } else {
+                    if (eventUser.getStatus() == false)
+                        eventUser.setStatus(true);
+                    eventUserService.addEventUser1(eventUser);
+                }
+                return new ResponseEntity<>(user,HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+    }
+
+    /** Get list user by account id ADROID. */
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
+    @GetMapping("/userByAccount")
+    public ResponseEntity<List<User>> getUserByEvent1 (@RequestParam("accountId") Long id) {
+        try {
+            Customer customer = customerService.findByAccountId(id);
+            Event event = eventService.getEventCheckin(customer.getId());
+            List<User> users = userService.getListUserByEvent(event.getId());
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/filterDay")
+    public ResponseEntity<?> filterDay() {
+        List<EventUser> userList = eventUserService.filterDay();
+        return new ResponseEntity<>(userList,HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/filterMonth")
+    public ResponseEntity<?> filterMonth() {
+        List<EventUser> userList = eventUserService.filterMonth();
+        return new ResponseEntity<>(userList,HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/filterYear")
+    public ResponseEntity<?> filterYear() {
+        List<EventUser> userList = eventUserService.filterYear();
+        return new ResponseEntity<>(userList,HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/import/{list}/{id}")
+    public ResponseEntity<?> importUser(@PathVariable("list") String list ,@PathVariable("id") String id) {
+        try {
+            for (int i = 0;i<list.length()/11;i++) {
+                String newString = list.substring(11*i,11*i+11);
+                Date date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat(
+                        "yyyy-MM-dd HH:mm:ss");
+                EventUser eventUser = eventUserService.getEventUserByEventAndUser(Long.parseLong(id),Long.parseLong(newString));
+                if (eventUser == null) {
+                    eventUserService.addEventUser(format.format(date),Long.parseLong(id),Long.parseLong(newString));
+                }
+            }
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e)
         {

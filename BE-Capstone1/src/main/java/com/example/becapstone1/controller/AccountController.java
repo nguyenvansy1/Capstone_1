@@ -49,11 +49,6 @@ public class AccountController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping("update/password/{id}")
     public ResponseEntity<?> updatePassword(@PathVariable("id") Long id, @RequestBody Password password) {
-        System.out.println(1);
-        System.out.println(id);
-        System.out.println(password.getOldPassword());
-        System.out.println(password.getNewPassword());
-        System.out.println(password.getConfirmPassword());
         Optional<Account> account = accountService.findAccountById(id);
         if (!account.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -77,19 +72,13 @@ public class AccountController {
 
     @PostMapping("/reset-password")
     public ResponseEntity<?> forgotPassword(@RequestBody LoginRequest loginRequest){
-        System.out.println(loginRequest.getUsername());
         System.out.println(1);
         if (accountService.existsByUsername(loginRequest.getUsername()) != null) {
             Optional<Account> user = accountService.findByUsername(loginRequest.getUsername());
             String code = RandomString.make(64);
             accountService.addVerificationCode(code, user.get().getUsername());
             String confirmUrl = "http://localhost:4200/verify-reset-password?code=" + code;
-            String subject = "Please verify your email";
-            String mailContent = "";
-            mailContent = "Hi " + user.get().getUsername() + " Click the following link to verify your email: " +
-                    confirmUrl + " (click here)! " +
-                    " \nDTU THANK YOU";
-            dataMailService.sendMail(user.get().getEmail(), subject, mailContent);
+            accountService.sendMail(confirmUrl,user);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -27,6 +27,10 @@ export class UserService {
     return this.httpClient.delete<void>(`${this.URL_API}/unblock/${id}`);
   }
 
+  updateAvatar(avatar: string, code: number): Observable<void> {
+    return this.httpClient.get<void>(`${this.URL_API}/updateAvatar?` + `&avatar=${avatar}&code=${code}`);
+  }
+
   getUserByCodeOrName(thePage: number, thePageSize: number, name: string): Observable<void> {
     const url = `${this.URL_API}/filter?` + `page=${thePage}&size=${thePageSize}&name=${name}`;
     return this.httpClient.get<void>(url);

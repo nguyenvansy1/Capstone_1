@@ -8,6 +8,7 @@ import {StatisticalComponent} from './component/statistical/statistical.componen
 import {EventDetailComponent} from './component/event-detail/event-detail.component';
 import {ChangePasswordComponent} from './component/change-password/change-password.component';
 import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
+import {CustomerComponent} from './component/customer-list/customer.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
       {path: 'event/list' , component: EventListComponent},
       {path: 'event/detail/:id' , component: EventDetailComponent},
       {path: 'home' , component: StatisticalComponent},
-      {path: 'update/password', component: ChangePasswordComponent}
+      {path: 'update/password', component: ChangePasswordComponent},
+      {path: 'customer/list' , component: CustomerComponent},
     ]
   }
 ];

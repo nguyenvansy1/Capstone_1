@@ -19,4 +19,9 @@ public interface IAccountService {
     Account findAccountByVerificationCode(String code);
 
     void saveNewPassword(String password, String code);
+
+    void sendMail(String code, Optional<Account> account);
+
+    Optional<Account> findByUsername1(String username);
+
 }

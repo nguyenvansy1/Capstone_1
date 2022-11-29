@@ -5,31 +5,34 @@ import {TokenStorageService} from '../../service/security/token-storage.service'
 
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-    constructor(private router: Router,
-                private tokenStorageService: TokenStorageService
-    ) {
-    }
+  private roles: string[];
+  constructor(private router: Router,
+              private tokenStorageService: TokenStorageService
+  ) {
+  }
 
-    canActivate(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        const user = this.tokenStorageService.getUser();
-        const user1 = this.tokenStorageService.getUser().roles[0];
-        console.log(user1);
-        console.log(route.data);
-        if (user !== null) {
-            const role = user.roles[0];
-            if (!this.tokenStorageService.isAuthenticated()) {
-                this.router.navigate(['/login']);
-                return false;
-            }
-            return true;
-        }
+  // xác định role vào được những trang nào
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    const user = this.tokenStorageService.getUser().account;
+    this.roles = this.tokenStorageService.getUser().account.roles[0].roleName;
+    console.log('user: ' + this.roles);
+    console.log(route.data);
+    if (user !== null) {
+      const role = this.tokenStorageService.getUser().account.roles[0];
+      console.log(role);
+      // nếu đăng nhập thất bại
+      if (!this.tokenStorageService.isAuthenticated()) {
         this.router.navigate(['/login']);
         return false;
-
+      }
+      return true;
     }
+    this.router.navigate(['/login']);
+    return false;
+  }
 }

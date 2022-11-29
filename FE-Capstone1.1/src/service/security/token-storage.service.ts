@@ -3,16 +3,17 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 
 const USER_KEY = 'auth-user';
 const TOKEN_KEY = 'auth-token';
+const AUTHORITIES_KEY = 'AuthAuthorities';
 @Injectable({
   providedIn: 'root'
 })
 export class TokenStorageService {
-
+  private roles: Array<string> = [];
   constructor(private jwtHelper: JwtHelperService) {
   }
+
   public isAuthenticated(): boolean {
     const token = this.getToken();
-
     return !this.jwtHelper.isTokenExpired(token);
   }
 
@@ -55,5 +56,17 @@ export class TokenStorageService {
     } else {
       return JSON.parse(sessionStorage.getItem(USER_KEY));
     }
+  }
+
+  public getAuthorities(): string[] {
+    this.roles = [];
+
+    if (localStorage.getItem(TOKEN_KEY)) {
+      JSON.parse(localStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
+        this.roles.push(authority.authority);
+      });
+    }
+
+    return this.roles;
   }
 }

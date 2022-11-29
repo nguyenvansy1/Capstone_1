@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   private roles: string[];
+  email: string;
   isLoggedIn = false;
   showAdminBoard = false;
   userName: string;
@@ -20,15 +21,15 @@ export class NavbarComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       this.userName = this.tokenStorageService.getUser().account.username;
+      this.email = this.tokenStorageService.getUser().account.email;
       this.roles = this.tokenStorageService.getUser().account.roles[0].roleName;
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       console.log('roles: ' + this.roles);
     }
   }
   logout() {
     this.check = false;
     this.tokenStorageService.signOut();
-    window.location.reload();
     this.router.navigateByUrl('');
   }
 

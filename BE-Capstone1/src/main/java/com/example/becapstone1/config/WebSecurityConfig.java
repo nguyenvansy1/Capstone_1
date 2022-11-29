@@ -19,8 +19,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
 @EnableWebSecurity
@@ -41,13 +39,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http.cors();
+//        http.authorizeRequests().anyRequest().authenticated();
+//        http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint);
+//        http.addFilterBefore(new JwtRequestFilter(), BasicAuthenticationFilter.class);
+//        http.authenticationProvider(jwtProvider);
+//        return http.build();
+//    }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors();
         httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers( "/auth/login").permitAll()
+                .authorizeRequests().antMatchers( "/auth/login","/api/account/reset-password","/api/account/verify-password","/api/account/do-forget-password").permitAll()
                 .antMatchers(HttpHeaders.ALLOW).permitAll()
-                .antMatchers(GET,"/api/user/**", "/api/event/**", "/api/customer/**").hasAnyAuthority("ROLE_ADMIN")
+//                .antMatchers("/api/event/**", "/api/user/**", "/api/customer/**").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
@@ -58,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public static PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -67,3 +75,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         authenticationManagerBuilder.userDetailsService(jwtService).passwordEncoder(passwordEncoder());
     }
 }
+

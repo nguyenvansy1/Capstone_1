@@ -1,0 +1,194 @@
+<!--Add customer-->
+<div style="width: 500px;height:777px;margin-left: 513px;margin-top: -20px" class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="height: 50px">
+        <h4 class="modal-title" id="editUserModalLabel">Add customer</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"  (click)="resetFormCustomer()">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="col-md-4">
+              <div class="" style="width: 100px">
+                <img class="w-100"
+                     [src]="oldAvatarLink"
+                     alt="avt" style="border-radius: 5px; border:4px solid darkred">
+              </div>
+              <div class="bg-white card d-inline rounded-circle text-primari cursor-pointer" style="
+                                        position: absolute;
+                                        bottom: -5px;
+                                        right: -80px;
+                                        width: 25px;
+                                        height: 25px;
+                                        text-align: center;
+                                        font-size: 12px;
+                                        cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
+                <i class="fa-solid fa-pencil" style="margin-top: 7px;"></i>
+                <input (change)="getAvatar($event)" class="file-avatar" type="file" style="
+                                        width: 25px;
+                                        height: 25px;
+                                        border-radius: 50%;
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        cursor: pointer;
+                                ">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <form [formGroup]="formAddCustomer" (ngSubmit)="addCustomer(formAddCustomer)">
+              <div class="form-group">
+                <div class="d-flex align-items-center">
+                  <label style="width: 40%;" for="name">Name:</label>
+                  <input style="border-radius: 8px" type="text" id="name4"  name="name" class="form-control" placeholder="Name" formControlName="name" >
+                </div>
+                <small class="fs-6 text__error" style="color: transparent">small</small>
+                <small
+                  *ngIf="(formAddCustomer.controls.name.dirty || formAddCustomer.controls.name.touched) && formAddCustomer.controls.name.errors?.required"
+                  style="color: red;margin-left: 50px;">Name can not be left blank </small>
+                <small
+                  *ngIf="(formAddCustomer.controls.name.dirty || formAddCustomer.controls.name.touched) && (formAddCustomer.controls.name.errors?.minlength || formAddCustomer.controls.name.errors?.maxlength)"
+                  style="color: red;margin-left: 50px;">Character length from 3-50 </small>
+              </div>
+              <div class="form-group">
+                <div class="d-flex align-items-center">
+                  <label style="width: 40%;" for="identityCard">Email:</label>
+                  <input style="border-radius: 8px" type="text" id="identityCard"  name="identityCard" class="form-control"  placeholder="Email"  formControlName="email" >
+                </div>
+                <small class="fs-6 text__error" style="color: transparent">small</small>
+                <small
+                  *ngIf="(formAddCustomer.controls.email.dirty || formAddCustomer.controls.email.touched) && formAddCustomer.controls.email.errors?.required"
+                  style="color: red;margin-left: 50px;">Email can not be left blank </small>
+                <small
+                  *ngIf="(formAddCustomer.controls.email.dirty || formAddCustomer.controls.email.touched) &&  formAddCustomer.controls.email.errors?.email"
+                  style="color: red;margin-left: 50px;"> Incorrect email format (...@)</small>
+              </div>
+              <div class="form-group">
+                <div class="d-flex align-items-center">
+                  <label style="width: 40%;" for="name">Address:</label>
+                  <input style="border-radius: 8px" type="text" id="Address"  name="name" class="form-control" placeholder="Address" formControlName="address" >
+                </div>
+                <small class="fs-6 text__error" style="color: transparent">small</small>
+                <small
+                  *ngIf="(formAddCustomer.controls.address.dirty || formAddCustomer.controls.address.touched) && formAddCustomer.controls.address.errors?.required"
+                  style="color: red;margin-left: 50px;">Address can not be left blank </small>
+                <small
+                  *ngIf="(formAddCustomer.controls.address.dirty || formAddCustomer.controls.address.touched) && (formAddCustomer.controls.address.errors?.minlength || formAddCustomer.controls.address.errors?.maxlength)"
+                  style="color: red;margin-left: 50px;">Character length from 5-100 </small>
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="edit-customer-form" class="btn" style="background-color: #5A6268;color: white"
+                        data-dismiss="modal" (click)="resetFormCustomer()">Close</button>
+                <button style="width: 67px" [disabled]="formAddCustomer.invalid" type="submit" class="btn btn-primary">Add</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="wrapper" style="background-color: #f6f9ff" >
+  <div class="main-content scroll">
+    <div class="row  user-table">
+      <div class="col-md-12 col-xs-12">
+        <div class="card">
+          <div class="card-header py-4">
+            <h4 class="title text-secondy font-weight-bold">List Customer</h4>
+            <div class="form-field">
+              <input #inputName name="search" [(ngModel)]="keywordName" (keyup)=(searchByName(inputName.value)) type="text" id="name" class="form-input" placeholder=" ">
+              <label for="name" class="form-label">Search</label>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="content">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th >STT</th>
+                  <th >
+                    Name
+                  </th>
+                  <th >
+                    Email
+                  </th>
+                  <th >
+                    Address
+                  </th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- -->
+                <tr *ngFor="let customer of customerList; let i = index">
+                  <td style="font-weight: 500">
+                    {{ i + 1 + (thePageNumber - 1) * thePageSize }}
+                  </td>
+                  <td style="font-weight: 500">
+                    {{ customer?.name }}
+                  </td>
+                  <td style="font-weight: 500">
+                    {{ customer?.account.email }}
+                  </td>
+                  <td style="font-weight: 500">
+                    {{ customer?.address }}
+                  </td>
+                  <td class="text-center align-middle">
+                    <div class="dropdown">
+                      <i style="cursor: pointer" class="fa-solid fa-ellipsis " data-toggle="dropdown" aria-expanded="false"></i>
+                      <ul class="dropdown-menu">
+                        <li (click)="onOpenModal(null, 'add')" class="text-left is-hover dropdown-item" data-toggle="modal"
+                            data-target="#removeModal" style="cursor: pointer;" >
+                          <i class=" fa-solid fa-trash"></i>
+                          <b> Create </b>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div *ngIf="customerList?.length == 0" class="alert alert-warning text-center" role="alert"
+                 style="background-color: #f2f2f2; color: black">
+              <b>Customer not found</b>
+            </div>
+            <div class="row" style="margin-left: -25px">
+              <div class="col-md-4" style="padding: 25px">
+                <span>Show </span>
+                <select
+                  style="height: 25px;width: 50px;-webkit-box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 1px 1px rgb(0 0 0 / 5%);border-radius: 3px"
+                  class="form-control-md" (change)="updatePageSize($event.target)">
+                  <option selected>5</option>
+                  <option>10</option>
+                  <option>20</option>
+                  <option>50</option>
+                </select>
+                <span> entries</span>
+              </div>
+              <div class="col-md-4 text-right" style="padding: 25px">
+                <p>
+                  Showing {{ (thePageNumber - 1) * thePageSize + 1 }} -
+                  {{ itemPerPage }} of {{ theTotalElements }} entries
+                </p>
+              </div>
+              <div class="col-md-4 d-flex align-items-center justify-content-end">
+                <ngb-pagination [(page)]="thePageNumber" [pageSize]="thePageSize" [collectionSize]="theTotalElements"
+                                (pageChange)="getListCustomer()" [boundaryLinks]="true" [maxSize]="3" [rotate]="true">
+                </ngb-pagination>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

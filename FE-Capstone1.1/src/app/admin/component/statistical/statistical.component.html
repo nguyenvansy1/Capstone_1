@@ -1,127 +1,204 @@
-<div id="wrapper">
-  <div class="main-content">
-    <div class="row">
-      <div class="col-sm-6 col-lg-3 col-xs-12" >
-        <div class="event-item box-content bg-inverse active-chart rounded-sm" style="height: 160px; border-radius: 20px !important;">
-          <h2 class="counter ">{{amountUser}}</h2>
-          <h4 class="box-title ">Thống kê sinh viên</h4>
-          <div class="dropdown js__drop_down">
-            <div class="icon-tun">
-              <i class="fa fa-user " aria-hidden="true"></i>
+<div  id="wrapper" style="overflow: scroll;background-color: #f6f9ff">
+<!--    <div class="main-content" style="height: 100vh;">-->
+<style>
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+</style>
+<div  class="main-content " >
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-sm-6 col-lg-4 col-xs-12 col-md-4">
+              <div class="event-item card active-event ">
+                <div class="card-body">
+                  <h3 class="counter text-secondy">{{amountUser}}</h3>
+                  <h4 class="box-title text-sm text-primari ">Total number of student</h4>
+                  <div class="dropdown js__drop_down text-right mt-2">
+                    <div class="icon-tun shadow">
+                      <i class="fa-solid fa-users" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="content widget-stat">
+                    <div id="bar1" class="progress" style="height: 13px">
+                      <div class="progress-bar active progress-bar-success progress-bar-striped bar"
+                           style="width: 45%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 col-xs-12 col-md-4">
+              <div class="event-item card ">
+                <div class="card-body">
+                  <h3 class="counter text-secondy">{{amountEventUpcoming}}</h3>
+                  <h4 class="box-title text-sm ">Upcoming events</h4>
+                  <div class="dropdown js__drop_down text-right mt-2">
+                    <div class="icon-tun shadow">
+                      <i class="fa-brands fa-slack" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="content widget-stat">
+                    <div id="bar1" class="progress" style="height: 13px">
+                      <div class="progress-bar active progress-bar-success progress-bar-striped bar"
+                           style="width: 55%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 col-xs-12 col-md-4">
+              <div class="event-item card  ">
+                <div class="card-body">
+                  <h3 class="counter text-secondy">{{amountEventFinished}}</h3>
+                  <h4 class="box-title text-sm ">Finished events</h4>
+                  <div class="dropdown js__drop_down text-right mt-2">
+                    <div class="icon-tun shadow">
+                      <i class="fa fa-user " aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="content widget-stat">
+                    <div id="bar1" class="progress" style="height: 13px">
+                      <div class="progress-bar active progress-bar-success progress-bar-striped bar"
+                           style="width: 65%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="content widget-stat">
-            <!-- <div class="left-content">
-                <h2 class="counter text-white">12</h2>
-                <p class="text text-white">Some text here</p>
-            </div> -->
-            <div id="bar1" class="progress" style="height: 13px">
-              <div class="progress-bar active progress-bar-success progress-bar-striped bar"
-                   style="width: 45%; background-color: #4b3333;"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3 col-xs-12">
-        <div class=" event-item box-content bg-inverse rounded-sm" style="height: 160px; border-radius: 20px !important;">
-          <h2 class="counter ">{{amountEventUpcoming}}</h2>
-          <h4 class="box-title ">Sự kiện sắp diễn ra</h4>
-          <div class="dropdown js__drop_down">
-            <div class="icon-tun" style="height: 45px;width: 45px">
-              <i class="fa fa-university" aria-hidden="true"></i>
-            </div>
-          </div>
-          <div class="content widget-stat">
-            <!-- <div class="left-content">
-                <h2 class="counter text-white">12</h2>
-                <p class="text text-white">Some text here</p>
-            </div> -->
-            <div id="bar2" class="progress" style="height: 13px">
-              <div class="progress-bar active progress-bar-success progress-bar-striped bar"
-                   style="width: 45%; background-color: #4b3333;"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3 col-xs-12" >
-        <div class="event-item box-content bg-inverse active-chart rounded-sm" style="height: 160px;border-radius: 20px !important;">
-          <h2 class="counter ">{{amountEventFinished}}</h2>
-          <h4 class="box-title ">Sự kiên đã kết thúc</h4>
-          <div class="dropdown js__drop_down">
-            <div class="icon-tun">
-              <i class="fa fa-user " aria-hidden="true"></i>
-            </div>
-          </div>
-          <div class="content widget-stat">
-            <!-- <div class="left-content">
-                <h2 class="counter text-white">12</h2>
-                <p class="text text-white">Some text here</p>
-            </div> -->
-            <div id="bar12" class="progress" style="height: 13px">
-              <div class="progress-bar active progress-bar-success progress-bar-striped bar"
-                   style="width: 45%; background-color: #4b3333;"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          <div class="row mt-3">
+            <div class="col-lg-12 col-md-12">
+              <div class="box-content card">
+                <iframe class="chartjs-hidden-iframe" tabindex="-1"
+                                                    style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;">
+                </iframe>
+                <h4 class="box-title text-sm chart-title p-2 font-weight-bold">Bar Chart</h4>
+                <div class="dropdown js__drop_down">
+                  <a href="#"
+                     class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
+                </div>
+                <canvas baseChart [datasets]="barChartDataEvent" [labels]="barChartLabels"
+                        [options]="barChartOptionEvent" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                        [chartType]="barChartTypeEvent" [colors]="chartColorsEvent" >
+                </canvas>
 
-    <div class="row">
-      <div class="col-lg-6 col-md-12">
-        <div class="box-content"><iframe class="chartjs-hidden-iframe" tabindex="-1"
-                                         style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
-          <h4 class="box-title">Bar Chart</h4>
-          <!-- /.box-title -->
-          <div class="dropdown js__drop_down">
-            <a href="#"
-               class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-            <!-- /.sub-menu -->
+              </div>
+            </div>
           </div>
-                        <canvas
-                          baseChart
-                          [datasets]="barChartDataEvent"
-                          [labels]="barChartLabels"
-                          [options]="barChartOptionEvent"
-                          [plugins]="barChartPlugins"
-                          [legend]="barChartLegend"
-                          [chartType]="barChartTypeEvent"
-                          [colors]="chartColorsEvent"
-                        >
-                        </canvas>
-          <!-- /.dropdown js__dropdown -->
-
         </div>
-        <!-- /.box-content -->
-      </div>
-      <div class="col-lg-6 col-md-12">
-        <div class="box-content"><iframe class="chartjs-hidden-iframe" tabindex="-1"
-                                         style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
-          <h4 class="box-title">Line Chart</h4>
-          <!-- /.box-title -->
-          <div class="dropdown js__drop_down">
-            <a href="#"
-               class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-            <!-- /.sub-menu -->
+        <div class="col-md-4" id="right-side">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+
+                <div class="card-header">
+                  <h5 class="card-title">Recent Activity <span>| {{textFilter}}</span></h5>
+                  <div class="filter">
+                    <a class="icon cursor-pointer" id="dropdownMenuButton"   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="bi fa-solid fa-ellipsis"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" aria-labelledby="dropdownMenuButton">
+                      <li class="dropdown-header text-start">
+                        <h6>Filter</h6>
+                      </li>
+                      <li (click)="filterMonth()"><a class="dropdown-item" >Month</a></li>
+                      <li (click)="filterYear()"><a class="dropdown-item" >Year</a></li>
+                      <li (click)="filterAll()"><a class="dropdown-item" >All</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="card-body">
+
+                  <div class="activity">
+                    <div *ngFor="let event of eventUser; let i = index" class="activity-item d-flex">
+                      <div class="activite-label">{{calulateDiff(event)}} {{hourTime(event)}}</div>
+                      <i [ngClass]="randomColor()" class="bi fa-solid fa-circle activity-badge  align-self-start"></i>
+
+                      <div class="activity-content">{{event.user.name}} checkin with {{event.event.name}}</div>
+                    </div>
+<!--                    <div class="activity-item d-flex">-->
+<!--                      <div class="activite-label">56 min</div>-->
+<!--                      <i  [ngClass]="setClasses()" class="bi fa-solid fa-circle activity-badge  align-self-start"></i>-->
+
+<!--                      <div class="activity-content"> Voluptatem blanditiis blanditiis eveniet</div>-->
+<!--                    </div>-->
+<!--                    <div class="activity-item d-flex">-->
+<!--                      <div class="activite-label">2 hrs</div>-->
+<!--                      <i [ngClass]="setClasses()"  class="bi fa-solid fa-circle activity-badge  align-self-start"></i>-->
+<!--                      <div class="activity-content"> Voluptates corrupti molestias voluptatem</div>-->
+<!--                    </div>-->
+<!--                    <div class="activity-item d-flex">-->
+<!--                      <div class="activite-label">1 day</div>-->
+<!--                      <i class="bi fa-solid fa-circle activity-badge text-info align-self-start"></i>-->
+<!--                      <div class="activity-content"> Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore</div>-->
+<!--                    </div>-->
+<!--                    <div class="activity-item d-flex">-->
+<!--                      <div class="activite-label">2 days</div>-->
+<!--                      <i class="bi fa-solid fa-circle activity-badge text-warning align-self-start"></i>-->
+<!--                      <div class="activity-content"> Est sit eum reiciendis exercitationem</div>-->
+<!--                    </div>-->
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- /.dropdown js__dropdown -->
-          <canvas id="line-chartjs-chart" class="chartjs-chart" width="697" height="465"
-                  style="display: block; width: 558px; height: 372px;"></canvas>
-          <!-- /#line-chartjs-chart.chartjs-chart -->
-        </div>
-        <!-- /.box-content -->
-      </div>
-    </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
+                  <div class="filter">
+                    <a class="icon cursor-pointer" id="dropdownMenuButton"   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="bi fa-solid fa-ellipsis"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" aria-labelledby="dropdownMenuButton">
+                      <li class="dropdown-header text-start">
+                        <h6>Filter</h6>
+                      </li>
+                      <li (click)="filterMonth()"><a class="dropdown-item" >Month</a></li>
+                      <li (click)="filterYear()"><a class="dropdown-item" >Year</a></li>
+                      <li (click)="filterAll()"><a class="dropdown-item" >All</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="card-body pb-0">
 
-  </div>
+                  <div class="news">
+                    <div class="post-item clearfix">
+                      <img src="https://freeetemplates.com/bootstrap5admin1/assets/img/news-1.jpg" alt="">
+                      <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
+                      <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
+                    </div>
+                    <div class="post-item clearfix">
+                      <img src="https://freeetemplates.com/bootstrap5admin1/assets/img/news-1.jpg" alt="">
+                      <h4><a href="#">Quidem autem et impedit</a></h4>
+                      <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
+                    </div>
+                    <div class="post-item clearfix">
+                      <img src="https://freeetemplates.com/bootstrap5admin1/assets/img/news-1.jpg" alt="">
+                      <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
+                      <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
+                    </div>
+                    <div class="post-item clearfix">
+                      <img src="https://freeetemplates.com/bootstrap5admin1/assets/img/news-1.jpg" alt="">
+                      <h4><a href="#">Laborum corporis quo dara net para</a></h4>
+                      <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
+                    </div>
+                    <div class="post-item clearfix">
+                      <img src="https://freeetemplates.com/bootstrap5admin1/assets/img/news-1.jpg" alt="">
+                      <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
+                      <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              </div>
+            </div>
+          </div>
+      </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
+</div>

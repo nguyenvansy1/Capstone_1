@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService} from '../../../service/account.service';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import {NotifierService} from 'angular-notifier';
 import {ToastrService} from 'ngx-toastr';
+import {invalid} from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'app-verifi-reset-password',
@@ -16,18 +16,22 @@ export class VerifiResetPasswordComponent implements OnInit {
   isSendMail: boolean;
   passwordGroup: FormGroup;
   code: string;
+  url = 'assets/js/main.js';
+  loadAPI: any;
   constructor(private route: ActivatedRoute,
               private accountService: AccountService,
               private formBuilder: FormBuilder,
               private router: Router,
-              private notifier: NotifierService,
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.loadAPI = new Promise(resolve => {
+      this.loadScript();
+    });
     this.formResetPassword = this.formBuilder.group({
       passwordGroup: this.formBuilder.group({
         // tslint:disable-next-line:max-line-length
-        newPassword: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,13}$')]],
+        newPassword: ['', [Validators.required, Validators.pattern('^(?=^.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#=?^&])[A-Za-z\\d@$!=%*#^?&]{8,20}$')]],
         confirmPassword: ['', [Validators.required]]
       }, {validator: this.comparePassword}),
     });
@@ -69,5 +73,14 @@ export class VerifiResetPasswordComponent implements OnInit {
   comparePassword(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
     return (value.newPassword === value.confirmPassword) ? null : {invalidConfirmation: true};
+  }
+
+  public loadScript() {
+    const node = document.createElement('script');
+    node.src = this.url;
+    node.type = 'text/javascript';
+    node.async = true;
+    node.charset = 'utf-8';
+    document.getElementsByTagName('head')[0].appendChild(node);
   }
 }

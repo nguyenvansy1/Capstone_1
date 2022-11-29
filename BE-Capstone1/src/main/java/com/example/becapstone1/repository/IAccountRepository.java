@@ -11,8 +11,8 @@ import java.util.Optional;
 
 @Transactional
 public interface IAccountRepository extends JpaRepository<Account,Long> {
-
-    @Query(value = "SELECT * FROM account join account_role on account.account_id = account_role.account_id WHERE account.account_username =?1 and account_role.role_id = 1", nativeQuery = true)
+//    and account_role.role_id = 1
+    @Query(value = "SELECT * FROM account join account_role on account.account_id = account_role.account_id WHERE account.account_username =?1 and account_flag = 1", nativeQuery = true)
     Account findAccountByUsername(String username);
 
 
@@ -40,4 +40,8 @@ public interface IAccountRepository extends JpaRepository<Account,Long> {
     @Modifying
     @Query(value = "update account set account_password =?1 where verification_code=?2 ",nativeQuery = true)
     void saveNewPassword(String password, String code);
+
+
+    @Query(value = "SELECT * FROM account join account_role on account.account_id = account_role.account_id WHERE account.account_username =?1 and account_role.role_id = 2", nativeQuery = true)
+    Optional<Account> findByUsername1(String username);
 }

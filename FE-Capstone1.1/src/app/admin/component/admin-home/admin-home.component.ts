@@ -13,13 +13,21 @@ export class AdminHomeComponent implements OnInit {
   username: string;
   showAdminBoard = false;
   private roles: string[];
+  url = 'assets/js/main.js';
+  loadAPI: any;
   constructor(private router: Router, private tokenStorageService: TokenStorageService) {
   }
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
-
-    if (!this.isLoggedIn) {
-      this.router.navigateByUrl('login');
-    }
+    this.loadAPI = new Promise(resolve => {
+      this.loadScript();
+    });
+  }
+  public loadScript() {
+    const node = document.createElement('script');
+    node.src = this.url;
+    node.type = 'text/javascript';
+    node.async = true;
+    node.charset = 'utf-8';
+    document.getElementsByTagName('head')[0].appendChild(node);
   }
 }

@@ -1,93 +1,44 @@
-<!--<div class="fixed-navbar">-->
-<!--  <div class="pull-left">-->
-<!--    <button type="button"-->
-<!--            class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile"></button>-->
-<!--    <h1 class="page-title" style="margin: 0;position: relative; top: 50%;transform: translateY(30%);">Dashboard</h1>-->
-<!--  </div>-->
-<!--  <div class="pull-right">-->
-<!--    <span>{{userName}}</span>-->
-<!--    <div class="ico-item toggle-hover js__drop_down active">-->
-<!--      <div class="js__drop_down_button avatar" style="width: 50px; ">-->
-<!--        <img (click)="updateCheck()" src="https://as1.ftcdn.net/v2/jpg/02/03/26/54/1000_F_203265470_uNAa2zAcCYXOcc4XxwF7r4uQsio6xxii.jpg"-->
-<!--             alt="avatar-->
-<!--                        position: relative;" style="border-radius: 50%; width: 40px;" />-->
-<!--      </div>-->
-<!--      <div class="toggle-content" *ngIf="check == true">-->
-<!--        <ul class="content__list">-->
-<!--          <li>-->
-<!--            <a routerLink="/admin/update/password">-->
-<!--              <i class="fa fa-gear" aria-hidden="true"></i>-->
-<!--              Change password-->
-<!--            </a>-->
-<!--          </li>-->
-<!--          <li (click)="logout()">-->
-<!--            <a href="#">-->
-<!--              <i class="ico mdi mdi-logout"></i>-->
-<!--              Logout-->
-<!--            </a>-->
-<!--          </li>-->
-
-<!--        </ul>-->
-<!--        <a href="#" class="read-more"><small>Quyền riêng tư · Điều khoản © 2022</small></a>-->
-<!--      </div>-->
-<!--      &lt;!&ndash; /.toggle-content &ndash;&gt;-->
-<!--    </div>-->
-
-<!--  </div>-->
-<!--</div>-->
-
-<div class="fixed-navbar">
-  <div class="pull-left">
-    <button type="button" class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile">
-      <i class="fa-solid fa-bars" style="font-size: 24px"></i>
-    </button>
-    <div>
-      <div class="breadcrumbb">
-        <div class="breadcrumb-item">
-          <a class="" href="#">Pages</a>
-        </div>
-        <div class="breadcrumb-item" aria-current="page">
-          Dashboard
-        </div>
-      </div>
-      <h6 class="name-page">Dashboard</h6>
+<div class="fixed-navbar d-flex align-items-center justify-content-between">
+    <div class="pull-left d-flex">
+        <button style="background-color: white" type="button" class="menu-mobile-button js__menu_mobile ">
+            <i style="color: #012970" class="fa-solid fa-bars "></i>
+        </button>
+        <nav>
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark">Pages</a>
+                </li>
+                <li class="breadcrumb-item text-sm text-dark active">Dashboard</li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0 text-dark">Dashboard</h6>
+        </nav>
     </div>
-  </div>
-  <div class="pull-right">
-    <div class="d-flex align-items-center">
-      <div class="" style="width: 100%;">
-        <ul class="navbar justify-content-end position-relative d-flex">
-          <li class="d-flex align-items-center position-relative">
-            <div class="main avatar">
-              <img src="https://demos.creative-tim.com/soft-ui-dashboard/assets/img/team-3.jpg" class="img-fluid" />
+    <div class="pull-right">
+        <div class="ico-item toggle-hover js__drop_down ">
+            <div class="avatar js__drop_down_button d-flex align-items-center">
+                <a  class=" font-weight-bold mr-2">
+                    <span style="color: #012970" class="text-sm ">Hello, {{userName}}</span>
+                </a>
+              <div style="height: 70px;">
+                <ngx-avatar gravatarId="{{email}}" size="40"></ngx-avatar>
+              </div>
             </div>
-          </li>
-          <ul class="sub-avatar hidden-setting">
-            <li class="nav-item">
-              <a routerLink="/admin/update/password" class="nav-link  d-flex align-items-center justify-content-start">
-                <div class="icon">
-                  <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
-                </div>
-                <h6  class="d-sm-inline d-none font-weight-bold pl-3">Change password</h6>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link   d-flex align-items-center">
-                <div>
-                  <i class="fa-solid fa-right-from-bracket"></i>
-                </div>
-                <h6 (click)="logout()" class="d-sm-inline d-none font-weight-bold pl-3">Logout</h6>
-              </a>
-            </li>
-          </ul>
-          <li class="d-flex align-items-center ">
-            <a href="#" class="nav-link  font-weight-bold px-0">
-              <span class="">{{userName}}</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
+            <div class="toggle-content">
+                <ul class="d-flex flex-column">
+                    <li class="hover">
+                        <a routerLink="/admin/update/password" class="d-flex">
+                            <i class="fa-solid fa-gear mr-2"></i>
+                            <span>Change Password</span>
+                        </a>
+                    </li>
+                    <li class="hover" (click)="logout()">
+                        <a class="d-flex">
+                            <i class="fa-solid fa-right-from-bracket mr-2"></i>
+                            <span class="txt">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+

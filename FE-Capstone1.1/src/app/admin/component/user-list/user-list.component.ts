@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import {NotifierService} from 'angular-notifier';
 import {User} from '../../../../model/user';
 import {Course} from '../../../../model/course';
 import {Majors} from '../../../../model/majors';
@@ -14,6 +13,7 @@ import {Class} from '../../../../model/class';
 import {ClassService} from '../../../../service/class.service';
 import {TokenStorageService} from '../../../../service/security/token-storage.service';
 import {ToastrService} from 'ngx-toastr';
+import {EventUser} from '../../../../model/event_user';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -34,11 +34,17 @@ export class UserListComponent implements OnInit {
   isLoggedIn = false;
   username: string;
   showAdminBoard = false;
+  order = true;
+  url = 'assets/js/main.js';
+  loadAPI: any;
   private roles: string[];
   // tslint:disable-next-line:max-line-length
-  constructor(private toastr: ToastrService,private userService: UserService, private tokenStorageService: TokenStorageService, private classService: ClassService, private router: Router, private courseService: CourseService, private majorsService: MajorsService, private fb: FormBuilder, private notifier: NotifierService) { }
+  constructor(private toastr: ToastrService, private userService: UserService, private tokenStorageService: TokenStorageService, private classService: ClassService, private router: Router, private courseService: CourseService, private majorsService: MajorsService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.loadAPI = new Promise(resolve => {
+      this.loadScript();
+    });
     this.getListUser();
     this.formEdit = this.fb.group(
       {
@@ -107,6 +113,7 @@ export class UserListComponent implements OnInit {
   }
 
   public onOpenModal(user: User, mode: string): void {
+    console.log(1);
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
@@ -116,6 +123,7 @@ export class UserListComponent implements OnInit {
       console.log(user);
       this.formEdit.controls.code.setValue(user.code);
       this.formEdit.controls.name.setValue(user.name);
+      console.log(this.formEdit.value.name);
       this.formEdit.controls.identityCard.setValue(user.identityCard);
       this.formEdit.controls.phone.setValue(user.phone);
       this.formEdit.controls.birthDay.setValue(user.birthDay);
@@ -183,7 +191,7 @@ export class UserListComponent implements OnInit {
     this.userService.unBlockUser(id).subscribe(
       (data: void) => {
         this.getListUser2();
-        this.toastr.success('Unblock user successfully!', 'Success: ');
+        this.toastr.info('Unblock user successfully!', 'Success: ');
       },
       (error: HttpErrorResponse) => {
         this.toastr.error('Unblock user unsuccessfully!', 'Error: ');
@@ -201,5 +209,13 @@ export class UserListComponent implements OnInit {
     const currentDate = new Date();
     const age = currentDate.getFullYear() - birthday.getFullYear();
     return age > 18 ? null : {invalidAge: true};
+  }
+  public loadScript() {
+    const node = document.createElement('script');
+    node.src = this.url;
+    node.type = 'text/javascript';
+    node.async = true;
+    node.charset = 'utf-8';
+    document.getElementsByTagName('head')[0].appendChild(node);
   }
 }

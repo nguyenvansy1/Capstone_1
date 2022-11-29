@@ -11,6 +11,7 @@ export interface User {
   birthDay?: string;
   gender?: boolean;
   since?: string;
+  avatar?: string;
   address?: string;
   account?: Account;
   course?: Course;

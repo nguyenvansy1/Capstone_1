@@ -1,0 +1,39 @@
+
+.dropdown-item {
+  line-height: 0;
+}
+
+.dropdown-menu {
+  border-radius: 10px !important;
+  transform: translate3d(-130px, 10px, 0px) !important
+}
+
+.file-avatar::file-selector-button {
+  color: transparent;
+  border: none;
+  background: transparent;
+}
+
+.file-avatar {
+  color: transparent !important;
+  background-color: transparent;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+
+.detail-event-show {
+  transform: translate3d(105px, 20px, 0px) !important;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -99999999 !important;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+}
+

@@ -1,354 +1,81 @@
-<div id="wrapper">
-<div class="main-content align-items-center event-table">
-  <div class="row small-spacing">
-    <div class="col-md-12 col-xs-12">
-      <div style="position: relative" class="box-content">
-        <h1 class="box-title h1">List event</h1>
-        <button (click)="onOpenModal(null, 'add')"  data-toggle="modal" data-target="#addCustomerModal"  mat-raised-button class="btn-addcustomer">Add Customer</button>
-        <div class="row" style="margin-bottom: 15px">
-          <div class="col-md-3">
-            <form class="form-inline my-2 my-lg-0" >
-            </form>
-          </div>
-          <div class="col-md-3">
-
-          </div>
-          <div class="col-md-3">
-          </div>
-          <div class="col-md-3">
-          </div>
+<div>
+  <div style="width: 500px;height:780px;margin-left: 508px;margin-top: -20px" class="modal fade" id="addEventModal"
+       tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="height: 50px">
+          <h4 class="modal-title" id="addEventModalLabel">Add Event</h4>
+          <br>
+          <button type="button" class="close" #closeBtn1 data-dismiss="modal" aria-label="Close">
+            <span (click)="resetFormEvent()" aria-hidden="true">&times;</span>
+          </button>
         </div>
-
-        <table class="table align-items-center mb-0">
-          <thead>
-          <tr>
-            <th
-              class="text-center align-middle text-secondary">
-              STT
-            </th>
-            <th
-              class="  align-middle text-secondary">
-              Name
-            </th>
-            <th
-              class=" align-middle text-secondary">
-              Location
-            </th>
-            <th
-              class=" text-center align-middle text-secondary">
-              Date
-            </th>
-            <th
-              class="text-center align-middle text-secondary">
-              Start Time
-            </th>
-            <th class="text-center align-middle text-secondary">
-            Start End
-          </th>
-            <th
-              class="text-center align-middle text-secondary">
-              Customer
-            </th>
-            <th class="text-center align-middle text-secondary">Action</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr  *ngFor="let event of eventList; let i = index">
-            <td class="align-middle text-center">{{i+1+(thePageNumber-1)*thePageSize}}</td>
-            <td style="width: 350px" class="align-middle" >
-                <a class="d-flex py-1 align-items-center" [routerLink]="['/admin/event/detail', event.id]">
-                  <div class="d-flex flex-column justify-content-center">
-                    <h6 class="mb-0 text-sm">{{event.name}}</h6>
-                  </div>
-                </a>
-            </td>
-            <td style="width: 350px" class="align-middle">
-              <p class="tmb-0">{{event.location}}
-              </p>
-            </td>
-            <td style="width: 350px" class="text-center align-middle text-start">
-              <span class=" ">{{event.date | date: 'dd/MM/yyyy'}}</span>
-            </td>
-            <td style="width: 150px" class="text-center align-middle text-start">
-              <span class="">{{event.startTime}}</span>
-            </td>
-            <td style="width: 150px" class="text-center align-middle text-start">
-              <span class="  ">{{event.endTime}}</span>
-            </td>
-            <td style="width: 150px" class="text-center align-middle">
-              <p class="  mb-0">{{event.customer.name}}
-              </p>
-            </td>
-            <td  style="width: 150px" class="text-center align-middle">
-              <div class="btn-group" style="cursor: pointer;">
-                <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa-solid fa-ellipsis h4"></i></div>
-                <ul class="dropdown-menu" style="left: -100px; min-width: 140px;">
-                  <li class="padding-top-10 text-left is-hover" data-toggle="modal"
-                    data-target="#editEventModal" style="cursor: pointer; padding: 8px 30px;"  (click)="onOpenModalEvent(event, 'edit')">
-                    <i class="fa-solid fa-pen"></i>
-                    Edit
-                  </li>
-                  <li class="padding-top-10 text-left is-hover"
-                      data-toggle="modal" data-target="#addEventModal" style="cursor: pointer; padding: 8px 30px;" (click)="onOpenModalEvent(null, 'add')">
-                    <i class="fa-solid fa-plus"></i>
-                    Create
-                  </li>
-                  <li class="padding-top-10 text-left is-hover" data-toggle="modal"
-                    data-target="#deleteEventModal" style="cursor: pointer; padding: 8px 30px;" (click)="onOpenModalEvent(event, 'delete')">
-                    <i class=" fa-solid fa-trash"></i>
-                    Delete
-                  </li>
-                </ul>
+        <div class="modal-body">
+          <form [formGroup]="formCreate" (ngSubmit)="onAddEvent(formCreate)">
+            <div class="form-group">
+              <div class="d-flex align-items-center">
+                <label style="width: 40%;" for="name">Name:</label>
+                <input style="border-radius: 8px" type="text" id="name11" name="name" class="form-control"
+                       placeholder="Name" formControlName="name">
               </div>
-            </td>
+            </div>
+            <br>
+            <div class="form-group">
+              <div class="d-flex align-items-center">
+                <label style="width: 40%;" for="location">Location:</label>
+                <input style="border-radius: 8px" type="text" id="location1" name="location" class="form-control"
+                       placeholder="Location" formControlName="location">
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <div class="d-flex align-items-center">
 
-          </tbody>
-        </table>
-        <div *ngIf="eventList?.length == 0" class="alert alert-warning text-center" role="alert" style="background-color: #F2F2F2; color: black">
-          <b>Event not found</b>
+                <label style="width: 40%;" for="startTime">Start Time:</label>
+                <input style="border-radius: 8px" type="date" id="startTime1" name="startTime" class="form-control"
+                       placeholder="Start Time" formControlName="startTime">
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <div class="d-flex align-items-center">
+                <label style="width: 40%;" for="endTime">End Time:</label>
+                <input style="border-radius: 8px" type="date" id="endTime1" name="endTime" class="form-control"
+                       placeholder="End Time" formControlName="endTime">
+              </div>
+              <small
+                *ngIf="formCreate.controls.endTime.invalid && (formCreate.controls.endTime.touched || formCreate.controls.endTime.dirty)"
+                style="color: red;margin-left: 50px;">Name can not be left blank </small>
+            </div>
+            <br>
+            <div class="form-group">
+              <div class="d-flex align-items-center">
+                <label style="width: 40%;" for="exampleFormControlSelect1">Customer:</label>
+                <select style="border-radius: 8px" [compareWith]="compareCustomer" class="form-control"
+                        id="exampleFormControlSelect2" formControlName="customer">
+                  <option [ngValue]="null" disabled>-- Select --</option>
+                  <option *ngFor="let customer of customerList" [ngValue]="customer">{{customer?.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn" style="background-color: #5A6268;color: white" data-dismiss="modal"
+                      (click)="resetFormEvent()">Close</button>
+              <button style="width: 67px" [disabled]="formCreate.invalid" type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </form>
         </div>
-        <div class="row" style="margin-left: -25px;">
-          <div class="col-md-4" style="padding: 25px" >
-            <span>Show </span>
-            <select style="height: 25px;width: 50px;-webkit-box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 1px 1px rgb(0 0 0 / 5%);border-radius: 3px" class="form-control-md" (change) = "updatePageSize($event.target.value)" >
-              <option selected >5</option>
-              <option >10</option>
-              <option >20</option>
-              <option >50</option>
-            </select>
-            <span> entries</span>
-          </div>
-          <div class="col-md-1" style="padding: 25px" >
-          </div>
-          <div class="col-md-3 text-right" style="padding: 25px" >
-            <p> Showing {{ (thePageNumber - 1) * thePageSize + 1 }} - {{ itemPerPage }} of {{ theTotalElements }} entries</p>
-          </div>
-          <div class="col-md-4 text-right">
-            <ngb-pagination [(page)] = "thePageNumber"
-                            [pageSize] = "thePageSize"
-                            [collectionSize] = "theTotalElements"
-                            (pageChange) = "getListEvent2()"
-                            [boundaryLinks]="true"
-                            [maxSize]="3"
-                            [rotate]="true"
-            >
-            </ngb-pagination>
-          </div>
-        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
-<!--Add Customer Modal-->
-<div style="" class="modal fade" id="addCustomerModal" tabindex="-1"
-     role="dialog" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document"
-       style="position: relative;
-              top: 50%;
-              left: 25%;
-              transform: translate(-50%, -50%);"
-  >
-    <div class="modal-content">
-      <div class="modal-header" style="height: 50px">
-        <h2 class="modal-title" id="addCustomerModalLabel">Add Customer</h2>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" (click)="resetFormCustomer()">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="formAddCustomer" (ngSubmit)="addCustomer(formAddCustomer)">
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="name">Name</label>
-              <input style="border-radius: 8px" type="text" name="name" id="name" class="form-control"
-                     formControlName="name" placeholder="Name">
-            </div>
-            <small
-              *ngIf="(formAddCustomer.controls.name.dirty || formAddCustomer.controls.name.touched) && formAddCustomer.controls.name.errors?.required"
-              style="color: red">Name cannot be left blank </small>
-          </div>
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="email">Email</label>
-              <input style="border-radius: 8px" type="email" name="email" id="email" class="form-control"
-                     formControlName="email" placeholder="Email">
-            </div>
-            <small
-              *ngIf="(formAddCustomer.controls.email.dirty || formAddCustomer.controls.email.touched) && formAddCustomer.controls.email.errors?.required"
-              style="color: red">Email cannot be left blank </small>
-            <small
-              *ngIf="(formAddCustomer.controls.email.dirty || formAddCustomer.controls.email.touched) &&  formAddCustomer.controls.email.errors?.email"
-              style="color: red"> Không đúng định đạng email (...@gmail.com)</small>
-          </div>
-          <div class="modal-footer">
-            <button type="button" id="edit-customer-form" class="btn" style="background-color: #5A6268;color: white"
-                    data-dismiss="modal" (click)="resetFormCustomer()">Close</button>
-            <button [disabled]="formAddCustomer.invalid" type="submit" class="btn btn-primary">Add</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<!--Add Event Modal-->
-<div style="width: 500px;height:780px;margin-left: 508px;margin-top: -20px" class="modal fade" id="addEventModal"
-     tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="height: 50px">
-        <h2 class="modal-title" id="addEventModalLabel">Add Event</h2>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeBtn>
-          <span (click)="resetFormEvent()" aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="formCreate" (ngSubmit)="onAddEvent(formCreate)">
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="name">Name</label>
-              <input style="border-radius: 8px" type="text" id="name11" name="name" class="form-control"
-                     placeholder="Name" formControlName="name">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="location">Location</label>
-              <input style="border-radius: 8px" type="text" id="location1" name="location" class="form-control"
-                     placeholder="Location" formControlName="location">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="date">Date</label>
-              <input style="border-radius: 8px" type="date" id="date1" name="date" class="form-control"
-                     formControlName="date">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-
-              <label style="width: 40%;" for="startTime">Start Time</label>
-              <input style="border-radius: 8px" type="time" id="startTime1" name="startTime" class="form-control"
-                     placeholder="Start Time" formControlName="startTime">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="endTime">End Time</label>
-              <input style="border-radius: 8px" type="time" id="endTime1" name="endTime" class="form-control"
-                     placeholder="End Time" formControlName="endTime">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="exampleFormControlSelect1">Customer</label>
-              <select style="border-radius: 8px" [compareWith]="compareCustomer" class="form-control"
-                      id="exampleFormControlSelect2" formControlName="customer">
-                <option [ngValue]="null" disabled>-- Select --</option>
-                <option *ngFor="let customer of customerList" [ngValue]="customer">{{customer?.name}}</option>
-              </select>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn" style="background-color: #5A6268;color: white" data-dismiss="modal"
-                    (click)="resetFormEvent()">Close</button>
-            <button [disabled]="formCreate.invalid" type="submit" class="btn btn-primary">Add</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!--Edit Event Modal-->
-<div style="width: 500px;height:780px;margin-left: 508px;margin-top: -20px" class="modal fade" id="editEventModal"
-     tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="height: 50px">
-        <h2 class="modal-title" id="editEventModalLabel">Edit Event</h2>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="formEdit" (ngSubmit)="onEditEvent(formEdit)">
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <input type="number" hidden name="id" class="form-control" required formControlName="id">
-              <input type="text" hidden name="flag" class="form-control" required formControlName="flag">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="name">Name</label>
-              <input style="border-radius: 8px" type="text" id="name1" name="name" class="form-control"
-                     placeholder="Name" formControlName="name">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="location">Location</label>
-              <input style="border-radius: 8px" type="text" id="location" name="location" class="form-control"
-                     placeholder="Location" formControlName="location">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="location">Date</label>
-              <input style="border-radius: 8px" type="date" id="date" name="date" class="form-control"
-                     formControlName="date">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="startTime">Start Time</label>
-              <input style="border-radius: 8px" type="time" id="startTime" name="startTime" class="form-control"
-                     placeholder="Start Time" formControlName="startTime">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="endTime">End Time</label>
-              <input style="border-radius: 8px" type="time" id="endTime" name="endTime" class="form-control"
-                     placeholder="End Time" formControlName="endTime">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="d-flex align-items-center">
-              <label style="width: 40%;" for="exampleFormControlSelect1">Customer</label>
-              <select style="border-radius: 8px" [compareWith]="compareCustomer" class="form-control"
-                      id="exampleFormControlSelect1" formControlName="customer">
-                <option [ngValue]="null" disabled>-- Select --</option>
-                <option *ngFor="let customer of customerList" [ngValue]="customer">{{customer?.name}}</option>
-              </select>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn" style="background-color: #5A6268;color: white"
-                    data-dismiss="modal">Close</button>
-            <button [disabled]="formEdit.invalid" type="submit" class="btn btn-primary">Save change</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <!--Delete Event Modal-->
-<div style="width: 500px;margin-left: 508px;margin-top: 200px" class="modal fade" id="deleteEventModal" tabindex="-1"
+<div class="modal fade" id="deleteEventModal" tabindex="-1"
      role="dialog" aria-labelledby="deleteEventModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="height: 50px">
-        <h2 class="modal-title" id="deleteEventModalLabel">Delete Event</h2>
+        <h4 class="modal-title" id="deleteEventModalLabel">Delete Event</h4>
         <button type="button" class="close" #closeBtn data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -364,3 +91,205 @@
     </div>
   </div>
 </div>
+
+<!--Add Event Modal-->
+<!--Edit Event Modal-->
+<div style=" width: 500px;height:780px;margin-left: 508px;margin-top: -20px" class="modal fade" id="editEventModal"
+     tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="height: 50px">
+        <h4 class="modal-title" id="editEventModalLabel">Edit Event</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEdit" (ngSubmit)="onEditEvent(formEdit)">
+          <div class="form-group">
+            <div class="d-flex align-items-center">
+              <input type="number" hidden name="id" class="form-control" required formControlName="id">
+              <input type="text" hidden name="flag" class="form-control" required formControlName="flag">
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="d-flex align-items-center">
+              <label style="width: 40%;" for="name">Name</label>
+              <input style="border-radius: 8px" type="text" id="name1" name="name" class="form-control"
+                     placeholder="Name" formControlName="name">
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="d-flex align-items-center">
+              <label style="width: 40%;" for="location">Location</label>
+              <input style="border-radius: 8px" type="text" id="location" name="location" class="form-control"
+                     placeholder="Location" formControlName="location">
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="d-flex align-items-center">
+              <label style="width: 40%;" for="startTime">Start Time</label>
+              <input style="border-radius: 8px" type="datetime-local" id="startTime" name="startTime" class="form-control"
+                     placeholder="Start Time" formControlName="startTime">
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="d-flex align-items-center">
+              <label style="width: 40%;" for="endTime">End Time</label>
+              <input style="border-radius: 8px" type="datetime-local" id="endTime" name="endTime" class="form-control"
+                     placeholder="End Time" formControlName="endTime">
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="d-flex align-items-center">
+              <label style="width: 40%;" for="exampleFormControlSelect1">Customer</label>
+              <select style="border-radius: 8px" [compareWith]="compareCustomer" class="form-control"
+                      id="exampleFormControlSelect1" formControlName="customer">
+                <option [ngValue]="null" disabled>-- Select --</option>
+                <option *ngFor="let customer of customerList" [ngValue]="customer">{{customer?.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn" style="background-color: #5A6268;color: white"
+                    data-dismiss="modal">Close</button>
+            <button [disabled]="formEdit.invalid" type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="main-container" class="main-content">
+  <div class="row event-table">
+        <div class="col-md-12 col-xs-12">
+          <div class="card">
+            <div class="card-header py-4">
+              <h4 class="title text-secondy font-weight-bold">List event</h4>
+<!--              <button (click)="onOpenModal(null, 'add')"  data-toggle="modal" data-target="#addCustomerModal"  class="btn btn-primary btn-addcustomer">Add Customer</button>-->
+                <div class="form-field">
+                  <input type="text" id="name" class="form-input" placeholder=" ">
+                  <label for="name" class="form-label">Search</label>
+                </div>
+              </div>
+            <div class="card-body"  style="padding: 0 1.25rem !important;">
+              <div class="content">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th class="text-center">
+                        Name
+                      </th>
+                      <th class="text-center">Location</th>
+                      <th style="width: 10%" class="text-center">
+                        Start Time
+                      </th>
+                      <th style="width: 10%" class="text-center">
+                        Start End
+                      </th>
+                      <th class="text-center">Customer</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <tr *ngFor="let event of eventList; let i = index">
+                      <td class="text-center">
+                        {{ i + 1 + (thePageNumber - 1) * thePageSize }}
+                      </td>
+                      <td class="align-middle text-center">
+                        <a [routerLink]="['/admin/event/detail', event.id]">
+                            <p style="color: black">{{ event.name }}</p>
+                        </a>
+                      </td>
+                      <td class=" text-center">
+                        <p >{{ event.location }}</p>
+                      </td>
+                      <td class=" text-center">
+                        <span class="">{{ event.startTime | date: 'MMM d, y, hh:mm:ss a'  }}</span>
+                      </td>
+                      <td class=" text-center">
+                        <span class="  ">{{ event.endTime | date: 'MMM d, y, hh:mm:ss a' }}</span>
+                      </td>
+                      <td  class=" text-center">
+                        <p  class="mb-0">{{ event.customer.name }}</p>
+                      </td>
+                      <td   class="text-center   position-relative">
+                        <div class="dropdown">
+                          <i   style="cursor: pointer" class="fa-solid fa-ellipsis " data-toggle="dropdown" aria-expanded="false"></i>
+                          <ul class="dropdown-menu">
+                            <li  class="text-start py-2 cursor-pointer hover dropdown-item"
+                                 data-toggle="modal" data-target="#addEventModal"
+                                 (click)="onOpenModalEvent(null, 'add')">
+                              <i class="fa-solid fa-plus mr-2"></i>
+                              Create
+                            </li>
+                            <li class="text-left py-2 is-hover cursor-pointer dropdown-item"  data-toggle="modal" data-target="#editEventModal"
+                                (click)="onOpenModalEvent(event, 'edit')">
+                              <i class="fa-solid fa-pen" style="margin-right: 5px"></i>
+                               Edit
+                            </li>
+                             <li  class="text-start py-2 cursor-pointer hover dropdown-item"
+                                                            data-toggle="modal" data-target="#deleteEventModal"
+                                  (click)="onOpenModalEvent(event, 'delete')" >
+                                                            <i class="fa-solid fa-trash mr-2"></i>
+                                                            Delete
+                           </li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+            <div class="card-footer">
+              <div *ngIf="eventList?.length == 0" class="alert alert-warning text-center" role="alert"
+                style="background-color: #f2f2f2; color: black">
+                <b>Event not found</b>
+              </div>
+              <div class="row" style="margin-left: -25px">
+                <div class="col-md-4" style="padding: 25px">
+                  <span>Show </span>
+                  <select style="
+                          height: 25px;
+                          width: 50px;
+                          --webkit-box-shadow: 0 0 0 1px rgb(0 0 0 / 5%),
+                            0 1px 1px rgb(0 0 0 / 5%);
+                          border-radius: 3px;
+                        " class="form-control-md" (change)="updatePageSize($event.target.value)">
+                    <option selected>5</option>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                  </select>
+                  <span> entries</span>
+                </div>
+                <div class="col-md-4 text-center" style="padding: 25px">
+                  <p>
+                    Showing {{ (thePageNumber - 1) * thePageSize + 1 }} -
+                    {{ itemPerPage }} of {{ theTotalElements }} entries
+                  </p>
+                </div>
+                <div class="col-md-4 d-flex align-items-center justify-content-end">
+                  <ngb-pagination [(page)]="thePageNumber" [pageSize]="thePageSize"
+                    [collectionSize]="theTotalElements" (pageChange)="getListEvent2()" [boundaryLinks]="true"
+                    [maxSize]="3" [rotate]="true">
+                  </ngb-pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+

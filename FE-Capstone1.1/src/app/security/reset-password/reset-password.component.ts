@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {NotifierService} from 'angular-notifier';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {AccountService} from '../../../service/account.service';
 import {ToastrService} from 'ngx-toastr';
@@ -13,7 +12,7 @@ export class ResetPasswordComponent implements OnInit {
   formGroup: FormGroup;
   isSubmitted = false;
   // tslint:disable-next-line:max-line-length
-  constructor(private toastr: ToastrService, private formBuilder: FormBuilder, private notifier: NotifierService, private accountService: AccountService) { }
+  constructor(private toastr: ToastrService, private formBuilder: FormBuilder, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.isSubmitted = false;
@@ -24,13 +23,16 @@ export class ResetPasswordComponent implements OnInit {
 
 
   onSubmit() {
+    console.log(this.formGroup.value.username);
     this.accountService.resetPassword(this.formGroup.value.username).subscribe(
       data => {
         this.isSubmitted = true;
-        this.toastr.success('Email has been sent!', 'Success: ');
+        console.log(0);
+        this.toastr.success('Email has been sent!', 'Success:');
+        console.log(1);
       }, error => {
         this.isSubmitted = false;
-        this.toastr.error('Wrong username or username is not registered!', 'Error: ');
+        this.toastr.error('Wrong username or username is not registered!', 'Error:');
       }
     );
   }

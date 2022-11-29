@@ -20,4 +20,22 @@ export class CustomerService {
   getAllCustomer(): Observable<Customer[]> {
     return this.httpClient.get<Customer[]>(`${this.URL_API}/list`);
   }
+
+  getAllCustomerPage(thePage: number, thePageSize: number): Observable<GetResponseCustomer> {
+    const url = `${this.URL_API}/listPage?` + `&page=${thePage}&size=${thePageSize}`;
+    return this.httpClient.get<GetResponseCustomer>(url);
+  }
+
+  getCustomerByName(thePage: number, thePageSize: number, name: string): Observable<void> {
+    const url = `${this.URL_API}/filter?` + `page=${thePage}&size=${thePageSize}&name=${name}`;
+    return this.httpClient.get<void>(url);
+  }
+}
+
+interface GetResponseCustomer {
+  content: Customer[];
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
 }

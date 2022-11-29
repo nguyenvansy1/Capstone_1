@@ -5,7 +5,6 @@ export interface Event {
   name?: string;
   location?: string;
   content?: string;
-  date?: string;
   startTime?: string;
   endTime?: string;
   customer?: Customer;

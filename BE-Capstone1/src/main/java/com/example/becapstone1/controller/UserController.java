@@ -103,9 +103,9 @@ public class UserController {
     }
 
     /** Find user by id. */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')")
     @GetMapping("/find/{code}")
-    public ResponseEntity<?> findUserById(@PathVariable("code") Long code) {
+    public ResponseEntity<?> findUserByCode(@PathVariable("code") Long code) {
         try {
             User user =  userService.findUserByCode(code);
             return new ResponseEntity<>(user,HttpStatus.OK);
@@ -163,4 +163,40 @@ public class UserController {
         Integer amountUser = userService.getAmountUser();
         return new ResponseEntity<>(amountUser, HttpStatus.OK);
     }
+
+    /** Get list user checkin successfully by event. */
+    @GetMapping("/userCheckin")
+    public ResponseEntity<?> getListUserCheckin(@RequestParam("id") Long id) {
+        try {
+            List<User> userList = userService.findUserCheckinByEventId(id);
+            return new ResponseEntity<>(userList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    /** Update avatar user. */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/updateAvatar")
+    public ResponseEntity<?> updateAvatar(@RequestParam("avatar") String avatar,
+                                                 @RequestParam("code") Long code) {
+        try {
+            userService.updateAvatar(avatar, code);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+//    /** Find user by code ANDROID. */
+//    @GetMapping("/find1/{code}")
+//    public ResponseEntity<?> findUserByCode1(@PathVariable("code") Long code) {
+//        try {
+//            User user =  userService.findUserByCode(code);
+//            return new ResponseEntity<>(user,HttpStatus.OK);
+//        }catch (Exception e)
+//        {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//    }
 }

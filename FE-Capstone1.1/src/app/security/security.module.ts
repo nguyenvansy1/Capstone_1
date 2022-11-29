@@ -7,7 +7,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { VerifiResetPasswordComponent } from './verifi-reset-password/verifi-reset-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import {NotifierModule} from 'angular-notifier';
 
 
 @NgModule({
@@ -20,7 +19,6 @@ import {NotifierModule} from 'angular-notifier';
     SecurityRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NotifierModule
   ]
 })
 export class SecurityModule { }

@@ -15,7 +15,7 @@ export class AccountService {
   constructor(private httpClient: HttpClient) { }
 
   public updatePassword(accountId: number, password: Password): Observable<void> {
-    return this.httpClient.patch<void>(`${this.URL_API}/update/password/${accountId}`, {password}, httpOptions);
+    return this.httpClient.patch<void>(`${this.URL_API}/update/password/${accountId}`, password);
   }
 
   resetPassword(username: string): Observable<any> {

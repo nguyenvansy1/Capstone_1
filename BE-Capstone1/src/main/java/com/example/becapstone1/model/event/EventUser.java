@@ -38,6 +38,13 @@ public class EventUser {
         this.user = user;
     }
 
+    public EventUser(Boolean status, Date checkin, Event event, User user) {
+        this.status = status;
+        this.checkin = checkin;
+        this.event = event;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }

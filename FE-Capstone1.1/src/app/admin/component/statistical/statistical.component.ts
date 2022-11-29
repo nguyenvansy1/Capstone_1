@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Directive, ElementRef, Input, OnInit} from '@angular/core';
 import {EventService} from '../../../../service/event.service';
 import { ChartType, ChartDataSets, ChartConfiguration} from 'chart.js';
 import { Label as ng2Chart } from 'ng2-charts';
@@ -6,6 +6,8 @@ import * as moment from 'moment';
 import {UserService} from '../../../../service/user.service';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../../../../service/security/token-storage.service';
+import {EventUser} from '../../../../model/event_user';
+import {isFakeMousedownFromScreenReader} from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-statistical',
@@ -13,6 +15,7 @@ import {TokenStorageService} from '../../../../service/security/token-storage.se
   styleUrls: ['./statistical.component.css']
 })
 export class StatisticalComponent implements OnInit {
+  eventUser: EventUser[];
   amountUser: number;
   amountEventFinished: number;
   amountEventUpcoming: number;
@@ -20,9 +23,13 @@ export class StatisticalComponent implements OnInit {
   username: string;
   showAdminBoard = false;
   private roles: string[];
+  url = 'assets/js/main.js';
+  loadAPI: any;
+  check = true;
+  loading = true;
+  color: string;
+  textFilter: string;
   // tslint:disable-next-line:max-line-length
-  constructor(private route: Router, private tokenStorageService: TokenStorageService, private eventService: EventService , private userService: UserService, private router: Router) { }
-
   title = 'test';
   public barChartOptionEvent: ChartConfiguration['options'] = {
     responsive: true,
@@ -125,7 +132,7 @@ export class StatisticalComponent implements OnInit {
     // },
     {
       backgroundColor: '#010101',
-      borderRadius: Number.MAX_VALUE,
+      borderColor: 'rgba(255, 26, 26, 0.86)',
     },
     {
       backgroundColor: '#C5CAFF',
@@ -188,7 +195,14 @@ export class StatisticalComponent implements OnInit {
   }): void {
     console.log(event, active);
   }
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private element: ElementRef, private route: Router, private tokenStorageService: TokenStorageService, private eventService: EventService , private userService: UserService, private router: Router) { }
+
   ngOnInit(): void {
+    this.loadAPI = new Promise(resolve => {
+      this.loadScript();
+    });
     this.eventService.getDataEvent().subscribe(data => {
       this.barChartDataEvent[0].data = data;
     }, (error) => {
@@ -200,9 +214,12 @@ export class StatisticalComponent implements OnInit {
     this.userService.getDataUser().subscribe(data => {
       this.barChartDataEvent[1].data = data;
     });
+
     this.userService.getAmountUser().subscribe(data => {
       this.amountUser = data;
     });
+
+    this.filterMonth();
 
     this.eventService.getAmountEventFinished().subscribe(data => {
       this.amountEventFinished = data;
@@ -210,6 +227,84 @@ export class StatisticalComponent implements OnInit {
 
     this.eventService.getAmountEventUpcoming().subscribe(data => {
       this.amountEventUpcoming = data;
+    });
+  }
+
+  randomColor() {
+    // tslint:disable-next-line:max-line-length
+    const myArray = ['text-danger', 'text-success', 'text-primary', 'text-dark', 'text-secondary', 'text-warning', 'text-info', 'text-muted'];
+    this.color = myArray[Math.floor(Math.random() * myArray.length)];
+    return this.color;
+  }
+  calulateDiff(event: EventUser) {
+    const start = new Date().getTime();
+    const end = new Date(event.checkin).getTime();
+    const time = start - end;
+    const diffDay = Math.floor(time / 86400000);
+    const diffHour = Math.floor((time % 86400000) / 3600000);
+    const diffMinute = Math.floor(((time % 86400000) % 3600000) / 60000);
+    const diffWeek = Math.floor((time / 86400000) / 7);
+    const diffMonth = Math.floor(((time / 86400000) / 7) / 4);
+    if (diffDay >= 1 && diffDay < 7) {
+      return diffDay;
+    } else if (diffDay >= 7 && diffDay <= 28) {
+      return diffWeek;
+    } else if (diffDay > 28) {
+      return diffMonth;
+    } else if (diffHour >= 1) {
+      return diffHour;
+    } else {
+      return diffMinute;
+    }
+  }
+
+  hourTime(key) {
+    const start = new Date().getTime();
+    const end = new Date(key.checkin).getTime();
+    const time = start - end;
+    const diffDay = Math.floor(time / 86400000);
+    const diffHour = Math.floor((time % 86400000) / 3600000);
+    const diffMinute = Math.floor(((time % 86400000) % 3600000) / 60000);
+    if (diffDay >= 1 && diffDay < 7) {
+      return key = 'day';
+    } else if (diffDay >= 7 && diffDay <= 28) {
+      return key = 'week';
+    } else if (diffDay > 28) {
+      return key = 'month';
+    } else if (diffHour >= 1) {
+      return key = 'hours';
+    } else {
+      return key = 'min';
+    }
+  }
+
+  public loadScript() {
+    const node = document.createElement('script');
+    node.src = this.url;
+    node.type = 'text/javascript';
+    node.async = true;
+    node.charset = 'utf-8';
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
+
+  filterMonth() {
+    this.textFilter = 'Month';
+    this.eventService.filterDay().subscribe(data => {
+      this.eventUser = data;
+    });
+  }
+
+  filterYear() {
+    this.textFilter = 'Year';
+    this.eventService.filterMonth().subscribe(data => {
+      this.eventUser = data;
+    });
+  }
+
+  filterAll() {
+    this.textFilter = 'All';
+    this.eventService.filterYear().subscribe(data => {
+      this.eventUser = data;
     });
   }
 }

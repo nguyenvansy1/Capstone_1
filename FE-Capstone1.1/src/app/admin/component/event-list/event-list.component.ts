@@ -1,10 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CustomerService} from '../../../../service/customer.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {User} from '../../../../model/user';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Customer} from '../../../../model/customer';
-import {NotifierService} from 'angular-notifier';
 import {Event} from '../../../../model/event';
 import {EventService} from '../../../../service/event.service';
 import {Majors} from '../../../../model/majors';
@@ -12,14 +11,15 @@ import {UserService} from '../../../../service/user.service';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../../../../service/security/token-storage.service';
 import {ToastrService} from 'ngx-toastr';
+import * as moment from 'moment';
+import {formatDate} from '@angular/common';
 @Component({
   selector: 'app-event-list',
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css']
 })
 export class EventListComponent implements OnInit {
-  @ViewChild('closeBtn') closeBtn: ElementRef;
-  formAddCustomer: FormGroup;
+
   formEdit: FormGroup;
   formCreate: FormGroup;
   eventList: Event[];
@@ -31,11 +31,20 @@ export class EventListComponent implements OnInit {
   deleteEventFlag: Event;
   isLoggedIn = false;
   username: string;
+  @ViewChild('closeBtn') closeBtn: ElementRef;
+  @ViewChild('closeBtn1') closeBtn1: ElementRef;
+  url = 'assets/js/main.js';
+  loadAPI: any;
   private roles: string[];
+
   // tslint:disable-next-line:max-line-length
-  constructor(private toastr: ToastrService, private customerService: CustomerService, private tokenStorageService: TokenStorageService, private router: Router, private fb: FormBuilder, private notifier: NotifierService, private eventService: EventService) { }
+  constructor(private toastr: ToastrService, private customerService: CustomerService, private tokenStorageService: TokenStorageService, private router: Router, private fb: FormBuilder, private eventService: EventService) {
+  }
 
   ngOnInit(): void {
+    this.loadAPI = new Promise(resolve => {
+      this.loadScript();
+    });
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (!this.isLoggedIn) {
@@ -51,28 +60,20 @@ export class EventListComponent implements OnInit {
       {
         name: [],
         location: [],
-        date: [],
         startTime: [],
         endTime: [],
         customer: []
-      }
+      } , this.checkDay
     );
     this.formEdit = this.fb.group(
       {
         id: [],
         name: [],
         location: [],
-        date: [],
         startTime: [],
         endTime: [],
         customer: [],
         flag: [],
-      }
-    );
-    this.formAddCustomer = this.fb.group(
-      {
-        name: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]]
       }
     );
   }
@@ -98,30 +99,6 @@ export class EventListComponent implements OnInit {
       this.itemPerPage = this.thePageNumber * this.thePageSize;
     }
   }
-  public onOpenModal(user: User, mode: string): void {
-    const container = document.getElementById('main-container');
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.style.display = 'none';
-    button.setAttribute('data-toggle', 'modal');
-    if (mode === 'add') {
-      button.setAttribute('data-target', '#addCustomerModal');
-    }
-    container.appendChild(button);
-    button.click();
-  }
-
-  public addCustomer(addForm: FormGroup): void {
-    this.customerService.addCustomer(addForm.value).subscribe(
-      (data: Customer) => {
-        this.resetFormCustomer();
-        this.toastr.success('Add customer successfully!', 'Success: ');
-      },
-      (error: HttpErrorResponse) => {
-        this.toastr.error('Add customer unsuccessfully!', 'Error: ');
-      }
-    );
-  }
 
   public onOpenModalEvent(event: Event, mode: string): void {
     const container = document.getElementById('main-container');
@@ -133,11 +110,11 @@ export class EventListComponent implements OnInit {
       this.formEdit.controls.id.setValue(event.id);
       this.formEdit.controls.name.setValue(event.name);
       this.formEdit.controls.location.setValue(event.location);
-      this.formEdit.controls.date.setValue(event.date);
-      this.formEdit.controls.startTime.setValue(event.startTime);
-      this.formEdit.controls.endTime.setValue(event.endTime);
+      this.formEdit.controls.startTime.setValue(moment(event.startTime).format('YYYY-MM-DDTkk:mm'));
+      this.formEdit.controls.endTime.setValue(moment(event.endTime).format('YYYY-MM-DDTkk:mm'));
       this.formEdit.controls.customer.setValue(event.customer);
       this.formEdit.controls.flag.setValue(event.flag);
+      console.log(this.formEdit.value.startTime);
       button.setAttribute('data-target', '#editEventModal');
     }
     if (mode === 'add') {
@@ -147,6 +124,8 @@ export class EventListComponent implements OnInit {
       this.deleteEventFlag = event;
       button.setAttribute('data-target', '#deleteEventModal');
     }
+    console.log(container);
+    console.log(button);
     container.appendChild(button);
     button.click();
   }
@@ -156,9 +135,6 @@ export class EventListComponent implements OnInit {
     this.thePageNumber = 1;
     this.getListEvent2();
   }
-  resetFormCustomer() {
-    this.formAddCustomer.reset();
-  }
 
   resetFormEvent() {
     this.formCreate.reset();
@@ -167,6 +143,7 @@ export class EventListComponent implements OnInit {
   public onAddEvent(createForm: FormGroup): void {
     this.eventService.addEvent1(createForm.value).subscribe(
       (data: Event) => {
+        this.closeModal1();
         this.resetFormEvent();
         this.ngOnInit();
         this.toastr.success('Create event successfully!', 'Success: ');
@@ -176,6 +153,7 @@ export class EventListComponent implements OnInit {
       }
     );
   }
+
   public onEditEvent(editForm: FormGroup): void {
     this.eventService.updateEvent(editForm.value).subscribe(
       (data: Event) => {
@@ -204,7 +182,30 @@ export class EventListComponent implements OnInit {
       }
     );
   }
+
   private closeModal(): void {
     this.closeBtn.nativeElement.click();
+  }
+
+  private closeModal1(): void {
+    this.closeBtn1.nativeElement.click();
+  }
+
+  public loadScript() {
+    const node = document.createElement('script');
+    node.src = this.url;
+    node.type = 'text/javascript';
+    node.async = true;
+    node.charset = 'utf-8';
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
+
+  checkDay(control: AbstractControl): ValidationErrors | null {
+    console.log(1);
+    const startTime = control.value.startTime;
+    const endTime = control.value.endTime;
+    const date1 = formatDate(startTime, 'yyyy-MM-dd', 'en_US');
+    const date2 = formatDate(endTime, 'yyyy-MM-dd', 'en_US');
+    return date1 <= date2 ? null : {dateError: true};
   }
 }

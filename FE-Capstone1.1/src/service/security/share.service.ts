@@ -13,7 +13,7 @@ export class ShareService {
     sendClickEvent() {
         this.subject.next();
     }
-    getClickEvent(): Observable<any>{
+    getClickEvent(): Observable<any> {
         return this.subject.asObservable();
     }
 }

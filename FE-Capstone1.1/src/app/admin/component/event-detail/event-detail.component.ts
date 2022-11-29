@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Event} from '../../../../model/event';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EventService} from '../../../../service/event.service';
 import {EventUser} from '../../../../model/event_user';
 import {TokenStorageService} from '../../../../service/security/token-storage.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-event-detail',
@@ -11,11 +13,12 @@ import {TokenStorageService} from '../../../../service/security/token-storage.se
   styleUrls: ['./event-detail.component.css']
 })
 export class EventDetailComponent implements OnInit {
+  @ViewChild('closeBtn') closeBtn: ElementRef;
   event: Event;
   id: number;
   eventList: EventUser[] = [];
   thePageNumber = 1;
-  thePageSize = 3;
+  thePageSize = 10000;
   theTotalElements: number;
   itemPerPage = 1;
   isLoggedIn = false;
@@ -23,13 +26,22 @@ export class EventDetailComponent implements OnInit {
   showAdminBoard = false;
   private roles: string[];
   // tslint:disable-next-line:max-line-length
-  constructor(private activatedRoute: ActivatedRoute, private tokenStorageService: TokenStorageService, private eventService: EventService, private router: Router) { }
+  formImport: FormGroup;
+  // tslint:disable-next-line:max-line-length
+  constructor(private toastr: ToastrService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private tokenStorageService: TokenStorageService, private eventService: EventService, private router: Router) { }
 
   ngOnInit(): void {
+    this.formImport = this.fb.group(
+      {
+        student: ['', [Validators.required]],
+        id: []
+      }
+    );
     // tslint:disable-next-line:radix
     this.id = parseInt(this.activatedRoute.snapshot.params.id);
     this.eventService.findEventById(this.id).subscribe(event => {
         this.event = event;
+        this.formImport.controls.id.setValue(this.event.id);
       }, (error) => {
       }
     );
@@ -87,5 +99,34 @@ export class EventDetailComponent implements OnInit {
         link.remove();
       }, 100);
     });
+  }
+
+  import() {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#textarea');
+    container.appendChild(button);
+    button.click();
+  }
+
+  importStudent(formImport: FormGroup) {
+    console.log(formImport.value.id);
+    this.eventService.import(formImport.value.student, formImport.value.id).subscribe(event => {
+      this.closeModal();
+      this.ngOnInit();
+      this.toastr.success('Import user successfully!', 'Success: ');
+      }, (error) => {
+      this.toastr.error('Import user unsuccessfully!', 'Error: ');
+      }
+    );
+  }
+  resetForm() {
+    this.formImport.reset();
+  }
+  private closeModal(): void {
+    this.closeBtn.nativeElement.click();
   }
 }

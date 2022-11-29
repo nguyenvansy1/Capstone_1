@@ -2,6 +2,9 @@ package com.example.becapstone1.service;
 
 import com.example.becapstone1.model.user.User;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface IUserService {
     Page<User> getAllUser(Integer page, Integer size);
@@ -20,5 +23,9 @@ public interface IUserService {
 
     Integer getAmountUser();
 
+    List<User> findUserCheckinByEventId(Long id);
 
+    List<User> getListUserByEvent(Long id);
+
+    void updateAvatar(String avatar , Long code );
 }
