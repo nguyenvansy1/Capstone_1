@@ -22,12 +22,12 @@ style="width: 100%;height: 100vh; background-image: url(../../../assets/images/d
                       <small class="fs-6 text__error"
                              style="color: red; margin-left: -35px;"
                              *ngIf="loginForm.get('username').errors?.required && (loginForm.get('username').dirty ||loginForm.get('username').touched) && checkUserName == false">
-                        Username can't be empty
+                        Username can not be blank
                       </small>
                       <small class="fs-6 text__error"
                              style="color: red; margin-left: -35px;"
                              *ngIf="this.loginForm.value.username === '' && checkUserName == true">
-                        Username can't be empty
+                        Username can not be blank
                       </small>   </div>
                         <div class="form-group position-relative">
                             <input class="password-field" id="password-field" type="password" class="form-control"
@@ -37,12 +37,12 @@ style="width: 100%;height: 100vh; background-image: url(../../../assets/images/d
                           <small class="fs-6 text__error" style="color: transparent">small</small>
                       <small class="fs-6 text__error" style="color: red;margin-left: -35px;"
                              *ngIf="loginForm.get('password').errors?.required && (loginForm.get('password').dirty ||loginForm.get('password').touched) && checkPassWord == false">
-                        Password can't be empty
+                        Password can not be blank
                       </small>
                       <small  class="fs-6 text__error"
                              style="color: red;margin-left: -35px;"
                              *ngIf="this.loginForm.value.password === '' && checkPassWord == true">
-                        Password can't be empty
+                        Password can not be blank
                       </small>
                           <small class="fs-6 text__error" style="color: red;margin-left: -35px;" *ngIf="errorMessage">The username or password is incorrect</small>
                         </div>

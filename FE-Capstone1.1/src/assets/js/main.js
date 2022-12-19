@@ -9,6 +9,8 @@ $(document).ready(function () {
   $(".edit-profile").click(function () {
     $('.full-name').prop('disabled', false);
     $('.full-name').focus();
+    $('.student-id').prop('disabled', false);
+    $('.id-card').prop('disabled', false);
     $('.phone').prop('disabled', false);
     $('.date').prop('disabled', false);
     $('.birthDay').prop('disabled', false);
@@ -29,6 +31,7 @@ $(document).ready(function () {
     $('.phone').prop('disabled', true);
     $('.email').prop('disabled', true);
     $('.date').prop('disabled', true);
+    $('.id-card').prop('disabled', true);
     $('.birthDay').prop('disabled', true);
     $('.address').prop('disabled', true);
     $('.class').prop('disabled', true);

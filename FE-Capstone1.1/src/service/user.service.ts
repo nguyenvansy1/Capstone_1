@@ -15,8 +15,8 @@ export class UserService {
     return this.httpClient.get<GetResponseUser>(url);
   }
 
-  updateUser(user: User): Observable<User> {
-    return this.httpClient.patch<User>(`${this.URL_API}/update`, user);
+  updateUser(user: User): Observable<ResponseMessage> {
+    return this.httpClient.patch<ResponseMessage>(`${this.URL_API}/update`, user);
   }
 
   blockUser(id: number): Observable<void> {
@@ -55,4 +55,8 @@ interface GetResponseUser {
   totalPages: number;
   size: number;
   number: number;
+}
+
+interface ResponseMessage {
+  message: string;
 }

@@ -145,27 +145,27 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis debitis quas sit 
                   />
                 </div>
               </li>
-              <small *ngIf="(formEdit.controls.phone.dirty || formEdit.controls.phone.touched) && formEdit.controls.phone.errors?.required" style="color: red">Phone can't be left blank</small>
+              <small *ngIf="(formEdit.controls.phone.dirty || formEdit.controls.phone.touched) && formEdit.controls.phone.errors?.required" style="color: red">Phone can not be left blank</small>
               <small *ngIf="(formEdit.controls.phone.dirty || formEdit.controls.phone.touched) && (formEdit.controls.phone.errors?.pattern)" style="color: red">Phone is not in the correct format</small>
               <li>
                 <strong class="text-secondy">Identity Card:</strong>
                 <div class="profile-setting d-inline-block">
                   <input
                     style="background: transparent; height: 35px; border: none"
-                    class="form-control phone"
+                    class="form-control id-card"
                     type="number"
                     formControlName="identityCard"
                     disabled
                   />
                 </div>
               </li>
-              <small *ngIf="(formEdit.controls.identityCard.dirty || formEdit.controls.identityCard.touched) && formEdit.controls.identityCard.errors?.required" style="color: red">Identity Card can't be left blank</small>
+              <small *ngIf="(formEdit.controls.identityCard.dirty || formEdit.controls.identityCard.touched) && formEdit.controls.identityCard.errors?.required" style="color: red">Identity Card can not be left blank</small>
               <small *ngIf="(formEdit.controls.identityCard.dirty || formEdit.controls.identityCard.touched) && (formEdit.controls.identityCard.errors?.pattern)" style="color: red">Identity card consists of 9 numbers</small>
               <li>
                 <strong class="text-secondy">Email:</strong>
                 <div class="profile-setting d-inline-block">
                   <input
-                    style="background: transparent; height: 35px; border: none"
+                    style="background: transparent; height: 35px; border: none;width: 130%"
                     class="form-control email"
                     type="text"
                     value="{{ user.account.email }}"

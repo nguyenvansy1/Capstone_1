@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CustomerService} from '../../../../service/customer.service';
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {User} from '../../../../model/user';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Customer} from '../../../../model/customer';
@@ -19,7 +19,7 @@ import {formatDate} from '@angular/common';
   styleUrls: ['./event-list.component.css']
 })
 export class EventListComponent implements OnInit {
-
+  submitted = false;
   formEdit: FormGroup;
   formCreate: FormGroup;
   eventList: Event[];
@@ -58,13 +58,16 @@ export class EventListComponent implements OnInit {
 
     this.formCreate = this.fb.group(
       {
-        name: [],
-        location: [],
+        name: ['', Validators.required],
+        location: ['', Validators.required],
+        dateGroup: this.fb.group({
         startTime: [],
         endTime: [],
-        customer: []
-      } , this.checkDay
+        }, {validator: this.checkDay}),
+        customer: ['', this.DefaultOption]
+      }
     );
+    this.formCreate.get('customer').setValue('Default');
     this.formEdit = this.fb.group(
       {
         id: [],
@@ -77,7 +80,7 @@ export class EventListComponent implements OnInit {
       }
     );
   }
-
+  get customer() { return this.formCreate.get('customer'); }
   getListEvent2() {
     this.eventService.getAllEvent(this.thePageNumber - 1, this.thePageSize).subscribe(this.processResult());
   }
@@ -101,7 +104,7 @@ export class EventListComponent implements OnInit {
   }
 
   public onOpenModalEvent(event: Event, mode: string): void {
-    const container = document.getElementById('main-container');
+    const container = document.getElementById('wrapper');
     const button = document.createElement('button');
     button.type = 'button';
     button.style.display = 'none';
@@ -141,6 +144,7 @@ export class EventListComponent implements OnInit {
   }
 
   public onAddEvent(createForm: FormGroup): void {
+    this.submitted = true;
     this.eventService.addEvent1(createForm.value).subscribe(
       (data: Event) => {
         this.closeModal1();
@@ -201,11 +205,18 @@ export class EventListComponent implements OnInit {
   }
 
   checkDay(control: AbstractControl): ValidationErrors | null {
-    console.log(1);
     const startTime = control.value.startTime;
     const endTime = control.value.endTime;
-    const date1 = formatDate(startTime, 'yyyy-MM-dd', 'en_US');
-    const date2 = formatDate(endTime, 'yyyy-MM-dd', 'en_US');
-    return date1 <= date2 ? null : {dateError: true};
+    const date1 = formatDate(startTime, 'yyyy-MM-dd hh:mm:ss', 'en_US');
+    const date2 = formatDate(endTime, 'yyyy-MM-dd hh:mm:ss', 'en_US');
+    return (date1 < date2 ) ? null : {dateError: true};
+  }
+
+  DefaultOption(control: AbstractControl): ValidationErrors {
+    if (control.value === 'Default') {
+      return { DefaultOption: true };
+    } else {
+      return null;
+    }
   }
 }

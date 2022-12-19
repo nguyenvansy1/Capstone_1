@@ -35,6 +35,7 @@ export class UserListComponent implements OnInit {
   username: string;
   showAdminBoard = false;
   order = true;
+  isDesc = true;
   url = 'assets/js/main.js';
   loadAPI: any;
   private roles: string[];
@@ -145,18 +146,6 @@ export class UserListComponent implements OnInit {
     console.log(2);
   }
 
-  public onUpdateUser(editForm: FormGroup): void {
-    this.userService.updateUser(editForm.value).subscribe(
-      (data: User) => {
-        this.getListUser2();
-        this.toastr.success('Edit user successfully!', 'Success: ');
-      },
-      (error: HttpErrorResponse) => {
-        this.toastr.error('Edit user unsuccessfully!', 'Error: ');
-      }
-    );
-  }
-
   updatePageSize(pageSize) {
     this.thePageSize = pageSize.value;
     this.thePageNumber = 1;
@@ -217,5 +206,29 @@ export class UserListComponent implements OnInit {
     node.async = true;
     node.charset = 'utf-8';
     document.getElementsByTagName('head')[0].appendChild(node);
+  }
+
+  sortCode() {
+    if (this.order) {
+      const newArray = this.userList.sort((a, b) => a.code - b.code);
+      this.userList = newArray;
+    } else {
+      const newArray = this.userList.sort((a, b) => b.code - a.code);
+      this.userList = newArray;
+    }
+    this.order = !this.order;
+  }
+
+  sortName() {
+    if (this.isDesc) {
+      // tslint:disable-next-line:max-line-length
+      const result = this.userList.sort((a, b) => a.name.split(' ')[a.name.split(' ').length - 1].localeCompare(b.name.split(' ')[b.name.split(' ').length - 1]));
+      this.userList = result;
+    } else {
+      // tslint:disable-next-line:max-line-length
+      const result = this.userList.sort((a, b) => b.name.split(' ')[b.name.split(' ').length - 1].localeCompare(a.name.split(' ')[a.name.split(' ').length - 1]));
+      this.userList = result;
+    }
+    this.isDesc = !this.isDesc;
   }
 }

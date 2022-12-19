@@ -21,20 +21,19 @@ export class EventDetailComponent implements OnInit {
   thePageSize = 10000;
   theTotalElements: number;
   itemPerPage = 1;
-  isLoggedIn = false;
   username: string;
-  showAdminBoard = false;
   private roles: string[];
-  // tslint:disable-next-line:max-line-length
   formImport: FormGroup;
+  uploadedFile: null;
+  url: string;
+  type: string;
   // tslint:disable-next-line:max-line-length
   constructor(private toastr: ToastrService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private tokenStorageService: TokenStorageService, private eventService: EventService, private router: Router) { }
 
   ngOnInit(): void {
     this.formImport = this.fb.group(
       {
-        student: ['', [Validators.required]],
-        id: []
+        id: ['']
       }
     );
     // tslint:disable-next-line:radix
@@ -113,20 +112,34 @@ export class EventDetailComponent implements OnInit {
   }
 
   importStudent(formImport: FormGroup) {
-    console.log(formImport.value.id);
-    this.eventService.import(formImport.value.student, formImport.value.id).subscribe(event => {
-      this.closeModal();
-      this.ngOnInit();
-      this.toastr.success('Import user successfully!', 'Success: ');
-      }, (error) => {
-      this.toastr.error('Import user unsuccessfully!', 'Error: ');
+    console.log(this.uploadedFile);
+    if (this.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+      if (this.uploadedFile !== undefined) {
+        this.eventService.import(this.uploadedFile, formImport.value.id).subscribe(event => {
+            this.closeModal();
+            this.ngOnInit();
+            this.toastr.success('Import user successfully!', 'Success: ');
+          }, (error) => {
+            this.toastr.error('Import user unsuccessfully!', 'Error: ');
+          }
+        );
+      } else {
+        this.toastr.error('Import user unsuccessfully!', 'Error: ');
       }
-    );
+    } else {
+      this.toastr.error('The requested file format is incorrect!', 'Error: ');
+    }
   }
   resetForm() {
     this.formImport.reset();
   }
   private closeModal(): void {
     this.closeBtn.nativeElement.click();
+  }
+
+  showPreview(e: any) {
+    this.uploadedFile = e.target.files[0].name;
+    this.type = e.target.files[0].type;
+    console.log(this.type);
   }
 }

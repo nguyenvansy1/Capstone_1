@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../../service/user.service';
 import {User} from '../../../../model/user';
-import {Event} from '../../../../model/event';
+import * as moment from 'moment';
 import {EventService} from '../../../../service/event.service';
 import {EventUser} from '../../../../model/event_user';
 import {TokenStorageService} from '../../../../service/security/token-storage.service';
@@ -27,6 +27,7 @@ export class UserDetailComponent implements OnInit {
   user: User;
   code: number;
   uploadedAvatar = null;
+  userErr: User;
   eventList: EventUser[] = [];
   thePageNumber = 1;
   thePageSize = 1;
@@ -41,6 +42,7 @@ export class UserDetailComponent implements OnInit {
   formEdit: FormGroup;
   url = 'assets/js/main.js';
   loadAPI: any;
+  type: string;
   oldAvatarLink = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
 
   // tslint:disable-next-line:max-line-length
@@ -152,12 +154,17 @@ export class UserDetailComponent implements OnInit {
   compareClass(c1: Class, c2: Class): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
+  // checkAge(control: AbstractControl): ValidationErrors | null {
+  //   const employeeDateOfBirth = control.value;
+  //   const birthday = new Date(employeeDateOfBirth);
+  //   const currentDate = new Date();
+  //   const age = currentDate.getFullYear() - birthday.getFullYear();
+  //   return age > 18 ? null : {invalidAge: true};
+  // }
   checkAge(control: AbstractControl): ValidationErrors | null {
     const employeeDateOfBirth = control.value;
-    const birthday = new Date(employeeDateOfBirth);
-    const currentDate = new Date();
-    const age = currentDate.getFullYear() - birthday.getFullYear();
-    return age > 18 ? null : {invalidAge: true};
+    return moment(employeeDateOfBirth).add(18, 'years') <=
+      moment() ? null : {invalidAge: true} ;
   }
   public loadScript() {
     const node = document.createElement('script');
@@ -171,53 +178,60 @@ export class UserDetailComponent implements OnInit {
   public onUpdateUser(editForm: FormGroup): void {
     console.log(editForm);
     this.userService.updateUser(editForm.value).subscribe(
-      (data: User) => {
+      (data: any) => {
         this.toastr.success('Edit user successfully!', 'Success: ');
       },
       (error: HttpErrorResponse) => {
-        this.toastr.error('Edit user unsuccessfully!', 'Error: ');
+        console.log(error);
+        this.toastr.error(error.error.message, 'Error: ');
       }
     );
   }
 
   getAvatar(event: any, code: number) {
     this.uploadedAvatar = event.target.files[0];
-    if (this.uploadedAvatar) {
-      const reader = new FileReader();
-      reader.readAsDataURL(this.uploadedAvatar);
-      reader.onload = (e: any) => {
-        this.oldAvatarLink = e.target.result;
-      };
-    }
-    if (this.uploadedAvatar !== null) {
-      // Upload img & download url
-      const avatarName = this.getCurrentDateTime() + this.uploadedAvatar.name;
-      const fileRef = this.storage.ref(avatarName);
-      this.storage.upload(avatarName, this.uploadedAvatar).snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe(url => {
-            // delete old img from firebase
-            if (this.user.avatar !== null) {
-              this.storage.storage.refFromURL(this.user.avatar).delete();
-            }
+    this.type = event.target.files[0].type;
+    if (this.type !== 'image/jpeg' && this.type !== 'image/png') {
+      this.toastr.error('The requested file format is incorrect!', 'Error: ');
+    } else {
+      if (this.uploadedAvatar) {
+        const reader = new FileReader();
+        reader.readAsDataURL(this.uploadedAvatar);
+        reader.onload = (e: any) => {
+          this.oldAvatarLink = e.target.result;
+        };
+      }
+      if (this.uploadedAvatar !== null) {
+        // Upload img & download url
+        const avatarName = this.getCurrentDateTime() + this.uploadedAvatar.name;
+        const fileRef = this.storage.ref(avatarName);
+        this.storage.upload(avatarName, this.uploadedAvatar).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(url => {
+              // delete old img from firebase
+              if (this.user.avatar !== null) {
+                this.storage.storage.refFromURL(this.user.avatar).delete();
+              }
 
-            // Update employee
-            this.userService.updateAvatar(url, code).subscribe(
-              () => {
-                this.toastr.success('Upload avatar successfully!', 'Success: ');
-              },
-              (error) => {
-                this.toastr.error('Upload avatar unsuccessfully!', 'Error: ');
-                this.uploadedAvatar = null;
-              },
-            );
-          });
-        })
-      ).subscribe();
+              // Update employee
+              this.userService.updateAvatar(url, code).subscribe(
+                () => {
+                  this.toastr.success('Upload avatar successfully!', 'Success: ');
+                },
+                (error) => {
+                  this.toastr.error('Upload avatar unsuccessfully!', 'Error: ');
+                  this.uploadedAvatar = null;
+                },
+              );
+            });
+          })
+        ).subscribe();
+      }
     }
   }
 
   private getCurrentDateTime() {
     return new Date().getTime();
   }
+
 }

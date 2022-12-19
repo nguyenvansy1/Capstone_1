@@ -23,7 +23,7 @@
                   <div class="content widget-stat">
                     <div id="bar1" class="progress" style="height: 13px">
                       <div class="progress-bar active progress-bar-success progress-bar-striped bar"
-                           style="width: 45%"></div>
+                           style="width: {{changeWith2()}};"></div>
                     </div>
                   </div>
                 </div>
@@ -42,7 +42,7 @@
                   <div class="content widget-stat">
                     <div id="bar1" class="progress" style="height: 13px">
                       <div class="progress-bar active progress-bar-success progress-bar-striped bar"
-                           style="width: 55%"></div>
+                           style="width: {{changeWith()}};"></div>
                     </div>
                   </div>
                 </div>
@@ -61,7 +61,7 @@
                   <div class="content widget-stat">
                     <div id="bar1" class="progress" style="height: 13px">
                       <div class="progress-bar active progress-bar-success progress-bar-striped bar"
-                           style="width: 65%"></div>
+                           style="width: {{changeWith1()}};"></div>
                     </div>
                   </div>
                 </div>
@@ -74,7 +74,23 @@
                 <iframe class="chartjs-hidden-iframe" tabindex="-1"
                                                     style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;">
                 </iframe>
-                <h4 class="box-title text-sm chart-title p-2 font-weight-bold">Bar Chart</h4>
+                <div id="right-side" class="d-flex justify-content-between position-relative">
+                  <h4 class="box-title text-sm chart-title p-2 font-weight-bold">Bar Chart</h4>
+                  <div class="filter" style="position: relative !important; top: 0 !important;">
+                    <a class="icon cursor-pointer" id="dropdownMenuButton"   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="bi fa-solid fa-ellipsis"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" aria-labelledby="dropdownMenuButton">
+                      <li class="dropdown-header text-start">
+                        <h6>Filter</h6>
+                      </li>
+                      <li (click)="filterMonth()"><a class="dropdown-item" >Month</a></li>
+                      <li (click)="filterYear()"><a class="dropdown-item" >Year</a></li>
+                      <li (click)="filterAll()"><a class="dropdown-item" >All</a></li>
+                    </ul>
+                  </div>
+                </div>
+
                 <div class="dropdown js__drop_down">
                   <a href="#"
                      class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
@@ -118,27 +134,6 @@
 
                       <div class="activity-content">{{event.user.name}} checkin with {{event.event.name}}</div>
                     </div>
-<!--                    <div class="activity-item d-flex">-->
-<!--                      <div class="activite-label">56 min</div>-->
-<!--                      <i  [ngClass]="setClasses()" class="bi fa-solid fa-circle activity-badge  align-self-start"></i>-->
-
-<!--                      <div class="activity-content"> Voluptatem blanditiis blanditiis eveniet</div>-->
-<!--                    </div>-->
-<!--                    <div class="activity-item d-flex">-->
-<!--                      <div class="activite-label">2 hrs</div>-->
-<!--                      <i [ngClass]="setClasses()"  class="bi fa-solid fa-circle activity-badge  align-self-start"></i>-->
-<!--                      <div class="activity-content"> Voluptates corrupti molestias voluptatem</div>-->
-<!--                    </div>-->
-<!--                    <div class="activity-item d-flex">-->
-<!--                      <div class="activite-label">1 day</div>-->
-<!--                      <i class="bi fa-solid fa-circle activity-badge text-info align-self-start"></i>-->
-<!--                      <div class="activity-content"> Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore</div>-->
-<!--                    </div>-->
-<!--                    <div class="activity-item d-flex">-->
-<!--                      <div class="activite-label">2 days</div>-->
-<!--                      <i class="bi fa-solid fa-circle activity-badge text-warning align-self-start"></i>-->
-<!--                      <div class="activity-content"> Est sit eum reiciendis exercitationem</div>-->
-<!--                    </div>-->
                   </div>
                 </div>
               </div>
@@ -166,31 +161,10 @@
                 <div class="card-body pb-0">
 
                   <div class="news">
-                    <div class="post-item clearfix">
-                      <img src="https://freeetemplates.com/bootstrap5admin1/assets/img/news-1.jpg" alt="">
-                      <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                      <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                    </div>
-                    <div class="post-item clearfix">
-                      <img src="https://freeetemplates.com/bootstrap5admin1/assets/img/news-1.jpg" alt="">
-                      <h4><a href="#">Quidem autem et impedit</a></h4>
-                      <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-                    </div>
-                    <div class="post-item clearfix">
-                      <img src="https://freeetemplates.com/bootstrap5admin1/assets/img/news-1.jpg" alt="">
-                      <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                      <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-                    </div>
-                    <div class="post-item clearfix">
-                      <img src="https://freeetemplates.com/bootstrap5admin1/assets/img/news-1.jpg" alt="">
-                      <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                      <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
-                    </div>
-                    <div class="post-item clearfix">
-                      <img src="https://freeetemplates.com/bootstrap5admin1/assets/img/news-1.jpg" alt="">
-                      <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                      <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...
-                      </p>
+                    <div *ngFor="let event1 of eventList; let i = index" class="post-item clearfix">
+                      <img [src]="event1.customer.avatar" alt="">
+                      <h4><a href="#">{{event1.name}}</a></h4>
+                      <p>Time: {{event1.startTime | date: 'MMM d, y, hh:mm:ss a'}} - {{event1.endTime | date: 'hh:mm:ss a'}}</p>
                     </div>
                   </div>
                 </div>

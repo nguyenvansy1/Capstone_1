@@ -1,11 +1,12 @@
 :root {
+  --text-hover: #000 !important;
   --text--primary: #000 !important;
   --text--second: #000 !important;
   --text--logo: #fff !important;
   --color-primary: #fff !important;
-  --color--navbar: #ffffff !important;
+  --color--navbar: #a62823 !important;
   --color-logo: #ffffff !important;
-  --color-sidebar: #ffffff !important;
+  --color-sidebar: #a62823 !important;
   --linear-color: linear-gradient(310deg, #7928ca, #ff0080) !important;
   --color-wrapper: #f8f9fa !important;
 }
@@ -555,7 +556,7 @@ label {
 
 .navigation .menu a {
   display: block;
-  color: var(--text--logo)
+  color: var(--text--hover);
 }
 
 @media (min-width:1025px) {
@@ -604,7 +605,8 @@ label {
 
 .navigation .menu>li:hover a {
   background: #fff;
-  color: var(--text--primary);
+  color: var(--text--hover);
+  font-weight: bold;
   border-radius: 0.5rem;
   transition: all 0.4 ease;
   box-shadow: 0 .3125rem .625rem 0 rgba(0, 0, 0, .12) !important;

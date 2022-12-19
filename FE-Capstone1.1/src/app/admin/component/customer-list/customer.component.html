@@ -100,7 +100,7 @@
       <div class="col-md-12 col-xs-12">
         <div class="card">
           <div class="card-header py-4">
-            <h4 class="title text-secondy font-weight-bold">List Customer</h4>
+            <h4 class="title text-secondy font-weight-bold">List customer</h4>
             <div class="form-field">
               <input #inputName name="search" [(ngModel)]="keywordName" (keyup)=(searchByName(inputName.value)) type="text" id="name" class="form-input" placeholder=" ">
               <label for="name" class="form-label">Search</label>
@@ -145,7 +145,7 @@
                       <ul class="dropdown-menu">
                         <li (click)="onOpenModal(null, 'add')" class="text-left is-hover dropdown-item" data-toggle="modal"
                             data-target="#removeModal" style="cursor: pointer;" >
-                          <i class=" fa-solid fa-trash"></i>
+                          <i class="fa-solid fa-plus mr-2"></i>
                           <b> Create </b>
                         </li>
                       </ul>

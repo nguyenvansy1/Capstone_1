@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 <div id="wrapper" style="background-color: #f6f9ff" >
 <div class="main-content scroll">
   <div class="row  user-table">
@@ -18,9 +19,11 @@
                 <th style="width: 5%">STT</th>
                 <th style="width: 10%">
                   Code
+                  <i (click)="sortCode()" class="bi bi-arrow-down-up"></i>
                 </th>
                 <th style="width: 18%">
                   Name
+                  <i (click)="sortName()" class="bi bi-arrow-down-up"></i>
                 </th>
                 <th style="width: 12%">Identity Card</th>
                 <th style="width: 10%">Phone</th>
@@ -80,13 +83,13 @@
                     <ul class="dropdown-menu">
                       <li *ngIf="user.account.flag == true; else elseBlock1" class="text-left is-hover dropdown-item" data-toggle="modal"
                           data-target="#removeModal" style="cursor: pointer;" (click)="blockUser(user.account.accountId)">
-                        <i class=" fa-solid fa-trash"></i>
+                        <i class="fa-solid fa-lock"></i>
                         <b>  Block</b>
                       </li>
                       <ng-template #elseBlock1>
                         <li class="text-left is-hover dropdown-item" data-toggle="modal"
                             data-target="#removeModal" style="cursor: pointer;" (click)="unBlockUser(user.account.accountId)">
-                          <i class="fa-solid fa-unlock-keyhole"></i>  <b>  Unblock</b>
+                          <i class="fa-solid fa-unlock"></i>  <b>  Unblock</b>
                         </li>
                       </ng-template>
                     </ul>

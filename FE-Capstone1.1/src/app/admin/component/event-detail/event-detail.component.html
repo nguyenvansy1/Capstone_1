@@ -4,7 +4,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel1">Import Student</h5>
+          <h5 class="modal-title" id="exampleModalLabel1">Import User</h5>
           <button type="button" #closeBtn class="close" data-dismiss="modal" aria-label="Close">
             <span (click)="resetForm()" aria-hidden="true">&times;</span>
           </button>
@@ -12,7 +12,10 @@
         <form [formGroup]="formImport" (ngSubmit)="importStudent(formImport)">
         <div class="modal-body">
 
-          <textarea formControlName="student" cols="50" rows="5" class="form-control"></textarea>
+<!--          <textarea  formControlName="student" name="" placeholder="Enter heard..." class="form-control"-->
+<!--                    cols="200" rows="5"-->
+<!--                    style="border: 1px solid black !important"></textarea>-->
+          <input  type="file" class="form-control-file" (change)="showPreview($event)">
           <input type="hidden" formControlName="id" >
         </div>
         <div class="modal-footer">

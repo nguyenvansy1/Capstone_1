@@ -45,6 +45,10 @@ export class EventService {
     return this.httpClient.get<number>(`${this.URL_API}/dataEventFinished`);
   }
 
+  getListEvent(): Observable<Event[]> {
+    return this.httpClient.get<Event[]>(`${this.URL_API}/list2`);
+  }
+
   getAmountEventUpcoming(): Observable<number> {
     return this.httpClient.get<number>(`${this.URL_API}/dataEventUpcoming`);
   }
@@ -72,8 +76,8 @@ export class EventService {
     return this.httpClient.delete<Event>(`${this.URL_API}/delete/${id}`);
   }
 
-  import(list: string, id: string): Observable<string> {
-    return this.httpClient.get<string>(`${this.URL_API}/import/${list}/${id}`);
+  import(path: string, id: string): Observable<string> {
+    return this.httpClient.get<string>(`${this.URL_API}/import/${path}/${id}`);
   }
 }
 

@@ -7,7 +7,8 @@ import {UserService} from '../../../../service/user.service';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../../../../service/security/token-storage.service';
 import {EventUser} from '../../../../model/event_user';
-import {isFakeMousedownFromScreenReader} from '@angular/cdk/a11y';
+import {Event} from '../../../../model/event';
+import {User} from '../../../../model/user';
 
 @Component({
   selector: 'app-statistical',
@@ -16,11 +17,18 @@ import {isFakeMousedownFromScreenReader} from '@angular/cdk/a11y';
 })
 export class StatisticalComponent implements OnInit {
   eventUser: EventUser[];
+  eventList: Event[];
   amountUser: number;
+  amountAllUser: number;
   amountEventFinished: number;
   amountEventUpcoming: number;
-  isLoggedIn = false;
+  amountEvent: number;
+  thePageNumber = 1;
+  thePageSize = 10000;
+  theTotalElements: number;
+  itemPerPage = 1;
   username: string;
+  userList: User[];
   showAdminBoard = false;
   private roles: string[];
   url = 'assets/js/main.js';
@@ -210,7 +218,10 @@ export class StatisticalComponent implements OnInit {
       //   this.router.navigateByUrl('/login');
       // }
     });
-
+    this.eventService.getListEvent().subscribe(data => {
+      this.eventList = data;
+      this.amountEvent = data.length;
+    });
     this.userService.getDataUser().subscribe(data => {
       this.barChartDataEvent[1].data = data;
     });
@@ -228,6 +239,7 @@ export class StatisticalComponent implements OnInit {
     this.eventService.getAmountEventUpcoming().subscribe(data => {
       this.amountEventUpcoming = data;
     });
+    this.getListUser();
   }
 
   randomColor() {
@@ -306,5 +318,41 @@ export class StatisticalComponent implements OnInit {
     this.eventService.filterYear().subscribe(data => {
       this.eventUser = data;
     });
+  }
+
+  changeWith() {
+    const amount = (this.amountEventUpcoming / this.amountEvent) * 100;
+    return amount + '%';
+  }
+
+  changeWith1() {
+    const amount = (this.amountEventFinished / this.amountEvent) * 100;
+    return amount + '%';
+  }
+
+  changeWith2() {
+    const amount = (this.amountUser / this.amountAllUser) * 100;
+    return amount + '%';
+  }
+
+  getListUser() {
+    this.userService.getAllUser(this.thePageNumber - 1, this.thePageSize).subscribe(this.processResult());
+  }
+  processResult() {
+    return (data) => {
+      this.userList = data.content; //
+      this.amountAllUser = this.userList.length;
+      this.thePageNumber = data.number + 1;
+      this.thePageSize = data.size;
+      this.theTotalElements = data.totalElements;
+      this.processItemPerPage();
+    };
+  }
+  processItemPerPage() {
+    if (this.thePageNumber * this.thePageSize > this.theTotalElements) {
+      this.itemPerPage = this.theTotalElements;
+    } else {
+      this.itemPerPage = this.thePageNumber * this.thePageSize;
+    }
   }
 }
